@@ -18,21 +18,21 @@ const Hero = () => {
       title: "Твой первый шаг — со скидкой!",
       subtitle:
         "Мы знаем, как волнительна первая татуировка. Чтобы было проще решиться, дарим скидку 15% на первую работу. Доверься профессионалам!",
-      image: "/images/hero/hero.jpg",
+      image: "/images/hero/hero.webp",
     },
     {
       id: 2,
       title: "Карта лояльности",
       subtitle:
         "За каждые 10 000 руб., потраченные в студии, клиент получает скидку 1000 бонусов на следующую услугу.",
-      image: "/images/hero/hero2.jpg",
+      image: "/images/hero/hero2.webp",
     },
     {
       id: 3,
       title: "Большие проекты под ключ",
       subtitle:
         "Хочешь сделать спину/полурукав/рукав/ногав — мы готовы сделать большой проект под ключ с четким дедлайном и железной ценой и подкрепим все договором.",
-      image: "/images/hero/hero3.jpg",
+      image: "/images/hero/hero3.webp",
     },
   ];
 
@@ -64,7 +64,7 @@ const Hero = () => {
               aria-label="Previous slide"
             >
               <img src={SliderArea.src} alt="" />
-              <img src={SliderArrow.src} alt="" />
+              <img src={SliderArrow.src} alt="" className={styles.arrow} />
             </button>
 
             <div className={styles.slider__container}>

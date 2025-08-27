@@ -11,7 +11,7 @@ const ImageCard = ({ imageSrc }: { imageSrc: string }) => {
   return (
     <div
       className={styles.image__card}
-      style={{ backgroundImage: `url(/images/${imageSrc}.jpg)` }}
+      style={{ backgroundImage: `url(/images/${imageSrc}.webp)` }}
     ></div>
   );
 };

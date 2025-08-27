@@ -31,7 +31,7 @@ const ImageCard = ({ imageSrc, text, onOpenModal }: Props) => {
       {/* Фон через ::before */}
       <style jsx>{`
         .${styles.image__card}::before {
-          background-image: url(/images/${imageSrc}.jpg);
+          background-image: url(/images/${imageSrc}.webp);
         }
       `}</style>
       <h3>{renderText()}</h3>

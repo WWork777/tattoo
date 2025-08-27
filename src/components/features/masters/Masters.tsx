@@ -73,7 +73,7 @@ export default function Masters() {
   const masters: Master[] = [
     {
       id: 1,
-      imageSrc: "tattoo.jpg",
+      imageSrc: "tattoo.webp",
       name: "Антон",
       description:
         "Более 10 лет в тату-индустрии. Специализация: Крупные проекты (рукава, ногава, спины)",
@@ -84,7 +84,7 @@ export default function Masters() {
     },
     {
       id: 2,
-      imageSrc: "tattoo2.png",
+      imageSrc: "tattoo2.webp",
       name: "Злата",
       description:
         "Специалист по нежной графике и минимализму. Каждая работа — аккуратная история, рассказанная через тонкие линии",
@@ -95,7 +95,7 @@ export default function Masters() {
     },
     {
       id: 3,
-      imageSrc: "tattoo3.jpg",
+      imageSrc: "tattoo3.webp",
       name: "Егор",
       description:
         "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
@@ -106,7 +106,7 @@ export default function Masters() {
     },
     {
       id: 4,
-      imageSrc: "tattoo4.jpg",
+      imageSrc: "tattoo4.webp",
       name: "Лиза",
       description:
         "Графика, в которой чувствуется характер Универсал — одинаково точно работает с разными стилями",
@@ -117,7 +117,7 @@ export default function Masters() {
     },
     {
       id: 5,
-      imageSrc: "tattoo5.jpg",
+      imageSrc: "tattoo5.webp",
       name: "Алина",
       description:
         "Бью стилевые и дерзкие татухи уже 5 лет. Моя страсть — андеграунд, дарк и аниме-графика, которые цепляют взгляд и отражают твой внутренний стиль",

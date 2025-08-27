@@ -389,7 +389,6 @@
 
   &__arrow__left {
     left: 20px;
-
     img:last-child {
       transform: rotate(180deg);
     }
@@ -589,13 +588,13 @@
 
   .right__bottom__left {
     &::before {
-      background-image: url("./images/tattoo-hero2.png");
+      background-image: url("./images/tattoo-hero2.webp");
       background: linear-gradient(
           to bottom,
           rgba(0, 0, 0, 0) 50%,
           rgba(0, 0, 0, 0.7) 100%
         ),
-        url("./images/tattoo-hero2.png");
+        url("./images/tattoo-hero2.webp");
       background-size: cover;
       background-position: center;
     }
@@ -603,13 +602,13 @@
 
   .right__bottom__right {
     &::before {
-      background-image: url("./images/tattoo-hero3.jpg");
+      background-image: url("./images/tattoo-hero3.webp");
       background: linear-gradient(
           to bottom,
           rgba(0, 0, 0, 0) 50%,
           rgba(0, 0, 0, 0.7) 100%
         ),
-        url("./images/tattoo-hero3.jpg");
+        url("./images/tattoo-hero3.webp");
       background-size: cover;
       background-position: center;
     }
