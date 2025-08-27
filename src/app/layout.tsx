@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.scss";
 import { Footer } from "@/components/layout/footer/Footer";
 import { Header } from "@/components/layout/header/Header";
-import YandexMetrika from "@/components/YandexMetrika/YandexMEtrika";
+import YandexMetrika from "@/components/YandexMetrika/YandexMetrika";
 
 export const metadata = {
   icons: {
