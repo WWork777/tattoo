@@ -100,8 +100,8 @@
   button {
     margin-top: 1rem;
     padding: 0.8rem 1rem;
-    background-color: #6a666180;
-    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.13);
     border: none;
     cursor: pointer;
     border-radius: $border-radius;
@@ -109,6 +109,18 @@
     font-size: 1rem;
     transition: all 0.3s ease;
     transform: translateY(0);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      backdrop-filter: blur(15px);
+      border-radius: 33px;
+    }
 
     @media (max-width: 1024px) {
       padding: 0.6rem 0.8rem;

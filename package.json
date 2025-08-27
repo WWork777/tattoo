@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
     "next": "15.5.0",
     "react": "19.1.0",
+    "react-accessible-accordion": "^5.0.1",
     "react-dom": "19.1.0",
     "sass": "^1.90.0",
     "swiper": "^11.2.10"
