@@ -1,0 +1,48 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5em;
+  color: $text-primary;
+  font-weight: 600;
+}
+
+h1 {
+  font-family: $font-condensed;
+  font-size: 46px;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: $font-regular;
+  text-align: center;
+  font-weight: 400;
+  font-size: 60px;
+  color: #c4c4c4;
+
+  @media (max-width: 1024px) {
+    font-size: 50px;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
+}
+
+h3 {
+  font-family: $font-regular;
+  font-weight: 400;
+  font-size: 20px;
+  color: $text-primary;
+}
+
+p {
+  font-family: $font-regular;
+  font-size: 20px;
+  line-height: 1.6;
+  color: $text-primary;
+  margin: 0;
+}

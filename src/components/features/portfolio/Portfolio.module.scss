@@ -1,0 +1,369 @@
+@import "@/styles/variables.scss";
+
+.portfolio {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.slider_nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.nav_button {
+  padding: 0.8rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(196, 196, 196, 0.3);
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: $font-regular;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+  &.active {
+    background-color: #c6ab7a;
+    color: white;
+    border-color: #c6ab7a;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.8rem;
+    font-size: 12px;
+  }
+}
+
+.slider {
+  display: none;
+  width: 100%;
+  margin-bottom: 2rem;
+
+  &.active {
+    display: block;
+  }
+}
+
+.slider_container {
+  position: relative;
+}
+
+.slider_wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  position: relative;
+
+  // Добавляем плавный переход для всей сетки
+  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.slide {
+  .image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 1250px) {
+      height: 250px;
+    }
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+
+    @media (max-width: 480px) {
+      height: 250px;
+    }
+  }
+}
+
+.slider_controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.8rem;
+  }
+}
+
+.slider_arrow_left,
+.slider_arrow_right {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(196, 196, 196, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+
+    &::before {
+      transform: translateX(0);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 480px) {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+.slider_dots {
+  display: flex;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.3rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    padding: 0;
+    position: relative;
+
+    &.active {
+      background: white;
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      width: 8px;
+      height: 8px;
+    }
+
+    @media (max-width: 480px) {
+      width: 6px;
+      height: 6px;
+    }
+  }
+}
+
+.button {
+  padding: 1rem 5rem;
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.274);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+
+  @media (max-width: 1800px) {
+    padding: 0.6rem 2rem;
+  }
+
+  @media (max-width: 1400px) {
+    padding: 0.5rem 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0.4rem 1rem;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.212);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  p {
+    font-size: 22px;
+    margin: 0;
+    transition: transform 0.3s ease;
+
+    @media (max-width: 1650px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.modal_content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.close_button {
+  position: absolute;
+  top: -40px;
+  right: -50px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal_content {
+    max-width: 95vw;
+    max-height: 85vh;
+
+    img {
+      max-height: 80vh;
+    }
+  }
+
+  .close_button {
+    top: -30px;
+    right: -30px;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .close_button {
+    top: -25px;
+    right: -25px;
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+}

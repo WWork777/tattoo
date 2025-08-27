@@ -1,0 +1,238 @@
+@import "@/styles/variables.scss";
+
+.card {
+  aspect-ratio: 1/1.2;
+  border-radius: $border-radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding: 2rem;
+  position: relative;
+
+  transition: all 0.5s ease;
+
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 1650px) {
+    padding: 1.5rem;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    mask: linear-gradient(to top, black 0%, black 80%, transparent 100%);
+
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+
+    &::after {
+      opacity: 0.8;
+    }
+  }
+
+  .card__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    z-index: 2;
+    img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+
+      @media (max-width: 1650px) {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    a:hover img {
+      transform: translateY(-3px) scale(1.1);
+    }
+  }
+
+  .card__footer__socials {
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+
+    @media (max-width: 1650px) {
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 1024px) {
+      gap: 0.6rem;
+    }
+  }
+
+  button {
+    padding: 0.8rem 3rem;
+    background-color: #6a666100;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+
+    @media (max-width: 1800px) {
+      padding: 0.6rem 2rem;
+    }
+
+    @media (max-width: 1400px) {
+      padding: 0.5rem 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      padding: 0.4rem 1rem;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+      p {
+        transform: scale(1.05);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0;
+      transition: transform 0.3s ease;
+
+      @media (max-width: 1650px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 30px;
+    margin: 0;
+    z-index: 2;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateX(5px);
+    }
+
+    @media (max-width: 1650px) {
+      font-size: 25px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+    color: #d0d0d0;
+    z-index: 2;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: white;
+    }
+
+    @media (max-width: 1650px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 1.2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+
+  button {
+    padding: 0.8rem 2rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #c6ab7a;
+      border-color: #c6ab7a;
+      color: black;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover:not(.active) p {
+      transform: scale(1.05);
+    }
+  }
+}

@@ -1,0 +1,283 @@
+@import "@/styles/variables.scss";
+
+.leaders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  position: relative;
+  color: white;
+
+  p {
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .facts_top {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      margin-bottom: 0;
+    }
+
+    .fact {
+      background-color: #6a6661;
+      padding: 1rem 1rem;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      p {
+        font-size: 20px;
+        @media (max-width: 1430px) {
+          font-size: 16px;
+        }
+      }
+
+      &:hover {
+        background-color: #c6ab7a;
+        transform: scale(1.05);
+      }
+
+      // Отключаем hover на мобильных
+      @media (max-width: 1024px) {
+        &:hover {
+          transform: none;
+        }
+      }
+
+      &:nth-child(1) {
+        width: 30%;
+        text-align: center;
+        background-color: #b29e7aa6;
+        @media (max-width: 1762px) {
+          width: 35%;
+        }
+
+        @media (max-width: 1500px) {
+          width: 37%;
+        }
+      }
+      &:nth-child(2) {
+        width: 30%;
+        text-align: center;
+      }
+    }
+  }
+
+  .facts_bottom {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    .fact {
+      align-items: center;
+      background-color: #6a6661;
+      padding: 1rem 1rem;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      p {
+        font-size: 20px;
+        @media (max-width: 1430px) {
+          font-size: 16px;
+        }
+      }
+
+      &:hover {
+        background-color: #c6ab7a;
+        transform: scale(1.05);
+      }
+
+      // Отключаем hover на мобильных
+      @media (max-width: 1024px) {
+        &:hover {
+          background-color: #6a6661;
+          transform: none;
+        }
+      }
+
+      &:nth-child(1) {
+        width: 30%;
+        text-align: center;
+        @media (max-width: 1762px) {
+          width: 35%;
+        }
+        @media (max-width: 1500px) {
+          width: 37%;
+        }
+      }
+      &:nth-child(2) {
+        width: 30%;
+        text-align: center;
+        background-color: #b29e7a98;
+      }
+    }
+  }
+
+  .text_block {
+    background-color: rgba(178, 158, 122, 0.5960784314);
+    padding: 4rem 2rem;
+    border-radius: $border-radius;
+    max-width: 450px;
+    font-size: 18px;
+    line-height: 1.5;
+
+    p {
+      font-size: 22px;
+
+      @media (max-width: 1024px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .images {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .image_left {
+    left: 6%;
+    top: 120px;
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 16px;
+    object-fit: cover;
+    transform: rotate(-10deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+    @media (max-width: 1550px) {
+      left: 4%;
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (max-width: 1230px) {
+      width: 250px;
+      height: 250px;
+      left: 2%;
+    }
+
+    @media (max-width: 1024px) {
+      width: 200px;
+      height: 200px;
+      left: 0px;
+      top: 300px;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      position: static;
+      transform: rotate(0);
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      margin-bottom: 20px;
+    }
+
+    &:hover {
+      transform: rotate(-5deg) scale(1.05);
+    }
+
+    // Отключаем hover на мобильных
+    @media (max-width: 1024px) {
+      &:hover {
+        transform: none !important;
+      }
+    }
+  }
+
+  .image_right {
+    position: absolute;
+    top: 0px;
+    right: 6%;
+    width: 350px;
+    height: 350px;
+    border-radius: 16px;
+    object-fit: cover;
+    transform: rotate(12deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+    @media (max-width: 1550px) {
+      right: 4%;
+      top: 100px;
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (max-width: 1230px) {
+      width: 250px;
+      height: 250px;
+      right: 2%;
+    }
+
+    @media (max-width: 1024px) {
+      width: 200px;
+      height: 200px;
+      right: 0px;
+      top: 0px;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      position: static;
+      transform: rotate(0);
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      margin-top: 20px;
+    }
+
+    &:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+
+    // Отключаем hover на мобильных
+    @media (max-width: 1024px) {
+      &:hover {
+        transform: none !important;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .facts_top,
+    .facts_bottom {
+      justify-content: center;
+
+      .fact {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+
+    .text_block {
+      padding: 1.5rem;
+      font-size: 16px;
+
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@import "@/styles/variables.scss";
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.image__card {
+  aspect-ratio: 1.75/1;
+  border-radius: $border-radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  position: relative;
+
+  @media (max-width: 1650px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  // Создаем контейнер для изображения
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transition: transform 1.5s ease-out;
+    transform: scale(1);
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  &:hover {
+    &::before {
+      transform: scale(1.1);
+    }
+
+    &::after {
+      opacity: 0.8;
+    }
+  }
+
+  h3 {
+    font-size: 40px;
+    font-family: $font-condensed;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 3px;
+    @media (max-width: 1550px) {
+      font-size: 30px;
+    }
+    @media (max-width: 1250px) {
+      font-size: 25px;
+    }
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background-color: #6a666180;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: $border-radius;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+
+    @media (max-width: 1024px) {
+      padding: 0.6rem 0.8rem;
+    }
+
+    p {
+      font-size: 24px;
+      font-family: $font-regular;
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+
+    &:hover {
+      background-color: #6a666194;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

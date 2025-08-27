@@ -1,0 +1,519 @@
+@import "@/styles/variables.scss";
+
+// Анимации появления
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  position: relative;
+  z-index: 100;
+  box-sizing: border-box;
+  animation: fadeInDown 0.6s ease-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(196, 196, 196, 0.2);
+    z-index: -1;
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  // Адаптация padding для разных размеров экранов
+  @media (max-width: 1400px) {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  @media (max-width: 1200px) {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 4%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 3%;
+  }
+}
+
+.header__content__left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeInLeft 0.6s ease-out 0.2s both;
+
+  img {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 1200px) {
+      width: 160px;
+    }
+
+    @media (max-width: 768px) {
+      width: 140px;
+    }
+
+    @media (max-width: 480px) {
+      width: 120px;
+    }
+  }
+}
+
+.nav__desktop {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeInRight 0.6s ease-out 0.2s both;
+
+  a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.4s ease-out 0.4s both;
+
+    &:nth-child(1) {
+      animation-delay: 0.4s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.7s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+    &:nth-child(6) {
+      animation-delay: 0.9s;
+    }
+
+    p {
+      margin-top: 0.8rem;
+      font-size: 18px;
+      font-family: $font-regular;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      position: relative;
+      padding: 0.5rem 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, #c6ab7a, #e6d5b8);
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: #c6ab7a;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+
+    @media (max-width: 1200px) {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.header__content__right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeInRight 0.6s ease-out 0.2s both;
+
+  .phone__desktop {
+    p {
+      margin-top: 0.8rem;
+      font-size: 18px;
+      font-family: $font-regular;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+      animation: fadeInUp 0.6s ease-out 0.5s both;
+
+      &:hover {
+        color: #c6ab7a;
+      }
+
+      @media (max-width: 1200px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 1450px) {
+      display: none;
+    }
+  }
+
+  a:not(.phone__desktop):not(:first-child) {
+    img {
+      margin-top: 0.8rem;
+      width: 28px;
+      height: 28px;
+      filter: brightness(0) invert(1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: fadeInUp 0.6s ease-out 0.6s both;
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+
+      @media (max-width: 1200px) {
+        width: 24px;
+        height: 24px;
+      }
+
+      @media (max-width: 768px) {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+
+  // Показываем бургер меню раньше
+  @media (max-width: 1100px) {
+    .menu__toggle {
+      display: flex;
+    }
+  }
+}
+
+// Бургер меню - показываем при 1100px
+.menu__toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 20px;
+  justify-content: space-between;
+  position: relative;
+  z-index: 101;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+
+  span {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    display: flex;
+  }
+}
+
+// Мобильное меню
+.nav__mobile {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.438);
+  backdrop-filter: blur(20px);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+
+  &.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    visibility: visible;
+
+    .nav__mobile__header {
+      animation: slideInFromLeft 0.4s ease-out;
+    }
+
+    .nav__mobile__content {
+      a {
+        animation: fadeInUp 0.4s ease-out both;
+
+        &:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        &:nth-child(3) {
+          animation-delay: 0.3s;
+        }
+        &:nth-child(4) {
+          animation-delay: 0.4s;
+        }
+        &:nth-child(5) {
+          animation-delay: 0.5s;
+        }
+        &:nth-child(6) {
+          animation-delay: 0.6s;
+        }
+        &:nth-child(7) {
+          animation-delay: 0.7s;
+          .phone__mobile p {
+            animation-delay: 0.7s;
+          }
+        }
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    border-bottom: 1px solid rgba(196, 196, 196, 0.2);
+
+    img {
+      width: 120px;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      animation: fadeInLeft 0.4s ease-out;
+
+      @media (max-width: 480px) {
+        width: 100px;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    gap: 2rem;
+    padding: 2rem 5%;
+
+    a {
+      text-decoration: none;
+
+      p {
+        margin: 0;
+        font-size: 24px;
+        font-family: $font-regular;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 400;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        text-align: center;
+
+        &:hover {
+          color: #c6ab7a;
+          transform: scale(1.05);
+        }
+      }
+
+      @media (max-width: 480px) {
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+
+    // Стили для телефона в мобильном меню
+    .phone__mobile {
+      margin-top: 1rem;
+      p {
+        font-size: 20px;
+        font-weight: 500;
+        color: #c6ab7a;
+        border: 1px solid #c6ab7a;
+        border-radius: 25px;
+        padding: 0.8rem 1.5rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgba(198, 171, 122, 0.1);
+          transform: scale(1.05);
+        }
+      }
+
+      @media (max-width: 480px) {
+        p {
+          font-size: 18px;
+          padding: 0.6rem 1.2rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    display: flex;
+  }
+}
+
+// Кнопка закрытия в мобильном меню
+.menu__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  padding: 0;
+  animation: fadeIn 0.4s ease-out;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+
+    &:nth-child(1) {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  &:hover {
+    span {
+      background-color: #c6ab7a;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 25px;
+    height: 25px;
+
+    span {
+      width: 20px;
+    }
+  }
+}
+
+// Sticky поведение
+.header {
+  position: sticky;
+  top: 0;
+}

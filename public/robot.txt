@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tatu-novosibirsk.ru/sitemap.xml
+
+# Host: tatu-novosibirsk.ru

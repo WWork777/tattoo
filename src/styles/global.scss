@@ -1,0 +1,177 @@
+@import "./fonts.scss";
+@import "./variables.scss";
+@import "./mixins.scss";
+@import "./typography.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bg-primary;
+  font-family: $font-regular;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.container-ellipse {
+  width: 100%;
+  margin-top: 200px;
+  max-width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 40%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #c6ab7a 0%, #000000 100%);
+    filter: blur(100px);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+  @media (max-width: 1024px) {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    margin-top: 100px;
+  }
+}
+
+.container-ellipse-hero {
+  width: 100%;
+  margin-top: 100px;
+  padding-left: 10%;
+  max-width: 100%;
+  padding-right: 10%;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 60%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #c6ab7a 0%, #000000 100%);
+    filter: blur(100px);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+  @media (max-width: 1024px) {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    margin-top: 50px;
+  }
+}
+
+.container {
+  width: 100%;
+  margin-top: 200px;
+  max-width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+
+  @media (max-width: 1024px) {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 100px;
+    width: 100%;
+  }
+}
+
+.container-slider {
+  width: 100%;
+  margin-top: 200px;
+  padding-left: 10%;
+  padding-right: 10%;
+  max-width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    margin-top: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+  }
+}
+
+#portfolio {
+  scroll-margin-top: 200px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
+
+#special {
+  scroll-margin-top: 50px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
+
+#form {
+  scroll-margin-top: 110px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
+
+#masters {
+  scroll-margin-top: 70px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
+
+#contacts {
+  scroll-margin-top: 70px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
