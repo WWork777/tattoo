@@ -2,6 +2,7 @@
 import styles from "./Special.module.scss";
 import ModalForm from "../modal/ModalForm";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Props {
   imageSrc: string;
@@ -35,8 +36,10 @@ const ImageCard = ({ imageSrc, text, onOpenModal }: Props) => {
         }
       `}</style>
       <h3>{renderText()}</h3>
-      <button onClick={onOpenModal}>
-        <p>Подробнее</p>
+      <button>
+        <Link href="https://vk.com/soprano_tattoo">
+          <p>Написать нам</p>
+        </Link>
       </button>
     </div>
   );

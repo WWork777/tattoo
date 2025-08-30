@@ -77,9 +77,9 @@ export default function Masters() {
       name: "Антон",
       description:
         "Более 10 лет в тату-индустрии. Специализация: Крупные проекты (рукава, ногава, спины)",
-      tgLink: "https://t.me/soprano_tattoo",
-      instaLink: "https://www.instagram.com/soprano_tattoo/",
-      vkLink: "https://vk.com/soprano_tattoo",
+      tgLink: "https://t.me/datsky_read",
+      instaLink: "https://www.instagram.com/draytsev_tattoo",
+      vkLink: "https://vk.com/tonismoke",
       category: "tattoo",
     },
     {
@@ -88,9 +88,9 @@ export default function Masters() {
       name: "Злата",
       description:
         "Специалист по нежной графике и минимализму. Каждая работа — аккуратная история, рассказанная через тонкие линии",
-      tgLink: "https://t.me/soprano_tattoo",
-      instaLink: "https://www.instagram.com/soprano_tattoo/",
-      vkLink: "https://vk.com/soprano_tattoo",
+      tgLink: "https://t.me/volchonoktattoo",
+      instaLink: "https://www.instagram.com/zlata_v_tattoo",
+      vkLink: "https://vk.com/club230565202",
       category: "tattoo",
     },
     {
@@ -99,8 +99,8 @@ export default function Masters() {
       name: "Егор",
       description:
         "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
-      tgLink: "https://t.me/soprano_tattoo",
-      instaLink: "https://www.instagram.com/soprano_tattoo/",
+      tgLink: "https://t.me/goretatt",
+      instaLink: "https://www.instagram.com/gore_tat",
       vkLink: "https://vk.com/soprano_tattoo",
       category: "tattoo",
     },
@@ -110,9 +110,9 @@ export default function Masters() {
       name: "Лиза",
       description:
         "Графика, в которой чувствуется характер Универсал — одинаково точно работает с разными стилями",
-      tgLink: "https://t.me/soprano_tattoo",
-      instaLink: "https://www.instagram.com/soprano_tattoo/",
-      vkLink: "https://vk.com/soprano_tattoo",
+      tgLink: "https://t.me/walifer_tattoo",
+      instaLink: "https://www.instagram.com/Walifer_tattoo",
+      vkLink: "https://vk.com/walifer_tattoo",
       category: "tattoo",
     },
     {
@@ -121,9 +121,9 @@ export default function Masters() {
       name: "Алина",
       description:
         "Бью стилевые и дерзкие татухи уже 5 лет. Моя страсть — андеграунд, дарк и аниме-графика, которые цепляют взгляд и отражают твой внутренний стиль",
-      tgLink: "https://t.me/soprano_tattoo",
-      instaLink: "https://www.instagram.com/soprano_tattoo/",
-      vkLink: "https://vk.com/soprano_tattoo",
+      tgLink: "https://t.me/sopranotattoo",
+      instaLink: "https://www.instagram.com/panabitch",
+      vkLink: "https://vk.com/terrorist_art",
       category: "tattoo",
     },
   ];

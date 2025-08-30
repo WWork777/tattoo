@@ -88,7 +88,9 @@ const Hero = () => {
                       <div className={styles.slide__line}></div>
                       <p className={styles.slide__subtitle}>{slide.subtitle}</p>
                       <button onClick={openModal}>
-                        <p>Подробнее</p>
+                        <Link href="https://vk.com/soprano_tattoo">
+                          <p>Написать нам</p>
+                        </Link>
                       </button>
                     </div>
                   </div>

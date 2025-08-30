@@ -39,14 +39,14 @@ export const Footer = () => {
         </div>
         <div className={styles.footer__content__right}>
           <Link
-            href="https://t.me/soprano_tattoo"
+            href="https://t.me/sopranotattoo"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img src="/icons/footer/tg.svg" alt="Telegram" />
           </Link>
           <Link
-            href="https://www.instagram.com/soprano_tattoo/"
+            href="https://www.instagram.com/soprano.tattoo.nsk"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -44,10 +44,10 @@ export const Header = () => {
         >
           <p>{phoneNumber}</p>
         </Link>
-        <Link href={"https://www.instagram.com/soprano_tattoo/"}>
+        <Link href={"https://www.instagram.com/soprano.tattoo.nsk"}>
           <img src="/icons/header/inst.svg" alt="Instagram" />
         </Link>
-        <Link href="https://t.me/soprano_tattoo">
+        <Link href="https://t.me/sopranotattoo">
           <img src="/icons/header/tg.svg" alt="Telegram" />
         </Link>
         <Link href="https://vk.com/soprano_tattoo">
