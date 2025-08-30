@@ -24,7 +24,7 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.header__content__left}>
         <Link href="/">
-          <img src="/images/logo/Logo 2.png" alt="logo" />
+          <img src="/images/logo/Logo.svg" alt="logo" />
         </Link>
 
         {/* Навигация для десктопа */}

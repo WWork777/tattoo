@@ -13,7 +13,7 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__top}>
-        <img src="/images/logo/Logo 2.png" alt="logo" className={styles.logo} />
+        <img src="/images/logo/Logo.svg" alt="logo" className={styles.logo} />
         <nav className={styles.footer__nav}>
           {navLinks.map((link, index) => (
             <Link key={index} href={link.href} className={styles.nav__link}>

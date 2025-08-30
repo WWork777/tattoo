@@ -11,7 +11,7 @@ const ImageCard = ({ imageSrc }: { imageSrc: string }) => {
   return (
     <div
       className={styles.image__card}
-      style={{ backgroundImage: `url(/images/${imageSrc}.webp)` }}
+      style={{ backgroundImage: `url(/images/${imageSrc}.jpg)` }}
     ></div>
   );
 };
@@ -74,16 +74,6 @@ const TextCard = ({
 };
 
 const Whous = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <section className="container">
       <h2>Кто мы?</h2>
@@ -98,7 +88,7 @@ const Whous = () => {
           color="rgba(236, 236, 236, 0.34)"
           colorText="white"
         />
-        <ImageCard imageSrc="whous2" />
+        <ImageCard imageSrc="whous3" />
         <TextCard
           text={[
             "— Татуировки от минимализма до масштабных проектов— Все виды пирсинга, включая интимные",
@@ -123,7 +113,7 @@ const Whous = () => {
           color="rgba(236, 236, 236, 0.34)"
           colorText="white"
         />
-        <ImageCard imageSrc="whous3" />
+        <ImageCard imageSrc="whous2" />
         <TextCard
           text={[
             "Мы не только делаем тату, но и обучаем этому искусству.",

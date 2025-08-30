@@ -1,9 +1,12 @@
 "use client";
 import styles from "./Portfolio.module.scss";
-import { useState, useEffect } from "react"; // Добавлен useEffect
+import { useState, useEffect } from "react";
 
 export const Portfolio = () => {
   const [activeSlider, setActiveSlider] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+  const [modalSliderIndex, setModalSliderIndex] = useState(0);
 
   // Данные для трех слайдеров
   const sliders = [
@@ -44,10 +47,49 @@ export const Portfolio = () => {
     },
   ];
 
+  // Функция для открытия модального окна
+  const openModal = (sliderIndex: number, imageIndex: number) => {
+    setModalSliderIndex(sliderIndex);
+    setModalImageIndex(imageIndex);
+    setModalOpen(true);
+  };
+
+  // Функции навигации в модальном окне
+  const nextModalImage = () => {
+    const currentSlider = sliders[modalSliderIndex];
+    setModalImageIndex((prev) =>
+      prev === currentSlider.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevModalImage = () => {
+    const currentSlider = sliders[modalSliderIndex];
+    setModalImageIndex((prev) =>
+      prev === 0 ? currentSlider.images.length - 1 : prev - 1
+    );
+  };
+
+  // Закрытие модального окна по клавише Escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setModalOpen(false);
+      }
+    };
+
+    if (modalOpen) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden"; // Блокируем скролл страницы
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset"; // Восстанавливаем скролл
+    };
+  }, [modalOpen]);
+
   return (
     <section className="container" id="portfolio">
-      {" "}
-      {/* id перенесен сюда */}
       <h2>Портфолио</h2>
       <div className={styles.portfolio}>
         {/* Навигация между слайдерами */}
@@ -73,10 +115,25 @@ export const Portfolio = () => {
               activeSlider === sliderIndex ? styles.active : ""
             }`}
           >
-            <SliderComponent images={slider.images} category={slider.title} />
+            <SliderComponent
+              images={slider.images}
+              category={slider.title}
+              onImageClick={(imageIndex) => openModal(sliderIndex, imageIndex)}
+            />
           </div>
         ))}
       </div>
+
+      {/* Модальное окно */}
+      {modalOpen && (
+        <ModalView
+          images={sliders[modalSliderIndex].images}
+          currentIndex={modalImageIndex}
+          onNext={nextModalImage}
+          onPrev={prevModalImage}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </section>
   );
 };
@@ -85,9 +142,11 @@ export const Portfolio = () => {
 const SliderComponent = ({
   images,
   category,
+  onImageClick,
 }: {
   images: string[];
   category: string;
+  onImageClick: (index: number) => void;
 }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -108,7 +167,6 @@ const SliderComponent = ({
 
   // Обновляем количество изображений при изменении размера окна
   useEffect(() => {
-    // Исправлено с useState на useEffect
     const handleResize = () => {
       setItemsPerPage(getItemsPerPage());
     };
@@ -150,8 +208,6 @@ const SliderComponent = ({
   return (
     <>
       <div className={styles.slider_container}>
-        {" "}
-        {/* Убран id отсюда */}
         <div
           className={`${styles.slider_wrapper} ${
             isAnimating ? styles.animating : ""
@@ -161,6 +217,7 @@ const SliderComponent = ({
             <div
               key={`${category}-${startIndex + index}`}
               className={styles.slide}
+              onClick={() => onImageClick(startIndex + index)}
             >
               <img
                 src={image}
@@ -205,5 +262,90 @@ const SliderComponent = ({
         )}
       </div>
     </>
+  );
+};
+
+// Компонент модального окна
+const ModalView = ({
+  images,
+  currentIndex,
+  onNext,
+  onPrev,
+  onClose,
+}: {
+  images: string[];
+  currentIndex: number;
+  onNext: () => void;
+  onPrev: () => void;
+  onClose: () => void;
+}) => {
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    onNext();
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  const handlePrev = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    onPrev();
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  // Обработка нажатий клавиш для навигации
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isAnimating]);
+
+  return (
+    <div className={styles.modal} onClick={onClose}>
+      <div
+        className={styles.modal_content}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className={styles.close_button} onClick={onClose}>
+          ×
+        </button>
+
+        <div className={styles.modal_image_container}>
+          <img
+            src={images[currentIndex]}
+            alt={`Image ${currentIndex + 1}`}
+            className={styles.modal_image}
+          />
+        </div>
+
+        <div className={styles.modal_controls}>
+          <button
+            className={styles.modal_arrow_left}
+            onClick={handlePrev}
+            disabled={isAnimating}
+          >
+            ←
+          </button>
+
+          <span className={styles.image_counter}>
+            {currentIndex + 1} / {images.length}
+          </span>
+
+          <button
+            className={styles.modal_arrow_right}
+            onClick={handleNext}
+            disabled={isAnimating}
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };

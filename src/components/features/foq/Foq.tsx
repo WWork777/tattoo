@@ -1,19 +1,13 @@
 "use client";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion"; // Импортируем компоненты
-import "react-accessible-accordion/dist/fancy-example.css"; // Импортируем базовые стили (опционально)
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Foq.module.scss";
 
-// Не забудьте импортировать стили, если хотите избежать конфликтов
-// import './your-accordion-styles.css'; // Ваш собственный CSS модуль
-
 export const Foq = () => {
-  // Данные FAQ остаются прежними
   const faqData = [
     {
       question: "Сколько стоит татуировка?",
@@ -50,42 +44,31 @@ export const Foq = () => {
   return (
     <section className="container-ellipse">
       <h2>Вопросы и ответы</h2>
-      {/* Используем Accordion из react-accessible-accordion */}
-      {/* allowZeroExpanded позволяет закрыть все панели одновременно */}
-      {/* allowMultipleExpanded позволяет открыть несколько панелей одновременно (по умолчанию false) */}
-      <Accordion
-        allowZeroExpanded
-        className={styles.accordion} // Применяем ваш внешний класс
-        preExpanded={[0]} // Опционально: раскрыть первый элемент по умолчанию
-      >
-        {/* Используем AccordionItem для каждого элемента FAQ */}
+      <div className={styles.accordion}>
         {faqData.map((item, index) => (
-          <AccordionItem
+          <Accordion
             key={index}
-            uuid={index}
+            elevation={0} // Убираем тень
             className={styles.accordion__item}
           >
-            <AccordionItemHeading>
-              <AccordionItemButton
-                className={`${styles.accordion__header}`} // Применяем ваш класс для кнопки
-                // Классы состояния (например, для активной кнопки) добавляются автоматически библиотекой
-                // Вы можете стилизовать их в вашем CSS модуле (например, .accordion__header[aria-expanded="true"])
-              >
-                <span>{item.question}</span>
-                {/* Иконка теперь может быть стилизована через CSS, используя селекторы библиотеки */}
-                {/* Например, в styles.accordion__header можно добавить стили для ::after */}
-              </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel
-              className={`${styles.accordion__content}`} // Применяем ваш класс для панели
-              // Классы состояния (например, для открытой панели) добавляются автоматически
-              // Вы можете стилизовать их в вашем CSS модуле (например, .accordion__content[hidden])
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon className={styles.accordion__icon} />}
+              aria-controls={`panel-${index}-content`}
+              id={`panel-${index}-header`}
+              className={styles.accordion__header}
             >
-              <p>{item.answer}</p>
-            </AccordionItemPanel>
-          </AccordionItem>
+              <Typography component="span" className={styles.accordion__title}>
+                <p>{item.question}</p>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails className={styles.accordion__content}>
+              <Typography component="p" className={styles.accordion__text}>
+                <p>{item.answer}</p>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         ))}
-      </Accordion>
+      </div>
     </section>
   );
 };
