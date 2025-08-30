@@ -42,7 +42,7 @@ export const Foq = () => {
   ];
 
   return (
-    <section className="container-ellipse">
+    <section className="container">
       <h2>Вопросы и ответы</h2>
       <div className={styles.accordion}>
         {faqData.map((item, index) => (
