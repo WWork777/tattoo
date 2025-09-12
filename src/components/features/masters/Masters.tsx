@@ -45,21 +45,28 @@ const Card = ({
       <h3>{name}</h3>
       <p>{description}</p>
       <div className={styles.card__footer}>
-        <div className={styles.card__footer__socials}>
-          <Link href={tgLink}>
-            <img src="/icons/socials/tg.svg" alt="" />
-          </Link>
-          <Link href={instaLink}>
-            <img src="/icons/socials/inst.svg" alt="" />
-          </Link>
-          <Link href={vkLink}>
-            <img src="/icons/socials/vk.svg" alt="" />
-          </Link>
+        <div>
+          <div>
+            <p>Портфолио</p>
+          </div>
+          <div className={styles.card__footer__socials}>
+            <Link href={tgLink}>
+              <img src="/icons/socials/tg.svg" alt="" />
+            </Link>
+            <Link href={instaLink}>
+              <img src="/icons/socials/inst.svg" alt="" />
+            </Link>
+            <Link href={vkLink}>
+              <img src="/icons/socials/vk.svg" alt="" />
+            </Link>
+          </div>
         </div>
-        <button onClick={onOpenModal}>
+        <button>
           {" "}
           {/* Вызываем функцию открытия */}
-          <p>Записаться</p>
+          <Link href="https://t.me/Soprano2024" target="_blank">
+            <p>Записаться</p>
+          </Link>
         </button>
       </div>
     </div>
@@ -107,7 +114,7 @@ export default function Masters() {
     {
       id: 4,
       imageSrc: "tattoo4.webp",
-      name: "Лиза",
+      name: "Елизавета",
       description:
         "Графика, в которой чувствуется характер Универсал — одинаково точно работает с разными стилями",
       tgLink: "https://t.me/walifer_tattoo",
@@ -126,6 +133,28 @@ export default function Masters() {
       vkLink: "https://vk.com/terrorist_art",
       category: "tattoo",
     },
+    {
+      id: 6,
+      imageSrc: "tattoo3.webp",
+      name: "Егор",
+      description:
+        "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
+      tgLink: "https://t.me/goretatt",
+      instaLink: "https://www.instagram.com/gore_tat",
+      vkLink: "https://vk.com/soprano_tattoo",
+      category: "piercing",
+    },
+    {
+      id: 7,
+      imageSrc: "tattoo3.webp",
+      name: "Егор",
+      description:
+        "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
+      tgLink: "https://t.me/goretatt",
+      instaLink: "https://www.instagram.com/gore_tat",
+      vkLink: "https://vk.com/soprano_tattoo",
+      category: "removal",
+    },
   ];
 
   const filteredMasters = masters.filter(
@@ -136,7 +165,6 @@ export default function Masters() {
     { id: "tattoo", name: "Тату" },
     { id: "piercing", name: "Пирсинг" },
     { id: "removal", name: "Удаление тату" },
-    { id: "permanent", name: "Перманент" },
   ];
 
   // Функции для управления модальным окном
@@ -152,7 +180,7 @@ export default function Masters() {
     <section className="container" id="masters">
       <h2>Мастера</h2>
 
-      {/* <div className={styles.buttons}>
+      <div className={styles.buttons}>
         {categories.map((category) => (
           <button
             key={category.id}
@@ -162,7 +190,7 @@ export default function Masters() {
             <p>{category.name}</p>
           </button>
         ))}
-      </div> */}
+      </div>
 
       <div className={styles.grid}>
         {filteredMasters.map((master) => (

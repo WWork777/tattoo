@@ -57,7 +57,6 @@ const Hero = () => {
       <div className={styles.hero}>
         <div className={styles.left}>
           <div className={styles.slider}>
-            {/* Стрелка влево */}
             <button
               className={styles.slider__arrow__left}
               onClick={prevSlide}
@@ -87,8 +86,8 @@ const Hero = () => {
                       ></h1>
                       <div className={styles.slide__line}></div>
                       <p className={styles.slide__subtitle}>{slide.subtitle}</p>
-                      <button onClick={openModal}>
-                        <Link href="https://vk.com/soprano_tattoo">
+                      <button>
+                        <Link href="https://t.me/Soprano2024" target="_blank">
                           <p>Написать нам</p>
                         </Link>
                       </button>
@@ -116,8 +115,13 @@ const Hero = () => {
               Запишись <br></br> на консультацию и получи скидку
             </p>
             <p>
-              <span>1000</span> рублей <br></br> на любую усулгу
+              <span>1000</span> рублей на любую усулгу
             </p>
+            <button className={styles.right__top__button}>
+              <Link href="https://t.me/Soprano2024" target="_blank">
+                <p>Написать нам</p>
+              </Link>
+            </button>
           </div>
           <div className={styles.right__bottom}>
             <Link href="/#portfolio" className={styles.right__bottom__left}>
@@ -142,8 +146,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Модальное окно */}
-      <ModalForm isOpen={isModalOpen} onClose={closeModal} />
+      {/* <ModalForm isOpen={isModalOpen} onClose={closeModal} /> */}
     </section>
   );
 };

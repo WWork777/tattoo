@@ -39,7 +39,7 @@ export const Footer = () => {
         </div>
         <div className={styles.footer__content__right}>
           <Link
-            href="https://t.me/sopranotattoo"
+            href="https://t.me/Soprano2024"
             target="_blank"
             rel="noopener noreferrer"
           >

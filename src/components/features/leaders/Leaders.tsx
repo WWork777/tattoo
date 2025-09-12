@@ -8,7 +8,7 @@ export const Leaders = () => {
       <div className={styles.leaders}>
         <div className={styles.facts_top}>
           <div className={styles.fact}>
-            <p>Антон Драйцеов, основатель Soprano</p>
+            <p>Антон Драйцев, основатель Soprano</p>
           </div>
           <div className={styles.fact}>
             <p>По гороскопу телец</p>

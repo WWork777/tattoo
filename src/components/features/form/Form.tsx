@@ -7,7 +7,7 @@ export const Form = () => {
 
   // Функции для открытия ссылок
   const openTelegram = () => {
-    window.open("https://t.me/sopranotattoo", "_blank");
+    window.open("https://t.me/https://t.me/Soprano2024", "_blank");
     setIsSuccess(true);
 
     // Скрываем сообщение об успехе через 5 секунд

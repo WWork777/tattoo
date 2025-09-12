@@ -12,6 +12,19 @@ export const Portfolio = () => {
   const sliders = [
     {
       id: 1,
+      title: "Проекты",
+      images: [
+        "/images/portfolio/project.webp",
+        "/images/portfolio/project2.webp",
+        "/images/portfolio/project3.webp",
+        "/images/portfolio/project4.webp",
+        "/images/portfolio/project5.webp",
+        "/images/portfolio/project6.webp",
+        "/images/portfolio/project7.webp",
+      ],
+    },
+    {
+      id: 2,
       title: "Большие тату",
       images: [
         "/images/portfolio/big.webp",
@@ -22,7 +35,7 @@ export const Portfolio = () => {
       ],
     },
     {
-      id: 2,
+      id: 3,
       title: "Мини-тату",
       images: [
         "/images/portfolio/mini.webp",
@@ -30,19 +43,6 @@ export const Portfolio = () => {
         "/images/portfolio/mini3.webp",
         "/images/portfolio/mini4.webp",
         "/images/portfolio/mini5.webp",
-      ],
-    },
-    {
-      id: 3,
-      title: "Проекты",
-      images: [
-        "/images/portfolio/project.webp",
-        "/images/portfolio/project2.webp",
-        "/images/portfolio/project3.webp",
-        "/images/portfolio/project4.webp",
-        "/images/portfolio/project5.webp",
-        "/images/portfolio/project6.webp",
-        "/images/portfolio/project7.webp",
       ],
     },
   ];

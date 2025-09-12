@@ -63,7 +63,7 @@ export const Map = () => {
                 <img src="/icons/footer/vk.svg" alt="ВКонтакте" />
               </Link>
               <Link
-                href="https://t.me/soprano_tattoo"
+                href="https://t.me/Soprano2024"
                 target="_blank"
                 className={styles.social__icon}
               >

@@ -7,9 +7,10 @@ import { Portfolio } from "@/components/features/portfolio/Portfolio";
 import { Leaders } from "@/components/features/leaders/Leaders";
 import { Reviews } from "@/components/features/otzivi/Reviews";
 import { Form } from "@/components/features/form/Form";
-import { Foq } from "@/components/features/foq/Foq";
+import { Foq } from "@/components/features/faq/Faq";
 import { Map } from "@/components/features/map/Map";
 import { headers } from "next/headers";
+import { Services } from "@/components/features/services/Services";
 
 export async function generateMetadata() {
   const headersList = headers();
@@ -69,6 +70,7 @@ export default function Home() {
       <Hero />
       <Whous />
       <Special />
+      <Services />
       <Masters />
       <Portfolio />
       <Leaders />

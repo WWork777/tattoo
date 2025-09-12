@@ -1,5 +1,5 @@
 "use client";
-import styles from "./Special.module.scss";
+import styles from "./Services.module.scss";
 import ModalForm from "../modal/ModalForm";
 import { useState } from "react";
 import Link from "next/link";
@@ -45,7 +45,7 @@ const ImageCard = ({ imageSrc, text, onOpenModal }: Props) => {
   );
 };
 
-export const Special = () => {
+export const Services = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -57,18 +57,24 @@ export const Special = () => {
   };
 
   return (
-    <section className="container">
-      <h2>Специальные предложения</h2>
+    <section className="container" id="special">
+      <h2>Услуги</h2>
 
       <div className={styles.grid}>
         <ImageCard
-          text={["Скидка 20% ", "защитникам Отечества"]}
-          imageSrc="special"
+          text={["Разработка", "индивидуального", "эскиза бесплатно"]}
+          imageSrc="special2"
+          onOpenModal={openModal}
+        />
+        <ImageCard text="Пирсинг" imageSrc="special3" onOpenModal={openModal} />
+        <ImageCard
+          text={["Удаление тату"]}
+          imageSrc="special5"
           onOpenModal={openModal}
         />
         <ImageCard
-          text="Рассрочка или кредит"
-          imageSrc="special4"
+          text="Перманентный макияж"
+          imageSrc="special6"
           onOpenModal={openModal}
         />
       </div>
