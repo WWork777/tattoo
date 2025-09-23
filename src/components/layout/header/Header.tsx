@@ -34,6 +34,8 @@ export const Header = () => {
               <p>{link.text}</p>
             </Link>
           ))}
+          <div className={styles.line}></div>
+          <Link href={"/obuchenie-tatu"}>Обучение</Link>
         </nav>
       </div>
 
