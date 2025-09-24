@@ -82,7 +82,7 @@ export default function Sertificate() {
   return (
     <section className="container">
       <div className={styles.header}>
-        <h2>Отзывы клиентов</h2>
+        <h2>Получение сертификатов</h2>
       </div>
 
       <div className={styles.sliderContainer}>

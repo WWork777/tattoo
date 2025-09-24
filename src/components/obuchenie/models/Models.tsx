@@ -3,7 +3,7 @@ import "./sales-slider.scss";
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
-
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
@@ -43,7 +43,12 @@ export default function Models() {
           progressInterval.current = null;
         }
         // Принудительно переключаем слайд
-        swiperRef.current?.slideNext();
+        const swiper = swiperRef.current;
+        if (swiper) {
+          const totalSlides = slides.length;
+          const nextIndex = (activeSlideIndex + 1) % totalSlides;
+          swiper.slideTo(nextIndex);
+        }
       }
     }, 50);
 
@@ -73,19 +78,40 @@ export default function Models() {
 
   const slides = [
     {
-      title: "2в1: лето пришло, а ты ещё не похудел?",
-      content:
-        "Попробуйте уникальный комплекс услуг: ДУШ ШАРКО + МАССАЖ СТАРВАК!",
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
     },
     {
-      title: "10% скидка новому клиенту на первое посещение",
-      content:
-        "Мы всегда рады новым клиентам, и пытаемся окутать заботой и комфортом каждого нового человека. Поэтому для новых клиентов мы делаем скидку 10% на первое посещение.",
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
     },
     {
-      title: "15% скидка на все услуги в ваш день рождения",
-      content:
-        "День рождения — прекрасный повод сделать себе подарок и записаться на уходовую процедуру. Скидка действует 3 дня до и 3 дня после вашего дня рождения.",
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
+    },
+    {
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
+    },
+    {
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
+    },
+    {
+      title: "Станислав",
+      date: "02.2024",
+      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      tgLink: "https://t.me/lisi_tattoo",
     },
   ];
 
@@ -119,11 +145,11 @@ export default function Models() {
         modules={[Pagination, Navigation, Autoplay]}
         className="mySwiper"
         onSlideChange={handleSlideChange}
-        autoplay={{
-          delay: autoplayDelay,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-        }}
+        // autoplay={{
+        //   delay: autoplayDelay,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: false,
+        // }}
         onMouseEnter={pauseAutoplay}
         onMouseLeave={resumeAutoplay}
         onTouchStart={pauseAutoplay}
@@ -133,7 +159,7 @@ export default function Models() {
           <SwiperSlide
             key={index}
             onClick={() => {
-              swiperRef.current?.slideToLoop(index);
+              swiperRef.current?.slideTo(index);
             }}
             className={activeSlideIndex === index ? "active-slide" : ""}
           >
@@ -159,8 +185,22 @@ export default function Models() {
               )}
 
               <div className="slide-content">
-                <strong>{slide.title}</strong>
-                <p>{slide.content}</p>
+                {/* Заголовок и дата */}
+                <div className="slide-header">
+                  <strong>{slide.title}</strong>
+                  <span className="slide-date">{slide.date}</span>
+                </div>
+
+                {/* Основной текст */}
+                <div className="slide-text">{slide.text}</div>
+
+                {/* Кнопка Telegram */}
+                <div className="slide-footer">
+                  <Link href={slide.tgLink} target="_blank">
+                    <img src="/icons/socials/tg.svg" alt="Telegram" />
+                    Написать в Telegram
+                  </Link>
+                </div>
               </div>
             </div>
           </SwiperSlide>

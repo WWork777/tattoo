@@ -11,6 +11,7 @@
 
   .title__container {
     padding-left: 10%;
+    padding-right: 10%;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -22,9 +23,9 @@
   }
 
   .mySwiper {
-    height: calc(50vh + 80px);
+    height: calc(60vh + 80px);
     width: 100%;
-    margin-top: 50px;
+    margin-top: 0px;
 
     .swiper-slide-active {
       opacity: 1 !important;
@@ -69,14 +70,14 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: space-between; // Изменено для распределения пространства
         gap: 25px;
         border-radius: 15px;
         width: 100%;
         height: 100%;
         background-color: hsla(0, 0%, 0%, 0.425);
         padding: 30px;
-        overflow: hidden; // Добавлено для скрытия выступающих элементов
+        overflow: hidden;
 
         // Линия времени на слайде
         .slide-progress-container {
@@ -86,45 +87,101 @@
           width: 100%;
           height: 4px;
           background-color: rgba(255, 255, 255, 0.3);
-          border-radius: 2px 2px 0 0; // Скругление только верхних углов
-          overflow: hidden; // Важно для скругления прогресс-бара
+          border-radius: 2px 2px 0 0;
+          overflow: hidden;
 
           .slide-progress-bar {
             height: 100%;
             background: linear-gradient(90deg, #c6ab7a, #a78e61);
-            border-radius: 2px 0 0 0; // Скругление только левого верхнего угла
+            border-radius: 2px 0 0 0;
             transition: width 0.1s linear;
           }
         }
 
         .slide-content {
-          margin-top: 10px;
+          // Убрано margin-top и изменено выравнивание
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end; // Контент прижат к низу
+          min-height: auto; // Убрана фиксированная высота
+          position: relative;
+          z-index: 2;
+          margin-top: auto; // Автоматический отступ сверху для прижатия к низу
+          padding-top: 20px; // Отступ от верхнего края контента
 
-          strong {
-            font-size: 20px;
-            font-weight: 800;
+          .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+
+            strong {
+              font-size: 22px;
+              font-weight: 800;
+              color: #ffffff;
+              text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .slide-date {
+              font-size: 14px;
+              color: #c6ab7a;
+              background: rgba(0, 0, 0, 0.3);
+              padding: 4px 10px;
+              border-radius: 12px;
+              font-weight: 600;
+            }
           }
 
-          p {
+          .slide-text {
             font-size: 16px;
-            line-height: 1.4;
-            margin-top: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #c6ab7a;
           }
-        }
 
-        a {
-          border: 1px solid black;
-          align-self: flex-end;
-          padding: 8px 20px;
-          border-radius: 30px;
-          margin: 10px 0;
-          font-size: 14px;
-          transition: 0.3s ease;
-          pointer-events: none;
-        }
+          .slide-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: auto;
 
-        a:hover {
-          background-color: black;
+            a {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              background: linear-gradient(135deg, #c6ab7a, #a78e61);
+              padding: 10px 20px;
+              border-radius: 25px;
+              text-decoration: none;
+              color: white;
+              font-weight: 600;
+              font-size: 14px;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 15px rgba(198, 171, 122, 0.3);
+              pointer-events: auto;
+
+              img {
+                width: 18px;
+                height: 18px;
+                filter: brightness(0) invert(1);
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(198, 171, 122, 0.5);
+                background: linear-gradient(135deg, #d4b98a, #b89d73);
+              }
+
+              &:active {
+                transform: translateY(0);
+              }
+            }
+          }
         }
       }
     }
