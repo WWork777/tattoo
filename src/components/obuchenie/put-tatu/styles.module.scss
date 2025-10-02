@@ -3,16 +3,27 @@
   margin-top: 200px;
   max-width: 100%;
   padding-left: 10%;
+
   @media (max-width: 1024px) {
     padding-left: 5%;
     margin-top: 100px;
-    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 2%;
+    margin-top: 60px;
   }
 
   .title {
     width: 100%;
     padding-left: 10%;
     padding-right: 20%;
+
+    @media (max-width: 768px) {
+      padding-left: 5%;
+      padding-right: 5%;
+      text-align: center;
+    }
   }
 }
 
@@ -20,31 +31,42 @@
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   width: 100%;
-  height: 600px;
+  height: 650px;
   margin-top: 1.5rem;
   overflow-x: visible;
 
-  -ms-overflow-style: none; /* Для IE и Edge */
-  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    display: none; /* Для Chrome, Safari, Edge */
+    display: none;
   }
 
   @media (max-width: 1024px) {
     height: 400px;
+  }
+
+  @media (max-width: 768px) {
+    height: 280px; // на мобильных компактнее
+    // border-radius: 12px;
   }
 }
 
 .slide {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  // border-radius: 20px;
+
   img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // border-radius: 20px;
+
+    @media (max-width: 768px) {
+      // border-radius: 12px;
+      max-height: 260px;
+      object-fit: contain;
+    }
   }
 }

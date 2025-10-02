@@ -10,15 +10,35 @@ export default function Prepod() {
   const slides = [
     {
       id: 1,
-      image: "/images/hero/hero.webp",
+      image: "/obuchenie/prepod/7.webp",
     },
     {
       id: 2,
-      image: "/images/hero/hero2.webp",
+      image: "/obuchenie/prepod/8.webp",
     },
     {
       id: 3,
-      image: "/images/hero/hero3.webp",
+      image: "/obuchenie/prepod/9.webp",
+    },
+    {
+      id: 4,
+      image: "/obuchenie/prepod/10.webp",
+    },
+    {
+      id: 5,
+      image: "/obuchenie/prepod/11.webp",
+    },
+    {
+      id: 6,
+      image: "/obuchenie/prepod/12.webp",
+    },
+    {
+      id: 7,
+      image: "/obuchenie/prepod/13.webp",
+    },
+    {
+      id: 8,
+      image: "/obuchenie/prepod/14.webp",
     },
   ];
 
@@ -31,7 +51,7 @@ export default function Prepod() {
   };
 
   return (
-    <section className="container">
+    <section className="container" id="prepod">
       <h2>Создатель курса и старший преподаватель</h2>
       <div className={styles.prepod}>
         <div className={styles.prepod__image}>

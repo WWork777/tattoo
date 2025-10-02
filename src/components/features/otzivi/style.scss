@@ -1,20 +1,13 @@
 .promo-catalog {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 .swiper-slide {
   position: relative;
-  width: calc(50% - 30px);
-  margin-right: 60px;
+  width: calc(100%);
   overflow: hidden;
-  border-radius: 33px;
-  -webkit-border-radius: 33px;
-  -moz-border-radius: 33px;
-  -ms-border-radius: 33px;
-  -o-border-radius: 33px;
 
   @media (max-width: 768px) {
     width: calc(100% - 30px);
-    margin-right: 20px;
   }
 }

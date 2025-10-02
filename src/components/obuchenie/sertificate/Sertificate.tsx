@@ -18,7 +18,7 @@ export default function Sertificate() {
   const reviews = [
     {
       id: 1,
-      image: "/images/whous.webp",
+      image: "/obuchenie/sertificate/34.webp",
       author: "Анна Петрова",
       shortText:
         "Отличный сервис! Массаж просто невероятный, осталась очень довольна...",
@@ -27,7 +27,7 @@ export default function Sertificate() {
     },
     {
       id: 2,
-      image: "/images/review2.jpg",
+      image: "/obuchenie/sertificate/35.webp",
       author: "Михаил Сидоров",
       shortText:
         "Процедура была на высшем уровне. Очень рекомендую этот салон...",
@@ -36,7 +36,7 @@ export default function Sertificate() {
     },
     {
       id: 3,
-      image: "/images/review3.jpg",
+      image: "/obuchenie/sertificate/36.webp",
       author: "Елена Козлова",
       shortText:
         "Лучший массаж в городе! Спасибо за профессиональный подход...",
@@ -45,7 +45,7 @@ export default function Sertificate() {
     },
     {
       id: 4,
-      image: "/images/review4.jpg",
+      image: "/obuchenie/sertificate/37.webp",
       author: "Дмитрий Волков",
       shortText:
         "Приятная атмосфера и профессиональный подход. Вернусь обязательно...",
@@ -54,7 +54,7 @@ export default function Sertificate() {
     },
     {
       id: 5,
-      image: "/images/review5.jpg",
+      image: "/obuchenie/sertificate/38.webp",
       author: "Ольга Морозова",
       shortText:
         "Салон превзошел все ожидания. Уютная атмосфера и отличные специалисты...",
@@ -63,7 +63,7 @@ export default function Sertificate() {
     },
     {
       id: 6,
-      image: "/images/review6.jpg",
+      image: "/obuchenie/sertificate/39.webp",
       author: "Александр Новиков",
       shortText:
         "Отличное место для релакса. Профессиональный подход и качественные услуги...",
@@ -100,7 +100,7 @@ export default function Sertificate() {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 30,
             },
           }}
@@ -119,23 +119,23 @@ export default function Sertificate() {
                   />
 
                   {/* Градиентный оверлей для текста */}
-                  <div className={styles.contentOverlay}>
-                    <div className={styles.reviewText}>
+                  {/* <div className={styles.contentOverlay}> */}
+                  {/* <div className={styles.reviewText}>
                       <p className={styles.shortText}>
                         {expandedCards[review.id]
                           ? review.fullText
                           : review.shortText}
                       </p>
-                    </div>
+                    </div> */}
 
-                    {/* Шторка для раскрытия отзыва */}
-                    <div
+                  {/* Шторка для раскрытия отзыва */}
+                  {/* <div
                       className={`${styles.dragHandle} ${
                         expandedCards[review.id] ? styles.expanded : ""
                       }`}
                       onClick={() => toggleCard(review.id)}
-                    >
-                      <div className={styles.dragIndicator}>
+                    > */}
+                  {/* <div className={styles.dragIndicator}>
                         <svg
                           width="24"
                           height="24"
@@ -151,14 +151,14 @@ export default function Sertificate() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                      </div>
-                      <span className={styles.dragText}>
+                      </div> */}
+                  {/* <span className={styles.dragText}>
                         {expandedCards[review.id]
                           ? "Свернуть отзыв"
                           : "Полный отзыв"}
-                      </span>
-                    </div>
-                  </div>
+                      </span> */}
+                  {/* </div> */}
+                  {/* </div> */}
                 </div>
               </div>
             </SwiperSlide>

@@ -4,7 +4,9 @@
 .practice__subtitle {
   text-align: center;
   font-size: 30px;
-  color: #c4c4c4;
+  font-weight: 600;
+  color: #cfcfcf;
+  margin-bottom: 40px;
 
   @media (max-width: 768px) {
     font-size: 20px;
@@ -19,10 +21,12 @@
 .practice__container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  gap: 100px;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
+  align-items: stretch;
+  gap: 80px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
   @media (max-width: 1024px) {
     gap: 50px;
   }
@@ -37,135 +41,83 @@
 .practice__image {
   flex: 1;
   position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 1;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-    mask: linear-gradient(to top, black 0%, black 80%, transparent 100%);
-    transition: opacity 0.3s ease;
-
-    @media (max-width: 768px) {
-      height: 50%;
-    }
-  }
+  max-width: 600px;
 
   .image__container {
+    position: relative;
     border-radius: $border-radius;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    justify-content: flex-end;
+    align-items: flex-end;
     padding: 2rem;
-    position: relative;
-    transition: all 0.5s ease;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 70vh;
-    border-radius: $border-radius;
+    height: 65vh;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
 
     @media (max-width: 1024px) {
-      height: 60vh;
+      height: 55vh;
       padding: 1.5rem;
     }
 
     @media (max-width: 768px) {
-      height: 50vh;
+      height: 45vh;
       padding: 1.2rem;
     }
 
     @media (max-width: 480px) {
-      height: 40vh;
+      height: 45vh;
       padding: 1rem;
-      gap: 0.3rem;
+    }
+
+    // затемнение снизу
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.65) 20%,
+        transparent 80%
+      );
+      z-index: 1;
+      transition: opacity 0.3s ease;
     }
   }
 
   .image__content {
     position: relative;
     z-index: 2;
-    max-width: 100%;
-    height: auto;
-    border-radius: $border-radius;
-    color: white;
+    color: #f0f0f0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 
     p {
       margin: 8px 0;
-      font-size: 1.1rem;
-      line-height: 1.4;
+      font-size: 1.05rem;
+      line-height: 1.5;
 
       @media (max-width: 1024px) {
         font-size: 1rem;
-        margin: 6px 0;
       }
 
       @media (max-width: 768px) {
         font-size: 0.9rem;
-        margin: 5px 0;
       }
 
       @media (max-width: 480px) {
-        font-size: 0.8rem;
-        margin: 4px 0;
-        line-height: 1.3;
-      }
-    }
-
-    ul {
-      padding-left: 20px;
-
-      @media (max-width: 768px) {
-        margin: 0;
-        padding-left: 15px;
-      }
-
-      li {
-        font-size: 1.2rem;
-
-        @media (max-width: 1024px) {
-          font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-          font-size: 0.9rem;
-        }
-
-        @media (max-width: 480px) {
-          font-size: 0.8rem;
-        }
-      }
-    }
-
-    h3 {
-      font-size: 2rem;
-
-      @media (max-width: 1024px) {
-        font-size: 1.5rem;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 1.3rem;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 1.1rem;
-        margin-bottom: 0;
+        font-size: 0.7rem;
       }
     }
   }
 }
 
-// Добавляем дополнительные медиа-запросы для очень маленьких экранов
+// Для совсем маленьких экранов
 @media (max-width: 360px) {
   .practice__subtitle {
     font-size: 16px;
@@ -177,7 +129,7 @@
 
   .practice__image {
     .image__container {
-      height: 35vh;
+      height: 34vh;
       padding: 0.8rem;
     }
 

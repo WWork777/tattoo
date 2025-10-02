@@ -16,22 +16,33 @@ export default function Programm() {
       </div>
 
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination]}
         spaceBetween={0}
-        slidesPerView={1.2} // ←←← Показываем 1 слайд + часть второго
-        // navigation
-        // pagination={{ clickable: true }}
         loop={false}
         className={styles.swiper}
+        breakpoints={{
+          320: { slidesPerView: 1 }, // телефоны
+          768: { slidesPerView: 1.2 }, // планшеты
+          1024: { slidesPerView: 1.2 }, // десктоп
+        }}
       >
         <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 1" />
+          <img src="/obuchenie/program/17.webp" alt="Slide 1" />
         </SwiperSlide>
         <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 2" />
+          <img src="/obuchenie/program/18.webp" alt="Slide 2" />
         </SwiperSlide>
         <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 3" />
+          <img src="/obuchenie/program/19.webp" alt="Slide 3" />
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <img src="/obuchenie/program/20.webp" alt="Slide 3" />
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <img src="/obuchenie/program/21.webp" alt="Slide 3" />
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <img src="/obuchenie/program/22.webp" alt="Slide 3" />
         </SwiperSlide>
       </Swiper>
     </section>

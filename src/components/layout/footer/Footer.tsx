@@ -20,6 +20,9 @@ export const Footer = () => {
               {link.text}
             </Link>
           ))}
+          <Link href={"/obuchenie-tatu"} className={styles.nav__link}>
+            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение</p>
+          </Link>
         </nav>
       </div>
 

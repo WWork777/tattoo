@@ -16,22 +16,21 @@ export default function Put() {
       </div>
 
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination]}
         spaceBetween={0}
-        slidesPerView={1.2} // ←←← Показываем 1 слайд + часть второго
-        // navigation
-        // pagination={{ clickable: true }}
         loop={false}
         className={styles.swiper}
+        breakpoints={{
+          320: { slidesPerView: 1 }, // телефоны
+          768: { slidesPerView: 1.2 }, // планшеты
+          1024: { slidesPerView: 1.5 }, // десктоп
+        }}
       >
         <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 1" />
+          <img src="/obuchenie/put/29.webp" alt="Slide 1" />
         </SwiperSlide>
         <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 2" />
-        </SwiperSlide>
-        <SwiperSlide className={styles.slide}>
-          <img src="/images/special.webp" alt="Slide 3" />
+          <img src="/obuchenie/put/Фон.webp" alt="Slide 2" />
         </SwiperSlide>
       </Swiper>
     </section>

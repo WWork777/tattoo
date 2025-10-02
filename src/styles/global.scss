@@ -174,3 +174,27 @@ a {
     visibility: hidden;
   }
 }
+
+#prepod {
+  scroll-margin-top: 20px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}
+
+#learnWorks {
+  scroll-margin-top: 40px; // Современное свойство для смещения
+
+  &::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin-top: -120px;
+    visibility: hidden;
+  }
+}

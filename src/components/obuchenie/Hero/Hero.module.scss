@@ -149,7 +149,7 @@
 
     &:nth-child(1) {
       .slide__content::before {
-        background: rgba(0, 0, 0, 0.048);
+        background: rgba(0, 0, 0, 0.308);
       }
     }
     &:nth-child(2) {
@@ -183,7 +183,7 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.13);
+          background: rgba(0, 0, 0, 0.89);
           z-index: 1; // Можно изменить на 1
         }
       }
@@ -655,13 +655,13 @@
 
   .right__bottom__left {
     &::before {
-      background-image: url("./images/tattoo-hero2.webp");
+      background-image: url("./images/4.webp");
       background: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0) 50%,
-          rgba(0, 0, 0, 0.7) 100%
+          rgba(0, 0, 0, 0.411) 50%,
+          rgba(0, 0, 0, 0.815) 100%
         ),
-        url("./images/tattoo-hero2.webp");
+        url("./images/4.webp");
       background-size: cover;
       background-position: center;
     }
@@ -669,13 +669,13 @@
 
   .right__bottom__right {
     &::before {
-      background-image: url("./images/tattoo-hero3.webp");
+      background-image: url("./images/5.webp");
       background: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0) 50%,
-          rgba(0, 0, 0, 0.7) 100%
+          rgba(0, 0, 0, 0.411) 50%,
+          rgba(0, 0, 0, 0.815) 100%
         ),
-        url("./images/tattoo-hero3.webp");
+        url("./images/5.webp");
       background-size: cover;
       background-position: center;
     }

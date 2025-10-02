@@ -5,7 +5,7 @@ import Arrow from "./arrow.svg";
 import ArrowSecond from "./arrow-second.svg";
 import SliderArea from "./slider-area.svg";
 import SliderArrow from "./slider-arrow.svg";
-import ModalForm from "../modal/ModalForm";
+// import ModalForm from "../modal/ModalForm";
 import Link from "next/link";
 
 const HeroObuchenie = () => {
@@ -18,7 +18,7 @@ const HeroObuchenie = () => {
       title: "Сделай шаг в новую профессию без лишних трат!",
       subtitle:
         "Профессии можно обучиться самостоятельно, но это займет большое количество времени, нервов и денег. Поэтому мы создали курсы, обучаясь на которых вы сэкономите все эти три ресурса!",
-      image: "/images/hero/hero.webp",
+      image: "/obuchenie/hero/1.webp",
     },
     {
       id: 2,
@@ -57,14 +57,14 @@ const HeroObuchenie = () => {
       <div className={styles.hero}>
         <div className={styles.left}>
           <div className={styles.slider}>
-            <button
+            {/* <button
               className={styles.slider__arrow__left}
               onClick={prevSlide}
               aria-label="Previous slide"
             >
               <img src={SliderArea.src} alt="" />
               <img src={SliderArrow.src} alt="" className={styles.arrow} />
-            </button>
+            </button> */}
 
             <div className={styles.slider__container}>
               {slides.map((slide, index) => (
@@ -98,14 +98,14 @@ const HeroObuchenie = () => {
             </div>
 
             {/* Стрелка вправо */}
-            <button
+            {/* <button
               className={styles.slider__arrow__right}
               onClick={nextSlide}
               aria-label="Next slide"
             >
               <img src={SliderArea.src} alt="" />
               <img src={SliderArrow.src} alt="" />
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -114,7 +114,9 @@ const HeroObuchenie = () => {
             <p>
               Запишись <br></br> на консультацию по обучению
             </p>
-            <p>и получи бесплатную стратегию с чего начать тату мастеру.</p>
+            <p>
+              и получи <b>бесплатную стратегию</b> с чего начать тату мастеру.
+            </p>
             <button className={styles.right__top__button}>
               <Link href="https://t.me/Soprano2024" target="_blank">
                 <p>Написать нам</p>
@@ -122,7 +124,10 @@ const HeroObuchenie = () => {
             </button>
           </div>
           <div className={styles.right__bottom}>
-            <Link href="/#portfolio" className={styles.right__bottom__left}>
+            <Link
+              href="/obuchenie-tatu/#prepod"
+              className={styles.right__bottom__left}
+            >
               <img src={Arrow.src} alt="" className={styles.arrow__left} />
               <img
                 src={ArrowSecond.src}
@@ -131,7 +136,10 @@ const HeroObuchenie = () => {
               />
               <p>Работы преподавателей</p>
             </Link>
-            <Link href="/#special" className={styles.right__bottom__right}>
+            <Link
+              href="/obuchenie-tatu/#learnWorks"
+              className={styles.right__bottom__right}
+            >
               <img src={Arrow.src} alt="" className={styles.arrow__right} />
               <img
                 src={ArrowSecond.src}
@@ -145,8 +153,6 @@ const HeroObuchenie = () => {
           </div>
         </div>
       </div>
-
-      {/* <ModalForm isOpen={isModalOpen} onClose={closeModal} /> */}
     </section>
   );
 };

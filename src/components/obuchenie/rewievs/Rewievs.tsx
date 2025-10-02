@@ -17,35 +17,35 @@ export default function Rewievs() {
   const reviews = [
     {
       id: 1,
-      image: "/obuchenie/rewievs/rewievs.webp",
+      image: "/obuchenie/rewievs/43.webp",
     },
     {
       id: 2,
-      image: "/obuchenie/rewievs/rewievs2.webp",
+      image: "/obuchenie/rewievs/44.webp",
     },
     {
       id: 3,
-      image: "/obuchenie/rewievs/rewievs3.webp",
+      image: "/obuchenie/rewievs/45.webp",
     },
     {
       id: 4,
-      image: "/obuchenie/rewievs/rewievs4.webp",
+      image: "/obuchenie/rewievs/46.webp",
     },
     {
       id: 5,
-      image: "/obuchenie/rewievs/rewievs5.webp",
+      image: "/obuchenie/rewievs/47.webp",
     },
     {
       id: 6,
-      image: "/obuchenie/rewievs/rewievs6.webp",
+      image: "/obuchenie/rewievs/48.webp",
     },
     {
       id: 7,
-      image: "/obuchenie/rewievs/rewievs7.webp",
+      image: "/obuchenie/rewievs/49.webp",
     },
     {
       id: 8,
-      image: "/obuchenie/rewievs/rewievs8.webp",
+      image: "/obuchenie/rewievs/50.webp",
     },
   ];
 
@@ -63,7 +63,7 @@ export default function Rewievs() {
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           spaceBetween={30}
-          slidesPerView={4}
+          slidesPerView={3}
           navigation={{
             nextEl: `.${styles.swiperButtonNext}`,
             prevEl: `.${styles.swiperButtonPrev}`,
@@ -74,7 +74,7 @@ export default function Rewievs() {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 30,
             },
           }}

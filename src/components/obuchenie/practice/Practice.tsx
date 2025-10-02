@@ -6,7 +6,7 @@ const PracticeCard = () => {
       <div
         className={styles.image__container}
         style={{
-          backgroundImage: `url(/images/masters/tattoo.webp)`,
+          backgroundImage: `url(/obuchenie/practice/24.webp)`,
         }}
       >
         <div className={styles.image__content}>
@@ -27,7 +27,7 @@ const PracticeCardSecond = () => {
       <div
         className={styles.image__container}
         style={{
-          backgroundImage: `url(/images/masters/tattoo.webp)`,
+          backgroundImage: `url(/obuchenie/practice/25.webp)`,
         }}
       >
         <div className={styles.image__content}>

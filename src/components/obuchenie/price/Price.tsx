@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./styles.module.scss";
 
 const tarifList = [
@@ -37,7 +38,7 @@ const PriceCard = ({
   return (
     <div className={styles.tarifCard}>
       <div
-        style={{ backgroundImage: `url(/images/hero/${img}.webp)` }}
+        style={{ backgroundImage: `url(/obuchenie/price/${img}.webp)` }}
         className={styles.tarif__img}
       ></div>
       <div className={styles.tarif__content}>
@@ -91,10 +92,14 @@ const PriceCard = ({
 
         <div className={styles.tarif__actions}>
           <button>
-            <p>Купить</p>
+            <Link href="https://t.me/Soprano2024">
+              <p>Купить</p>
+            </Link>
           </button>
           <button>
-            <p>Купить в рассрочку</p>
+            <Link href="https://t.me/Soprano2024">
+              <p>Купить в рассрочку</p>
+            </Link>
           </button>
         </div>
       </div>
@@ -108,7 +113,7 @@ export default function Price() {
       <h2>Стоимость</h2>
       <div className={styles.tarif__grid}>
         <PriceCard
-          img="hero"
+          img="40"
           tarifNumber="1"
           tarifTitle="Стартовый курс"
           tarifList={tarifList}
@@ -116,7 +121,7 @@ export default function Price() {
           tafirCreditPrice="2 500 ₽"
         />
         <PriceCard
-          img="hero2"
+          img="41"
           tarifNumber="2"
           tarifTitle="Стандартный курс"
           tarifList={tarifList}
@@ -124,7 +129,7 @@ export default function Price() {
           tafirCreditPrice="5 000 ₽"
         />
         <PriceCard
-          img="hero3"
+          img="42"
           tarifNumber="3"
           tarifTitle="Углубленный курс"
           tarifList={tarifList}

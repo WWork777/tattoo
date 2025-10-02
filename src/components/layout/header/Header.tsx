@@ -34,8 +34,18 @@ export const Header = () => {
               <p>{link.text}</p>
             </Link>
           ))}
-          <div className={styles.line}></div>
-          <Link href={"/obuchenie-tatu"}>Обучение</Link>
+          <div
+            className={styles.line}
+            style={{
+              width: "2px",
+              height: "50px",
+              backgroundColor: "#c6ab7a",
+              margin: "12px 0",
+            }}
+          ></div>
+          <Link href={"/obuchenie-tatu"}>
+            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение</p>
+          </Link>
         </nav>
       </div>
 
@@ -99,6 +109,14 @@ export const Header = () => {
               <p>{link.text}</p>
             </Link>
           ))}
+          <Link href={"/obuchenie-tatu"}>
+            <p
+              style={{ color: "#c6ab7a", fontSize: "20px" }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Обучение
+            </p>
+          </Link>
           {/* Номер телефона в мобильном меню */}
           <Link
             href={`tel:${phoneNumber.replace(/[^\d]/g, "")}`}

@@ -81,42 +81,51 @@ export default function Models() {
       title: "Станислав",
       date: "02.2024",
       text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+    },
+    {
+      title: "Полина",
+      date: "07.2024",
+      text: "Работает в студии Старк-тату в Кемерово, специализируется на минимализме",
+    },
+    {
+      title: "Евгения",
+      date: "03.2025",
+      text: "Работает в тату студии в Грузии в стиле реалистичная графика",
       tgLink: "https://t.me/lisi_tattoo",
     },
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: "Алина",
+      date: "06.2025",
+      text: "Работает стажером в Soprano тату, имеет 3+ клиентов в неделю",
+      tgLink: "https://t.me/Akimova_Tattoo",
     },
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: "Виолетта",
+      date: "07.2025",
+      text: "Работает тату мастером в Бердске",
+      tgLink: "https://t.me/violaclubtattoo",
     },
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: "Полина",
+      date: "07.2024",
+      text: "Работает тату мастером во Владивостоке",
+      tgLink: "https://t.me/kak_stat_kruche",
     },
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: "Ксения",
+      date: "08.2024",
+      text: "Учмится в 10 классе, при этом имеет стабильный доход с татуировок",
+      tgLink: "https://t.me/firebreathingtattoo",
     },
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: "София",
+      date: "08.2024",
+      text: "Учиться в колледже 2 курс, в свободное время делает татуировки одногруппникам",
     },
   ];
 
   return (
-    <section className="sales">
+    <section className="sales" id="learnWorks">
       <div className="title__container">
         <h2 className="title">Переходим к моделям</h2>
       </div>
@@ -137,7 +146,9 @@ export default function Models() {
         loop={false}
         breakpoints={{
           200: { slidesPerView: 1 },
-          600: { slidesPerView: 1 },
+          600: {
+            slidesPerView: 1,
+          },
           900: { slidesPerView: 1 },
           1300: { slidesPerView: 5 },
           1920: { slidesPerView: 5 },
@@ -195,12 +206,14 @@ export default function Models() {
                 <div className="slide-text">{slide.text}</div>
 
                 {/* Кнопка Telegram */}
-                <div className="slide-footer">
-                  <Link href={slide.tgLink} target="_blank">
-                    <img src="/icons/socials/tg.svg" alt="Telegram" />
-                    Написать в Telegram
-                  </Link>
-                </div>
+                {slide.tgLink && (
+                  <div className="slide-footer">
+                    <Link href={slide.tgLink} target="_blank">
+                      <img src="/icons/socials/tg.svg" alt="Telegram" />
+                      Написать в Telegram
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </SwiperSlide>
