@@ -14,7 +14,7 @@ export const Header = () => {
     { href: "/#special", text: "Услуги" },
     { href: "/#masters", text: "Мастера" },
     { href: "/#portfolio", text: "Портфолио" },
-    { href: "/#contacts", text: "Контакты" },
+    { href: "/blogCard", text: "Блог" },
     { href: "/#form", text: "Консультация" },
   ];
 
