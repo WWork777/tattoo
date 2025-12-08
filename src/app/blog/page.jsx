@@ -12,16 +12,19 @@ export async function generateMetadata() {
 
   return {
     title: "Блог о татуировках | Soprano Tattoo Новосибирск",
-    description: "Статьи о татуировках, уходе, стилях и тенденциях. Советы от мастеров Soprano Tattoo Новосибирск. Профессиональные рекомендации до и после сеанса.",
-    keywords: "блог о тату, статьи про татуировки, уход за тату, стили татуировок, тату мода, советы по тату, Soprano Tattoo блог",
-    
+    description:
+      "Статьи о татуировках, уходе, стилях и тенденциях. Советы от мастеров Soprano Tattoo Новосибирск. Профессиональные рекомендации до и после сеанса.",
+    keywords:
+      "блог о тату, статьи про татуировки, уход за тату, стили татуировок, тату мода, советы по тату, Soprano Tattoo блог",
+
     alternates: {
       canonical: blogURL,
     },
-    
+
     openGraph: {
       title: "Блог о татуировках | Soprano Tattoo Новосибирск",
-      description: "Полезные статьи и советы от профессиональных мастеров тату. Все о татуировках в одном блоге.",
+      description:
+        "Полезные статьи и советы от профессиональных мастеров тату. Все о татуировках в одном блоге.",
       url: blogURL,
       siteName: "Soprano Tattoo Новосибирск",
       images: [
@@ -35,14 +38,15 @@ export async function generateMetadata() {
       locale: "ru_RU",
       type: "website",
     },
-    
+
     twitter: {
       card: "summary_large_image",
       title: "Блог о татуировках | Soprano Tattoo Новосибирск",
-      description: "Статьи и советы от профессиональных мастеров тату. Soprano Tattoo блог.",
+      description:
+        "Статьи и советы от профессиональных мастеров тату. Soprano Tattoo блог.",
       images: [`${baseURL}/images/blog/blog-twitter.jpg`],
     },
-    
+
     robots: {
       index: true,
       follow: true,
@@ -54,7 +58,7 @@ export async function generateMetadata() {
         "max-snippet": -1,
       },
     },
-    
+
     // Дополнительные мета-теги для блога
     authors: [{ name: "Soprano Tattoo Team" }],
     creator: "Soprano Tattoo Новосибирск",
@@ -77,7 +81,7 @@ function BlogCard({
   slug,
 }) {
   return (
-    <Link href={`/blog-tatu/${slug}`} className={styles.blogCard}>
+    <Link href={`/blog/${slug}`} className={styles.blogCard}>
       <div className={styles.imageContainer}>
         {imageUrl ? (
           <img src={imageUrl} alt={title} />
@@ -135,4 +139,3 @@ export default function BlogGrid() {
     </div>
   );
 }
-

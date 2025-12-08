@@ -6,7 +6,6 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
-
 function getArticleData(slug) {
   return blogData.find((post) => post.slug === slug);
 }
@@ -39,7 +38,7 @@ function parseDate(dateString) {
 }
 
 export default async function ArticlePage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const article = getArticleData(slug);
 
   if (!article) {
@@ -51,7 +50,9 @@ export default async function ArticlePage({ params }) {
     "@type": "BlogPosting",
     headline: article.title,
     description: article.description,
-    image: article.imageUrl ? `https://soprano-tattoo.ru${article.imageUrl}` : undefined,
+    image: article.imageUrl
+      ? `https://soprano-tattoo.ru${article.imageUrl}`
+      : undefined,
     datePublished: parseDate(article.date).toISOString(),
     dateModified: new Date().toISOString(),
     author: {
@@ -70,11 +71,17 @@ export default async function ArticlePage({ params }) {
       "@type": "WebPage",
       "@id": `https://soprano-tattoo.ru/blog/${article.slug}`,
     },
-    keywords: ["тату", "татуировки", "Новосибирск", "тату салон", article.category],
+    keywords: [
+      "тату",
+      "татуировки",
+      "Новосибирск",
+      "тату салон",
+      article.category,
+    ],
     articleSection: article.category,
     articleBody: (article.text || "").substring(0, 5000),
   };
-  
+
   return (
     <section className="hero-container">
       <script
@@ -82,7 +89,11 @@ export default async function ArticlePage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <article className="article" itemScope itemType="https://schema.org/BlogPosting">
+      <article
+        className="article"
+        itemScope
+        itemType="https://schema.org/BlogPosting"
+      >
         <header className="articleHeader">
           <div className="meta">
             <span className="category" itemProp="articleSection">
@@ -90,7 +101,10 @@ export default async function ArticlePage({ params }) {
             </span>
             <span className="date">
               📅{" "}
-              <time itemProp="datePublished" dateTime={parseDate(article.date).toISOString()}>
+              <time
+                itemProp="datePublished"
+                dateTime={parseDate(article.date).toISOString()}
+              >
                 {article.date}
               </time>
             </span>
@@ -104,7 +118,12 @@ export default async function ArticlePage({ params }) {
             {article.description}
           </p>
 
-          <div className="author" itemProp="author" itemScope itemType="https://schema.org/Person">
+          <div
+            className="author"
+            itemProp="author"
+            itemScope
+            itemType="https://schema.org/Person"
+          >
             <meta itemProp="name" content="Soprano Tattoo" />
             <span>Автор: Soprano Tattoo</span>
           </div>
@@ -120,20 +139,32 @@ export default async function ArticlePage({ params }) {
 
         <div className="articleContent" itemProp="articleBody">
           {typeof article.text === "string"
-            ? article.text.split("\n\n").map((para, idx) => (
-                <p key={idx}>{para.replace(/^#+\s*/, "")}</p>
-              ))
+            ? article.text
+                .split("\n\n")
+                .map((para, idx) => (
+                  <p key={idx}>{para.replace(/^#+\s*/, "")}</p>
+                ))
             : null}
         </div>
 
         <footer className="articleFooter">
           <div className="tags">
             <span>Теги:</span>
-            <button className="tag" itemProp="keywords">тату</button>
-            <button className="tag" itemProp="keywords">Новосибирск</button>
-            <button className="tag" itemProp="keywords">тату салон</button>
-            <button className="tag" itemProp="keywords">эскизы</button>
-            <button className="tag" itemProp="keywords">{article.category}</button>
+            <button className="tag" itemProp="keywords">
+              тату
+            </button>
+            <button className="tag" itemProp="keywords">
+              Новосибирск
+            </button>
+            <button className="tag" itemProp="keywords">
+              тату салон
+            </button>
+            <button className="tag" itemProp="keywords">
+              эскизы
+            </button>
+            <button className="tag" itemProp="keywords">
+              {article.category}
+            </button>
           </div>
         </footer>
       </article>
@@ -174,7 +205,9 @@ export async function generateMetadata({ params }) {
           .slice(0, 30)
       : [];
 
-  const keywords = [...new Set([...baseKeywords, ...contentKeywords, article.category])].join(", ");
+  const keywords = [
+    ...new Set([...baseKeywords, ...contentKeywords, article.category]),
+  ].join(", ");
 
   const ogImage = article.imageUrl
     ? {
@@ -245,4 +278,3 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-
