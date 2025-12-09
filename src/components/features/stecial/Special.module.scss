@@ -12,7 +12,6 @@
 }
 
 .image__card {
-  aspect-ratio: 1.7/1;
   border-radius: $border-radius;
   overflow: hidden;
   display: flex;
@@ -20,20 +19,45 @@
   justify-content: space-between;
   padding: 2.5rem;
   position: relative;
+  min-height: 350px; // Увеличиваем минимальную высоту для десктопа
+  transition: min-height 0.5s ease;
+
+  &.with_details {
+    justify-content: flex-start;
+    min-height: 350px; // Увеличиваем начальную высоту
+  }
+
+  // На десктопе высота не меняется при раскрытии
+  &.with_details.expanded {
+    @media (max-width: 768px) {
+      min-height: 400px; // Увеличиваем больше на мобильных
+    }
+
+    @media (max-width: 480px) {
+      min-height: 380px;
+    }
+  }
 
   @media (max-width: 1650px) {
     padding: 1.5rem;
+    min-height: 320px;
   }
 
   @media (max-width: 1024px) {
     padding: 1rem;
+    min-height: 300px;
   }
 
   @media (max-width: 768px) {
     padding: 1.5rem;
+    min-height: 280px;
   }
 
-  // Создаем контейнер для изображения
+  @media (max-width: 480px) {
+    padding: 1rem;
+    min-height: 250px;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -46,6 +70,7 @@
     z-index: 0;
     transition: transform 1.5s ease-out;
     transform: scale(1);
+    border-radius: $border-radius;
   }
 
   & > * {
@@ -68,6 +93,7 @@
     );
     z-index: 1;
     transition: opacity 0.5s ease;
+    border-radius: $border-radius;
   }
 
   &:hover {
@@ -80,12 +106,22 @@
     }
   }
 
+  .card_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+  }
+
   h3 {
-    font-size: 40px;
+    font-size: 30px;
     font-family: $font-condensed;
     line-height: 1.2;
     font-weight: 600;
     letter-spacing: 3px;
+    margin-bottom: 1rem;
+
     @media (max-width: 1550px) {
       font-size: 30px;
     }
@@ -95,9 +131,153 @@
     @media (max-width: 768px) {
       font-size: 20px;
     }
+    @media (max-width: 480px) {
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
   }
 
-  button {
+  .details_section {
+    margin-top: auto;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .details_toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 18px;
+    font-family: $font-regular;
+    cursor: pointer;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    width: fit-content;
+    min-width: 140px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    z-index: 5;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    span {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      padding: 0.7rem 1rem;
+      min-width: 120px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+      padding: 0.6rem 0.9rem;
+      min-width: 110px;
+      gap: 0.3rem;
+    }
+  }
+
+  .details_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease,
+      margin 0.5s ease;
+    opacity: 0;
+    position: relative;
+    z-index: 20;
+    box-sizing: border-box;
+    width: 100%;
+
+    &.open {
+      opacity: 1;
+      margin-top: 1rem;
+
+      // Разная высота для разных экранов
+      @media (min-width: 769px) {
+        max-height: 180px; // Увеличиваем на десктопе
+      }
+
+      @media (max-width: 768px) {
+        max-height: 200px; // Больше на мобильных
+      }
+
+      @media (max-width: 480px) {
+        max-height: 180px;
+      }
+
+      overflow-y: auto;
+
+      // Стилизация скроллбара
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1.2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin: 0;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+      text-align: left;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        padding: 1rem;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 13px;
+        padding: 0.9rem;
+        line-height: 1.3;
+      }
+    }
+  }
+
+  .action_button {
     margin-top: 1rem;
     padding: 0.8rem 1rem;
     background-color: rgba(255, 255, 255, 0.25);
@@ -109,6 +289,9 @@
     font-size: 1rem;
     transition: all 0.3s ease;
     transform: translateY(0);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
 
     &::before {
       content: "";
@@ -131,6 +314,9 @@
       font-family: $font-regular;
       @media (max-width: 768px) {
         font-size: 16px;
+      }
+      @media (max-width: 480px) {
+        font-size: 14px;
       }
     }
 

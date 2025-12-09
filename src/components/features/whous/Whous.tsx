@@ -78,7 +78,7 @@ const Whous = () => {
     <section className="container">
       <h2>Кто мы?</h2>
       <div className={styles.grid}>
-        <ImageCard imageSrc="whous" />
+        <ImageCard imageSrc="whous3" />
         <TextCard
           text={[
             "Тату-студия в Новосибирске, где каждый мастер — не просто профессионал, а художник со своей философией.",
@@ -88,7 +88,7 @@ const Whous = () => {
           color="rgba(236, 236, 236, 0.34)"
           colorText="white"
         />
-        <ImageCard imageSrc="whous3" />
+        <ImageCard imageSrc="whous" />
         <TextCard
           text={[
             "— Татуировки от минимализма до масштабных проектов— Все виды пирсинга, включая интимные",

@@ -1,11 +1,20 @@
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. Отключение уязвимых экспериментальных функций
   experimental: {
-    serverComponents: false,
-    appDir: false,
-    rsc: false,
+    turbo: false,
+  },
+
+  // 1. Отключение уязвимых экспериментальных функций
+  // experimental: {
+  //   serverComponents: false,
+  //   appDir: false,
+  //   rsc: false,
+  //   optimizeCss: false, // Отключаем оптимизацию CSS
+  //   webpackBuildWorker: false, // Отключаем воркеры для сборки
+  // },
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
   },
 
   eslint: {

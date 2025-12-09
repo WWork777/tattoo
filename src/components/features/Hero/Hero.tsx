@@ -15,9 +15,9 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      title: "Твой первый шаг — со скидкой!",
+      title: "SOPRANO — главный голос, ведущий за собой всю итальянскую оперу.",
       subtitle:
-        "Мы знаем, как волнительна первая татуировка. Чтобы было проще решиться, дарим скидку 15% на первую работу. Доверься профессионалам!",
+        "Ваша татуировка — это и есть ваше сопрано. Это — мелодия вашей личности, которую мы напишем вместе с вами.",
       image: "/images/hero/hero.webp",
     },
     {
@@ -86,12 +86,12 @@ const Hero = () => {
                       ></h1>
                       <div className={styles.slide__line}></div>
                       <p className={styles.slide__subtitle}>{slide.subtitle}</p>
-                      <button>
-                        <Link href="https://t.me/Soprano2024" target="_blank">
-                          <p>Написать нам</p>
-                        </Link>
-                      </button>
                     </div>
+                    <button>
+                      <Link href="https://t.me/Soprano2024" target="_blank">
+                        <p>Написать нам</p>
+                      </Link>
+                    </button>
                   </div>
                 </div>
               ))}
@@ -111,11 +111,9 @@ const Hero = () => {
 
         <div className={styles.right}>
           <div className={styles.right__top}>
+            <p>Сообщи при первой записи нашему менеджеру кодовое слово</p>
             <p>
-              Запишись <br></br> на консультацию и получи скидку
-            </p>
-            <p>
-              <span>1000</span> рублей на любую усулгу
+              <span>СИЦИЛИЯ</span> <br></br>и получи скидку 1000 р.
             </p>
             <button className={styles.right__top__button}>
               <Link href="https://t.me/Soprano2024" target="_blank">

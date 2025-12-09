@@ -44,7 +44,7 @@ export const Header = () => {
             }}
           ></div>
           <Link href={"/obuchenie-tatu"}>
-            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение</p>
+            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение тату</p>
           </Link>
         </nav>
       </div>
@@ -114,7 +114,7 @@ export const Header = () => {
               style={{ color: "#c6ab7a", fontSize: "20px" }}
               onClick={() => setIsMenuOpen(false)}
             >
-              Обучение
+              Обучение тату
             </p>
           </Link>
           {/* Номер телефона в мобильном меню */}
