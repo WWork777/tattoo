@@ -43,9 +43,14 @@ export const Header = () => {
               margin: "12px 0",
             }}
           ></div>
+          <div className={styles.lessons}>
           <Link href={"/obuchenie-tatu"}>
             <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение тату</p>
           </Link>
+          <Link href={"/obuchenie-tatu"}>
+            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение пирсингy</p>
+          </Link>
+          </div>
         </nav>
       </div>
 
