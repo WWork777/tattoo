@@ -12,7 +12,7 @@
 }
 
 .image__card {
-  aspect-ratio: 1.7/1;
+  // aspect-ratio: 1.7/1;
   border-radius: $border-radius;
   overflow: hidden;
   display: flex;
@@ -20,6 +20,7 @@
   justify-content: space-between;
   padding: 2.5rem;
   position: relative;
+  text-transform: uppercase;
 
   @media (max-width: 1650px) {
     padding: 1.5rem;
@@ -79,24 +80,30 @@
       opacity: 0.8;
     }
   }
-
-  h3 {
-    font-size: 40px;
-    font-family: $font-condensed;
-    line-height: 1.2;
-    font-weight: 600;
-    letter-spacing: 3px;
-    @media (max-width: 1550px) {
-      font-size: 30px;
+  .imageCardTitle {
+    h3 {
+      margin: 10px;
+      font-size: 40px;
+      font-family: $font-condensed;
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: 3px;
+      @media (max-width: 1550px) {
+        font-size: 30px;
+      }
+      @media (max-width: 1250px) {
+        font-size: 25px;
+      }
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
     }
-    @media (max-width: 1250px) {
-      font-size: 25px;
-    }
-    @media (max-width: 768px) {
-      font-size: 20px;
+    p {
+      font-family: $font-condensed;
+      font-size: 28px;
+      font-weight: 500;
     }
   }
-
   button {
     margin-top: 1rem;
     padding: 0.8rem 1rem;

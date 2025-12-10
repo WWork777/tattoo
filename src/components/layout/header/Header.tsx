@@ -47,7 +47,7 @@ export const Header = () => {
           <Link href={"/obuchenie-tatu"}>
             <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение тату</p>
           </Link>
-          <Link href={"/obuchenie-tatu"}>
+          <Link href={"/obuchenie-pirsingu"}>
             <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение пирсингy</p>
           </Link>
           </div>

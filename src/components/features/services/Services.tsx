@@ -15,12 +15,19 @@ const ImageCard = ({ imageSrc, text, onOpenModal }: Props) => {
     if (Array.isArray(text)) {
       return (
         <>
+        <div className={styles.imageCardTitle} style={{ textAlign: 'center' }}>
+          <h3>сеанс татуировки</h3>
+          <p>найдем мастера под твой стиль</p>
+        </div>
+        <ul>
           {text.map((sentence, index) => (
-            <span key={index}>
+            <li key={index}>
               {sentence}
               <br />
-            </span>
+            </li>
           ))}
+        </ul>
+        <span>стоимость: <span>от 3000 руб.</span></span>
         </>
       );
     }
@@ -62,7 +69,7 @@ export const Services = () => {
 
       <div className={styles.grid}>
         <ImageCard
-          text={["Разработка", "индивидуального", "эскиза бесплатно"]}
+          text={["новая тату", "коррекция тату", "перекрытие", "продолжение тату"]}
           imageSrc="special2"
           onOpenModal={openModal}
         />

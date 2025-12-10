@@ -139,6 +139,9 @@
       p {
         margin: 0;
         padding: 0;
+        @media (max-width: 1300px) {
+          font-size: 16px !important;
+        }
       }
     }
   }
@@ -204,7 +207,7 @@
       }
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
       p {
         font-size: 16px;
       }
@@ -250,7 +253,7 @@
       }
     }
 
-    @media (max-width: 1450px) {
+    @media (max-width: 1700px) {
       display: none;
     }
   }
