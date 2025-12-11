@@ -172,6 +172,33 @@
       font-size: 14px;
     }
   }
+  ul {
+    z-index: 2;
+    list-style: none;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    grid-area: 5px;
+    padding: 0;
+    margin: 0;
+    li {
+      color: #d0d0d0;
+      &:hover {
+        color: white;
+      }
+      @media (max-width: 1650px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+    li::before {
+      content: "-";
+      flex-shrink: 0; /* маркер не сжимается */
+    }
+  }
 }
 
 .grid {

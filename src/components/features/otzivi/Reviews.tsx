@@ -117,16 +117,17 @@ export const Reviews = () => {
 
         <div className={styles.filters}>
           <button
-            className={activeFilter === "Авито" ? styles.active : ""}
-            onClick={() => setActiveFilter("Авито")}
-          >
-            <p>Авито</p>
-          </button>
-          <button
             className={activeFilter === "2ГИС" ? styles.active : ""}
             onClick={() => setActiveFilter("2ГИС")}
           >
             <p>2ГИС</p>
+          </button>
+
+          <button
+            className={activeFilter === "Авито" ? styles.active : ""}
+            onClick={() => setActiveFilter("Авито")}
+          >
+            <p>Авито</p>
           </button>
           
           <button

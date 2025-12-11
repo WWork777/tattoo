@@ -8,7 +8,8 @@ interface Master {
   id: number;
   imageSrc: string;
   name: string;
-  description: string;
+  description?: string;
+  list?: string[];
   tgLink: string;
   instaLink: string;
   vkLink: string;
@@ -18,7 +19,8 @@ interface Master {
 interface Props {
   imageSrc: string;
   name: string;
-  description: string;
+  description?: string;
+  list?: string[];
   tgLink: string;
   instaLink: string;
   vkLink: string;
@@ -29,6 +31,7 @@ const Card = ({
   name,
   imageSrc,
   description,
+  list,
   tgLink,
   instaLink,
   vkLink,
@@ -43,7 +46,14 @@ const Card = ({
       }}
     >
       <h3>{name}</h3>
-      <p>{description}</p>
+      {description == null ? '' : <p>{description}</p>}
+      {list == null ? '' : 
+        <ul>
+          {list?.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      }
       <div className={styles.card__footer}>
         <div>
           <div>
@@ -92,68 +102,46 @@ export default function Masters() {
     {
       id: 2,
       imageSrc: "tattoo2.webp",
-      name: "Злата",
+      name: "Иван",
       description:
-        "Специалист по нежной графике и минимализму. Каждая работа — аккуратная история, рассказанная через тонкие линии",
-      tgLink: "https://t.me/volchonoktattoo",
-      instaLink: "https://www.instagram.com/zlata_v_tattoo",
-      vkLink: "https://vk.com/club230565202",
+        "Стаж 5 лет - опыт, превращённый в уверенную руку и высокую скорость",
+      tgLink: "#",
+      instaLink: "#",
+      vkLink: "#",
       category: "tattoo",
     },
     {
       id: 3,
-      imageSrc: "tattoo3.webp",
-      name: "Егор",
-      description:
-        "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
-      tgLink: "https://t.me/goretatt",
-      instaLink: "https://www.instagram.com/gore_tat",
-      vkLink: "https://vk.com/soprano_tattoo",
-      category: "tattoo",
-    },
-    {
-      id: 4,
-      imageSrc: "tattoo4.webp",
-      name: "Елизавета",
-      description:
-        "Графика, в которой чувствуется характер Универсал — одинаково точно работает с разными стилями",
-      tgLink: "https://t.me/walifer_tattoo",
-      instaLink: "https://www.instagram.com/Walifer_tattoo",
-      vkLink: "https://vk.com/walifer_tattoo",
-      category: "tattoo",
-    },
-    {
-      id: 5,
-      imageSrc: "tattoo5.webp",
-      name: "Алина",
-      description:
-        "Бью стилевые и дерзкие татухи уже 5 лет. Моя страсть — андеграунд, дарк и аниме-графика, которые цепляют взгляд и отражают твой внутренний стиль",
-      tgLink: "https://t.me/sopranotattoo",
-      instaLink: "https://www.instagram.com/panabitch",
-      vkLink: "https://vk.com/terrorist_art",
-      category: "tattoo",
-    },
-    {
-      id: 6,
-      imageSrc: "tattoo3.webp",
-      name: "Егор",
-      description:
-        "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
-      tgLink: "https://t.me/goretatt",
-      instaLink: "https://www.instagram.com/gore_tat",
-      vkLink: "https://vk.com/soprano_tattoo",
+      imageSrc: "piercing.webp",
+      name: "Кирилл",
+      list:
+        ["7 лет опыта", "Мед. Образование", "Работает со всеми проколами классического пирсинга", "Работал во множествах студий Новосибирска, с разным прайсом и оборудованием"],
+      tgLink: "#",
+      instaLink: "#",
+      vkLink: "#",
       category: "piercing",
     },
     {
-      id: 7,
-      imageSrc: "tattoo3.webp",
-      name: "Егор",
+      id: 4,
+      imageSrc: "tattoo.webp",
+      name: "Антон",
       description:
-        "Амбассадор контуров 10 лет в тату — опыт, превращённый в уверенную руку и высокую скорость",
-      tgLink: "https://t.me/goretatt",
-      instaLink: "https://www.instagram.com/gore_tat",
-      vkLink: "https://vk.com/soprano_tattoo",
-      category: "removal",
+        "Куратор курса",
+      tgLink: "https://t.me/datsky_read",
+      instaLink: "https://www.instagram.com/draytsev_tattoo",
+      vkLink: "https://vk.com/tonismoke",
+      category: "lesson",
+    },
+    {
+      id: 5,
+      imageSrc: "tattoo2.webp",
+      name: "Иван",
+      description:
+        "Старший мастер",
+      tgLink: "#",
+      instaLink: "#",
+      vkLink: "#",
+      category: "lesson",
     },
   ];
 
@@ -164,7 +152,7 @@ export default function Masters() {
   const categories = [
     { id: "tattoo", name: "Тату" },
     { id: "piercing", name: "Пирсинг" },
-    { id: "removal", name: "Удаление тату" },
+    { id: "lesson", name: "Обучение тату" },
   ];
 
   // Функции для управления модальным окном
@@ -199,6 +187,7 @@ export default function Masters() {
             imageSrc={master.imageSrc}
             name={master.name}
             description={master.description}
+            list={master.list}
             tgLink={master.tgLink}
             instaLink={master.instaLink}
             vkLink={master.vkLink}

@@ -20,9 +20,14 @@ export const Footer = () => {
               {link.text}
             </Link>
           ))}
-          <Link href={"/obuchenie-tatu"} className={styles.nav__link}>
-            <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение</p>
-          </Link>
+          <div className={styles.lessons}>
+            <Link href={"/obuchenie-tatu"} className={styles.nav__link}>
+              <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение тату</p>
+            </Link>
+            <Link href={"/obuchenie-pirsingu"} className={styles.nav__link}>
+              <p style={{ color: "#c6ab7a", fontSize: "20px" }}>Обучение пирсингу</p>
+            </Link>
+          </div>
         </nav>
       </div>
 
@@ -33,7 +38,7 @@ export const Footer = () => {
           </Link>
           <div className={styles.item}>
             <img src="/icons/footer/geo.svg" alt="" />{" "}
-            <p>Кирова 113/2, 19 этаж, офис 1920</p>
+            <p>Кирова 113/2, 16 этаж, офис 1604</p>
           </div>
           <Link href="tel:+79537931889" className={styles.item}>
             <img src="/icons/footer/phone.svg" alt="" />{" "}

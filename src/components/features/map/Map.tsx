@@ -4,7 +4,7 @@ import styles from "./Map.module.scss";
 export const Map = () => {
   const phoneNumber = "+7(953) 793-18-89";
   const email = "soprano_tattoo";
-  const address = "Кирова 113/2, 19 этаж, офис 1920";
+  const address = "Кирова 113/2, 16 этаж, офис 1604";
 
   return (
     <section className="container" id="contacts">
@@ -81,13 +81,16 @@ export const Map = () => {
         </div>
 
         <div className={styles.map}>
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A0c378b50faec6784004b0a04536276697570b360e7d0b4237f3f48ad586835e0&amp;source=constructor"
-            width="100%"
-            height="447"
-            frameBorder="0"
-            title="Карта салона Soprano"
-          ></iframe>
+          <iframe 
+            id="map_345070441" 
+            frameBorder="0" 
+            width="100%" 
+            height="470px" 
+            src="https://makemap.2gis.ru/widget?data=eJw1jktuwzAMRO_CboXAH8mRfYAU3WUXoEUWjsW2AmRTkBkgqeG7l7ZargjOcOYtQMlhQveKNCInjzN0HwvwMyJ0cMKe7wlBQUwUMfGuLzBQoCT6y2dxs9VNdPYctg9ZHc5D8pE9Tfnw8zY5fEBXFv-zKvjKhc8t7q_tTH5i8Q8kUH7qeYex1aE1um1qZcyhKGvbXOXdO-iOrV2vCsY-nmn2uW-B0DN02WpaY7UpjK4VhE3NWZXWTVk3-qitwBGNgmYlU7AphMs3Ynjfr5zuuP4Cfb1ZKQ" 
+            sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"
+          >
+          </iframe>
+
         </div>
       </div>
     </section>

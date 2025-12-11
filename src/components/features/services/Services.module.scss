@@ -2,13 +2,25 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr); /* 6 колонок для равномерного распределения */
+  grid-template-rows: auto auto;
   gap: 1rem;
   margin-top: 2rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
+}
+.grid .image__card:nth-child(1),
+.grid .image__card:nth-child(2) {
+  grid-column: span 3;
+}
+
+/* Нижние 3 элемента занимают по 2 колонки каждый */
+.grid .image__card:nth-child(3),
+.grid .image__card:nth-child(4),
+.grid .image__card:nth-child(5) {
+  grid-column: span 2;
 }
 
 .image__card {
@@ -18,6 +30,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   padding: 2.5rem;
   position: relative;
   text-transform: uppercase;
@@ -63,9 +76,9 @@
     bottom: 0;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 0.7) 100%
+      rgba(0, 0, 0, .6) 0%,
+      rgba(0, 0, 0, .7) 50%,
+      rgba(0, 0, 0, .6) 100%
     );
     z-index: 1;
     transition: opacity 0.5s ease;
@@ -74,34 +87,108 @@
   &:hover {
     &::before {
       transform: scale(1.1);
+
     }
 
     &::after {
       opacity: 0.8;
     }
   }
-  .imageCardTitle {
-    h3 {
-      margin: 10px;
-      font-size: 40px;
-      font-family: $font-condensed;
-      line-height: 1;
-      font-weight: 600;
-      letter-spacing: 3px;
-      @media (max-width: 1550px) {
-        font-size: 30px;
+  .imageContent {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    .imageCardTitle {
+      h3 {
+        margin: 10px;
+        font-size: 32px;
+        font-family: $font-condensed;
+        line-height: 1;
+        font-weight: 600;
+        letter-spacing: 3px;
+        @media (max-width: 1550px) {
+          font-size: 25px;
+        }
+        @media (max-width: 1280px) {
+          font-size: 22px;
+        }
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
+        @media (max-width: 480px) {
+          font-size: 20px;
+        }
       }
-      @media (max-width: 1250px) {
-        font-size: 25px;
-      }
-      @media (max-width: 768px) {
-        font-size: 20px;
+      p {
+        font-family: $font-condensed;
+        font-size: 24px;
+        font-weight: 500;
+        @media (max-width: 1550px) {
+          font-size: 20px;
+        }
+        @media (max-width: 1280px) {
+          font-size: 18px;
+        }
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
+        @media (max-width: 480px) {
+          font-size: 18px;
+        }
       }
     }
-    p {
+    ul {
+      list-style: none; /* маркер внутри блока li */
+      padding-left: 0; /* убираем отступ слева */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      text-align: left;
+    }
+    li {
       font-family: $font-condensed;
-      font-size: 28px;
+      font-size: 20px;
       font-weight: 500;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      @media (max-width: 1550px) {
+          font-size: 18px;
+        }
+        @media (max-width: 1280px) {
+          font-size: 16px;
+        }
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
+        @media (max-width: 480px) {
+          font-size: 16px;
+          gap: 5px;
+        }
+    }
+    li::before {
+      content: "•";
+      flex-shrink: 0; /* маркер не сжимается */
+    }
+    span {
+      font-family: $font-condensed;
+      font-weight: 600;
+      font-size: 28px;
+        @media (max-width: 1550px) {
+          font-size: 21px;
+        }
+        @media (max-width: 1280px) {
+          font-size: 18px;
+        }
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
+        @media (max-width: 480px) {
+          font-size: 16px;
+        }
     }
   }
   button {
