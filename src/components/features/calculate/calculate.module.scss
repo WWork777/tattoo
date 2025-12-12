@@ -1,0 +1,718 @@
+// Основные цвета из примера
+$gold: #c6ab7a;
+$dark-bg: #6c6862;
+$border-radius: 8px;
+$white: white;
+$black: black;
+$gray-light: rgba(255, 255, 255, 0.3);
+$gray-hover: rgba(255, 255, 255, 0.1);
+
+.section {
+  padding: 80px 20px;
+  background-color: #1a1a1a; // Темный фон как в фильтрах
+  min-height: 100vh;
+  color: $white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  color: $white;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  
+  @media (max-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+.subtitle {
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form {
+  background-color: $dark-bg;
+  border-radius: $border-radius;
+  padding: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: 1024px) {
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.progress {
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.progressBar {
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: $gold;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  text-align: center;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step {
+  margin-bottom: 40px;
+}
+
+.stepHeader {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.stepNumber {
+  display: inline-block;
+  padding: 0.8rem 2.5rem;
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $gray-light;
+  border-radius: $border-radius;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: $gray-hover;
+    transform: translateY(-2px);
+  }
+}
+
+.stepTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: $white;
+  margin-bottom: 15px;
+  
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+}
+
+.stepSubtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.radioGrid {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.radioLabel {
+  padding: 0.8rem 2.5rem;
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $gray-light;
+  cursor: pointer;
+  border-radius: $border-radius;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  
+  &:hover {
+    background-color: $gray-hover;
+    transform: translateY(-2px);
+  }
+  
+  &.active {
+    background-color: $gold;
+    border-color: $gold;
+    color: $black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.radioInput {
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+  accent-color: $gold;
+}
+
+.radioText {
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+  transition: transform 0.3s ease;
+  
+  .radioLabel:hover:not(.active) & {
+    transform: scale(1.05);
+  }
+}
+
+.fileUpload {
+  margin-bottom: 30px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  border: 2px dashed $gray-light;
+  border-radius: $border-radius;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  
+  &:hover {
+    border-color: $gold;
+    background-color: rgba(198, 171, 122, 0.1);
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 2rem;
+  }
+}
+
+.fileIcon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: $gold;
+}
+
+.fileText {
+  font-size: 20px;
+  font-weight: 600;
+  color: $white;
+  margin-bottom: 10px;
+}
+
+.fileInfo {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.filePreview {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: $border-radius;
+  margin-top: 20px;
+  border: 1px solid $gray-light;
+}
+
+.filePreviewIcon {
+  font-size: 32px;
+  margin-right: 20px;
+  color: $gold;
+}
+
+.filePreviewInfo {
+  flex: 1;
+}
+
+.fileName {
+  font-weight: 600;
+  color: $white;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.fileSize {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.fileRemoveButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: $gold;
+  }
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 40px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 3.5rem 1rem 1.5rem;
+  font-size: 20px;
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $gray-light;
+  border-radius: $border-radius;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $gold;
+    box-shadow: 0 0 0 2px rgba(198, 171, 122, 0.2);
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.currency {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 600;
+  color: $gold;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 18px;
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $gray-light;
+  border-radius: $border-radius;
+  resize: vertical;
+  min-height: 150px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  line-height: 1.4;
+  
+  &:focus {
+    outline: none;
+    border-color: $gold;
+    box-shadow: 0 0 0 2px rgba(198, 171, 122, 0.2);
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.charCounter {
+  text-align: right;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
+}
+
+.charCount {
+  font-weight: 600;
+  color: $gold;
+}
+
+.charMax {
+  margin-left: 4px;
+}
+
+// Стили для чекбокса согласия
+.privacyCheckbox {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+  gap: 15px;
+  
+  &:hover {
+    color: $white;
+    
+    .checkboxCustom {
+      border-color: $gold;
+    }
+  }
+}
+
+.checkboxInput {
+  display: none;
+  
+  &:checked + .checkboxCustom {
+    background-color: $gold;
+    border-color: $gold;
+    
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.checkboxCustom {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border: 2px solid $gray-light;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  
+  &::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 16px;
+    font-weight: bold;
+    color: $black;
+    transition: transform 0.3s ease;
+  }
+}
+
+.checkboxText {
+  font-size: 18px;
+  line-height: 1.4;
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+  padding: 0.8rem;
+  background-color: rgba(255, 107, 107, 0.1);
+  border-radius: $border-radius;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prevButton {
+  padding: 0.8rem 2.5rem;
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $gray-light;
+  cursor: pointer;
+  border-radius: $border-radius;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: $gray-hover;
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.nextButton {
+  padding: 0.8rem 2.5rem;
+  background-color: $gold;
+  color: $black;
+  border: 1px solid $gold;
+  cursor: pointer;
+  border-radius: $border-radius;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-left: auto;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($gold, 10%);
+    border-color: darken($gold, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.success, .error {
+  text-align: center;
+  padding: 3rem 2rem;
+  
+  @media (max-width: 1024px) {
+    padding: 2rem 1rem;
+  }
+}
+
+.successIcon, .errorIcon {
+  font-size: 64px;
+  margin-bottom: 30px;
+  
+  @media (max-width: 1024px) {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+}
+
+.successTitle, .errorTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  
+  @media (max-width: 1024px) {
+    font-size: 28px;
+  }
+}
+
+.successTitle {
+  color: $gold;
+}
+
+.errorTitle {
+  color: #ff6b6b;
+}
+
+.successMessage, .errorMessage {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+.newRequest, .retry {
+  padding: 0.8rem 2.5rem;
+  background-color: $gold;
+  color: $black;
+  border: 1px solid $gold;
+  cursor: pointer;
+  border-radius: $border-radius;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: darken($gold, 10%);
+    border-color: darken($gold, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.retry {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
+  color: $white;
+  
+  &:hover {
+    background-color: darken(#ff6b6b, 10%);
+    border-color: darken(#ff6b6b, 10%);
+  }
+}
+
+// Удален блок .privacy, так как он теперь внутри формы в виде чекбокса
+
+// Медиа запросы
+@media (max-width: 1500px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 60px 20px;
+  }
+  
+  .title {
+    font-size: 36px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  
+  .radioLabel {
+    min-width: 160px;
+    padding: 0.7rem 2rem;
+    font-size: 16px;
+  }
+  
+  .radioText {
+    font-size: 16px;
+  }
+  
+  .stepTitle {
+    font-size: 24px;
+  }
+  
+  .stepSubtitle {
+    font-size: 16px;
+  }
+  
+  .checkboxText {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 16px;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .form {
+    padding: 1.5rem;
+  }
+  
+  .radioGrid {
+    gap: 0.5rem;
+  }
+  
+  .radioLabel {
+    min-width: 140px;
+    padding: 0.6rem 1.5rem;
+    font-size: 14px;
+  }
+  
+  .radioText {
+    font-size: 14px;
+  }
+  
+  .stepTitle {
+    font-size: 20px;
+  }
+  
+  .textarea {
+    font-size: 16px;
+  }
+  
+  .checkboxLabel {
+    font-size: 16px;
+    gap: 12px;
+  }
+  
+  .checkboxCustom {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    
+    &::after {
+      font-size: 14px;
+    }
+  }
+  
+  .checkboxText {
+    font-size: 16px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .prevButton, .nextButton {
+    width: 100%;
+  }
+  
+  .nextButton {
+    margin-left: 0;
+  }
+}
+.inputHint {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}

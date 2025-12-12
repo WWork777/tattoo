@@ -11,6 +11,7 @@ import { Foq } from "@/components/features/faq/Faq";
 import { Map } from "@/components/features/map/Map";
 import { headers } from "next/headers";
 import { Services } from "@/components/features/services/Services";
+import TattooCalculator from "@/components/features/calculate/calculate";
 
 export async function generateMetadata() {
   const headersList = headers();
@@ -68,6 +69,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <TattooCalculator />
       <Whous />
       <Special />
       <Services />
