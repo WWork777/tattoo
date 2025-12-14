@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from 'react'
 import styles from './calculate.module.scss'
+import { button } from 'framer-motion/client'
 
 export default function TattooCalculator() {
   // Состояния
@@ -53,7 +54,7 @@ export default function TattooCalculator() {
     'Пока нет идей, нужна консультация'
   ]
 
-  const totalSteps = 7
+  const totalSteps = 6
 
   // Функции
   const validateCurrentStep = (): boolean => {
@@ -84,12 +85,12 @@ export default function TattooCalculator() {
           newErrors.budget = 'Введите корректную сумму (только цифры)'
         }
         break
-      case 7:
-        // Вопрос 7: Валидация чекбокса на последнем шаге
-        if (!formData.privacyAccepted) {
-          newErrors.privacyAccepted = 'Необходимо согласие на обработку персональных данных'
-        }
-        break
+      // case 7:
+      //   // Вопрос 7: Валидация чекбокса на последнем шаге
+      //   if (!formData.privacyAccepted) {
+      //     newErrors.privacyAccepted = 'Необходимо согласие на обработку персональных данных'
+      //   }
+      //   break
     }
     
     setErrors(newErrors)
@@ -383,48 +384,48 @@ export default function TattooCalculator() {
           </div>
         )
 
-      case 7:
-        return (
-          <div className={styles.step}>
-            <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 7 из 7</span>
-              <h3 className={styles.stepTitle}>Если есть пожелания по тату, напиши</h3>
-            </div>
+      // case 7:
+      //   return (
+      //     <div className={styles.step}>
+      //       <div className={styles.stepHeader}>
+      //         <span className={styles.stepNumber}>Шаг 7 из 7</span>
+      //         <h3 className={styles.stepTitle}>Если есть пожелания по тату, напиши</h3>
+      //       </div>
             
-            <textarea
-              name="notes"
-              value={formData.notes}
-              onChange={handleInputChange}
-              className={styles.textarea}
-              placeholder="Опишите ваши идеи, пожелания, особенности..."
-              rows={6}
-              maxLength={500}
-            />
+      //       <textarea
+      //         name="notes"
+      //         value={formData.notes}
+      //         onChange={handleInputChange}
+      //         className={styles.textarea}
+      //         placeholder="Опишите ваши идеи, пожелания, особенности..."
+      //         rows={6}
+      //         maxLength={500}
+      //       />
             
-            <div className={styles.charCounter}>
-              <span className={styles.charCount}>{formData.notes.length}</span>
-              <span className={styles.charMax}>/500 символов</span>
-            </div>
+      //       <div className={styles.charCounter}>
+      //         <span className={styles.charCount}>{formData.notes.length}</span>
+      //         <span className={styles.charMax}>/500 символов</span>
+      //       </div>
 
-            {/* Чекбокс на последнем шаге */}
-            <div className={styles.privacyCheckbox}>
-              <label className={styles.checkboxLabel}>
-                <input
-                  type="checkbox"
-                  name="privacyAccepted"
-                  checked={formData.privacyAccepted}
-                  onChange={handleInputChange}
-                  className={styles.checkboxInput}
-                />
-                <span className={styles.checkboxCustom}></span>
-                <span className={styles.checkboxText}>
-                  Я соглашаюсь с обработкой персональных данных
-                </span>
-              </label>
-              {errors.privacyAccepted && <div className={styles.error}>{errors.privacyAccepted}</div>}
-            </div>
-          </div>
-        )
+      //       {/* Чекбокс на последнем шаге */}
+      //       <div className={styles.privacyCheckbox}>
+      //         <label className={styles.checkboxLabel}>
+      //           <input
+      //             type="checkbox"
+      //             name="privacyAccepted"
+      //             checked={formData.privacyAccepted}
+      //             onChange={handleInputChange}
+      //             className={styles.checkboxInput}
+      //           />
+      //           <span className={styles.checkboxCustom}></span>
+      //           <span className={styles.checkboxText}>
+      //             Я соглашаюсь с обработкой персональных данных
+      //           </span>
+      //         </label>
+      //         {errors.privacyAccepted && <div className={styles.error}>{errors.privacyAccepted}</div>}
+      //       </div>
+      //     </div>
+      //   )
 
       default:
         return <div className={styles.error}>Ошибка: неверный шаг</div>
@@ -510,7 +511,8 @@ export default function TattooCalculator() {
                 )}
                 
                 <button
-                  type={currentStep === totalSteps ? 'submit' : 'button'}
+                  type={'button'}
+                  // type={currentStep === totalSteps ? 'submit' : 'button'}
                   onClick={currentStep === totalSteps ? undefined : nextStep}
                   disabled={isSubmitting}
                   className={styles.nextButton}
