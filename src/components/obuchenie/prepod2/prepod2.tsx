@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import styles from "./styles.module.scss";
+import styles from "./prepod2.module.scss";
 import SliderArea from "./slider-area.svg";
 import SliderArrow from "./slider-arrow.svg";
 
@@ -10,35 +10,23 @@ export default function Prepod() {
   const slides = [
     {
       id: 1,
-      image: "/obuchenie/prepod/7.webp",
+      image: "/obuchenie/prepod2/01.jpg",
     },
     {
       id: 2,
-      image: "/obuchenie/prepod/8.webp",
+      image: "/obuchenie/prepod2/02.jpg",
     },
     {
       id: 3,
-      image: "/obuchenie/prepod/9.webp",
+      image: "/obuchenie/prepod2/03.jpg",
     },
     {
       id: 4,
-      image: "/obuchenie/prepod/10.webp",
+      image: "/obuchenie/prepod2/04.jpg",
     },
     {
       id: 5,
-      image: "/obuchenie/prepod/11.webp",
-    },
-    {
-      id: 6,
-      image: "/obuchenie/prepod/12.webp",
-    },
-    {
-      id: 7,
-      image: "/obuchenie/prepod/13.webp",
-    },
-    {
-      id: 8,
-      image: "/obuchenie/prepod/14.webp",
+      image: "/obuchenie/prepod2/05.jpg",
     },
   ];
 
@@ -52,25 +40,22 @@ export default function Prepod() {
 
   return (
     <section className="container" id="prepod">
-      <h2>Создатель курса</h2>
+      <h2>Cтарший преподаватель</h2>
       <div className={styles.prepod}>
         <div className={styles.prepod__image}>
           <div
             className={styles.image__container}
             style={{
-              backgroundImage: `url(/images/masters/tattoo.webp)`,
+              backgroundImage: `url(/images/masters/tattoo2.webp)`,
             }}
           >
             <div className={styles.image__content}>
-              <h3>Антон Драйцев</h3>
+              <h3>Иван</h3>
               <ul>
-                <li>Основатель тату-студии SOPRÁNO</li>
-                <li>Более 10 лет в тату-индустрии</li>
-                <li>Есть свой почерк и стиль</li>
-                <li>Специализация: Крупные проекты (рукава, ногава, спины)</li>
-                <li>Выпустил 15+ мастеров тату</li>
-                <li>Постоянный участник тату фестивалей</li>
-                <li>Участник русского медвежонка</li>
+                <li>Опыт 5 лет</li>
+                <li>Специализируется во всех стилях в тату, как универсальный солдат</li>
+                <li>С тонким педагогическим подходом к обучению</li>
+                <li>Звезда Каргата</li>
               </ul>
             </div>
           </div>

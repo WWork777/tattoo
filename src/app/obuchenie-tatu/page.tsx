@@ -1,4 +1,5 @@
 import Prepod from "@/components/obuchenie/prepod/Prepod";
+import Prepod2 from "@/components/obuchenie/prepod2/prepod2";
 import HeroObuchenie from "../../components/obuchenie/Hero/Hero";
 import Put from "@/components/obuchenie/put-tatu/Put";
 import Program from "@/components/obuchenie/program/Program";
@@ -67,6 +68,7 @@ export default function Page() {
     <>
       <HeroObuchenie />
       <Prepod />
+      <Prepod2 />
       <Put />
       <Program />
       <Practice />

@@ -206,14 +206,14 @@ export default function Models() {
                 <div className="slide-text">{slide.text}</div>
 
                 {/* Кнопка Telegram */}
-                {slide.tgLink && (
+                {/* {slide.tgLink && (
                   <div className="slide-footer">
                     <Link href={slide.tgLink} target="_blank">
                       <img src="/icons/socials/tg.svg" alt="Telegram" />
                       Написать в Telegram
                     </Link>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </SwiperSlide>

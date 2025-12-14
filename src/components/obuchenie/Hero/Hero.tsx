@@ -112,10 +112,10 @@ const HeroObuchenie = () => {
         <div className={styles.right}>
           <div className={styles.right__top}>
             <p>
-              Запишись <br></br> на консультацию по обучению
+              Запишись <br></br> на консультацию по обучению,
             </p>
             <p>
-              и получи <b>бесплатную стратегию</b> с чего начать тату мастеру.
+              cообщи кодовое слово <b>ФЛОРЕНЦИЯ</b>,<br/>и получи скидку 10% на обучение
             </p>
             <button className={styles.right__top__button}>
               <Link href="https://t.me/Soprano2024" target="_blank">

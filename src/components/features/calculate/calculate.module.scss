@@ -8,9 +8,8 @@ $gray-light: rgba(255, 255, 255, 0.3);
 $gray-hover: rgba(255, 255, 255, 0.1);
 
 .section {
-  padding: 80px 20px;
+  padding: 200px 20px 0 20px;
   background-color: #1a1a1a; // Темный фон как в фильтрах
-  min-height: 100vh;
   color: $white;
 }
 
@@ -21,8 +20,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
 }
 
 .title {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 60px;
   text-align: center;
   color: $white;
   margin-bottom: 20px;
