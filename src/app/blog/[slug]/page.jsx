@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import "../article.scss";
 import blogData from "@/data/blogData.json";
+
 export async function generateStaticParams() {
   return blogData.map((post) => ({
     slug: post.slug,
   }));
 }
+
 function getArticleData(slug) {
   return blogData.find((post) => post.slug === slug);
 }
@@ -37,8 +39,118 @@ function parseDate(dateString) {
   return new Date();
 }
 
+// Функция для генерации метаданных
+export async function generateMetadata({ params }) {
+  // Важно: params уже готов к использованию, не нужно await
+  const { slug } = params;
+  const article = getArticleData(slug);
+
+  if (!article) {
+    return {
+      title: "Статья не найдена",
+      description: "Запрошенная статья не существует или была удалена",
+    };
+  }
+
+  const baseKeywords = [
+    "тату блог",
+    "статьи о татуировках",
+    "тату советы",
+    "тату идеи",
+    "тату стили",
+    "эскизы тату",
+    "уход за татуировкой",
+    "как выбрать тату",
+    "тату салон блог",
+    "тату мастер советы",
+  ];
+
+  const contentKeywords =
+    typeof article.text === "string"
+      ? article.text
+          .toLowerCase()
+          .split(/\s+/)
+          .filter((word) => word.length > 4)
+          .slice(0, 30)
+      : [];
+
+  const keywords = [
+    ...new Set([...baseKeywords, ...contentKeywords, article.category]),
+  ].join(", ");
+
+  const ogImage = article.imageUrl
+    ? {
+        url: `https://soprano-tattoo.ru${article.imageUrl}`,
+        width: 1200,
+        height: 630,
+        alt: article.title,
+      }
+    : {
+        url: "https://soprano-tattoo.ru/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Блог о татуировках Soprano Tattoo",
+      };
+
+  return {
+    title: `${article.title} | Блог Soprano Tattoo`,
+    description: article.description,
+    keywords,
+    openGraph: {
+      title: `${article.title} | Блог Soprano Tattoo`,
+      description: article.description,
+      type: "article",
+      publishedTime: parseDate(article.date).toISOString(),
+      authors: ["Soprano Tattoo"],
+      tags: ["тату", "татуировки", "Новосибирск", article.category],
+      images: [ogImage],
+      url: `https://soprano-tattoo.ru/blog/${article.slug}`,
+      siteName: "Soprano Tattoo",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${article.title} | Блог Soprano Tattoo`,
+      description: article.description,
+      images: [ogImage.url],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    alternates: {
+      canonical: `https://soprano-tattoo.ru/blog/${article.slug}`,
+    },
+    // Дополнительные мета-теги
+    other: {
+      "application-name": "Блог Soprano Tattoo",
+      generator: "Next.js",
+      referrer: "origin-when-cross-origin",
+      "color-scheme": "light only",
+      language: "ru",
+      "content-language": "ru-RU",
+      "geo.region": "RU",
+      "geo.placename": "Новосибирск",
+      "geo.position": "55.030199;82.920430",
+      "business:contact_data:locality": "Новосибирск",
+      "business:contact_data:country_name": "Россия",
+      "product:brand": "Soprano Tattoo",
+      "product:availability": "in_stock",
+      "product:condition": "new",
+      "product:price:amount": "0",
+      "product:price:currency": "RUB",
+    },
+  };
+}
+
 export default async function ArticlePage({ params }) {
-  const { slug } = await params;
+  const { slug } = params; // Не нужно await здесь для статической генерации
   const article = getArticleData(slug);
 
   if (!article) {
@@ -170,111 +282,4 @@ export default async function ArticlePage({ params }) {
       </article>
     </section>
   );
-}
-
-export async function generateMetadata({ params }) {
-  const { slug } = params;
-  const article = getArticleData(slug);
-
-  if (!article) {
-    return {
-      title: "Статья не найдена",
-      description: "Запрошенная статья не существует или была удалена",
-    };
-  }
-
-  const baseKeywords = [
-    "тату блог",
-    "статьи о татуировках",
-    "тату советы",
-    "тату идеи",
-    "тату стили",
-    "эскизы тату",
-    "уход за татуировкой",
-    "как выбрать тату",
-    "тату салон блог",
-    "тату мастер советы",
-  ];
-
-  const contentKeywords =
-    typeof article.text === "string"
-      ? article.text
-          .toLowerCase()
-          .split(/\s+/)
-          .filter((word) => word.length > 4)
-          .slice(0, 30)
-      : [];
-
-  const keywords = [
-    ...new Set([...baseKeywords, ...contentKeywords, article.category]),
-  ].join(", ");
-
-  const ogImage = article.imageUrl
-    ? {
-        url: `https://soprano-tattoo.ru${article.imageUrl}`,
-        width: 1200,
-        height: 630,
-        alt: article.title,
-      }
-    : {
-        url: "https://soprano-tattoo.ru/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Блог о татуировках Soprano Tattoo",
-      };
-
-  return {
-    title: `${article.title} | Блог Soprano Tattoo`,
-    description: article.description,
-    keywords,
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      type: "article",
-      publishedTime: parseDate(article.date).toISOString(),
-      authors: ["Soprano Tattoo"],
-      tags: ["тату", "татуировки", "Новосибирск", article.category],
-      images: [ogImage],
-      url: `https://soprano-tattoo.ru/blog/${article.slug}`,
-      siteName: "Soprano Tattoo",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.description,
-      images: [ogImage.url],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
-    alternates: {
-      canonical: `https://soprano-tattoo.ru/blog/${article.slug}`,
-    },
-    other: {
-      "application-name": "Блог Soprano Tattoo",
-      generator: "Next.js",
-      referrer: "origin-when-cross-origin",
-      "color-scheme": "light only",
-      language: "ru",
-      "content-language": "ru-RU",
-      "geo.region": "RU",
-      "geo.placename": "Новосибирск",
-      "geo.position": "55.030199;82.920430",
-      "business:contact_data:locality": "Новосибирск",
-      "business:contact_data:country_name": "Россия",
-      "product:brand": "Soprano Tattoo",
-      "product:availability": "in_stock",
-      "product:condition": "new",
-      "product:price:amount": "0",
-      "product:price:currency": "RUB",
-    },
-  };
 }
