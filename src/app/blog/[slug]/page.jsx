@@ -42,7 +42,7 @@ function parseDate(dateString) {
 // Функция для генерации метаданных
 export async function generateMetadata({ params }) {
   // Важно: params уже готов к использованию, не нужно await
-  const { slug } = params;
+  const { slug } = await params;
   const article = getArticleData(slug);
 
   if (!article) {
@@ -150,7 +150,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ArticlePage({ params }) {
-  const { slug } = params; // Не нужно await здесь для статической генерации
+  const { slug } = await params; // Не нужно await здесь для статической генерации
   const article = getArticleData(slug);
 
   if (!article) {
