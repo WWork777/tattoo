@@ -115,7 +115,7 @@ const HeroObuchenie = () => {
               Запишись <br></br> на консультацию по обучению,
             </p>
             <p>
-              cообщи кодовое слово <b>ФЛОРЕНЦИЯ</b>,<br/>и получи скидку 10% на обучение
+              cообщи кодовое слово <b>ФЛОРЕНЦИЯ</b>,<br/> и получи скидку 10% на обучение
             </p>
             <button className={styles.right__top__button}>
               <Link href="https://t.me/Soprano2024" target="_blank">
