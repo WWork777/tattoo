@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tatu-novosibirsk.ru/sitemap.xml
+Sitemap: https://soprano-tattoo.ru/sitemap.xml
 
-# Host: tatu-novosibirsk.ru
+# Host: soprano-tattoo.ru
