@@ -90,7 +90,7 @@ export const Map = () => {
             sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"
           >
           </iframe>
-
+          <Link href={"https://2gis.ru/novosibirsk/firm/70000001096896409?m=82.95482%2C55.013448%2F16"} className={styles.btn2gis}>2ГИС</Link>
         </div>
       </div>
     </section>

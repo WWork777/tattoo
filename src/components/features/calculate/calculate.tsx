@@ -464,7 +464,7 @@ export default function TattooCalculator() {
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id='calculate'>
       <div className={styles.container}>
         <h1 className={styles.title}>Рассчитать стоимость татуировки</h1>
         <p className={styles.subtitle}>
