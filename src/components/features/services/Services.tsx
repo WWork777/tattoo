@@ -30,7 +30,7 @@ const ImageCard = ({ imageSrc, text, onOpenModal, btn, title, subtitle }: Props)
             </li>
           ))}
         </ul>
-        <span>стоимость: <span>от 3000 руб.</span></span>
+        {/* <span>стоимость: <span>от 3000 руб.</span></span> */}
         </>
       );
     }

@@ -162,6 +162,7 @@
 }
 
 .map {
+  position: relative;
   border-radius: $border-radius;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -185,8 +186,29 @@
     height: 250px;
     border-radius: 15px;
   }
+  .btn2gis {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 80%;
+    left: 5%;
+    padding: 10px 60px;
+    border-radius: $border-radius;
+    background: rgb(198, 171, 122);
+    font-size: 24px;
+    color:#fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    &:hover {
+      transform: translateY(-2px);
+      transition: .9s;
+    }
+    @media (max-width: 768px) {
+      top: 75%;
+      font-size: 16px;
+      padding: 10px 30px;
+    }
+  }
 }
-
 // Адаптивность для очень маленьких экранов
 @media (max-width: 480px) {
   .contacts__item {
