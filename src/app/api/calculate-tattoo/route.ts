@@ -23,7 +23,11 @@ export async function POST(request: NextRequest) {
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Telegram credentials not configured')
       return NextResponse.json(
-        { error: 'Telegram bot not configured' },
+        { 
+          error: 'Telegram bot not configured. Please set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env.local', 
+          success: false,
+          code: 'TELEGRAM_NOT_CONFIGURED'
+        },
         { status: 500 }
       )
     }
@@ -56,45 +60,86 @@ ${notes || 'Не указано'}
     `.trim()
 
     // Отправляем текстовое сообщение в Telegram
-    const textResponse = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    let textResponse;
+    try {
+      textResponse = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown',
+          }),
+        }
+      );
+    } catch (fetchError) {
+      console.error('Ошибка при вызове Telegram API:', fetchError);
+      return NextResponse.json(
+        { 
+          error: 'Network error when sending to Telegram', 
+          success: false, 
+          details: fetchError instanceof Error ? fetchError.message : 'Unknown fetch error',
+          telegramError: true
         },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'Markdown',
-        }),
-      }
-    )
+        { status: 500 }
+      );
+    }
 
     if (!textResponse.ok) {
-      const errorData = await textResponse.json()
-      console.error('Telegram API error:', errorData)
+      let errorData;
+      try {
+        errorData = await textResponse.json();
+      } catch (e) {
+        const text = await textResponse.text();
+        errorData = { message: text, status: textResponse.status, statusText: textResponse.statusText };
+      }
+      console.error('Telegram API error:', {
+        status: textResponse.status,
+        statusText: textResponse.statusText,
+        errorData
+      });
       return NextResponse.json(
-        { error: 'Failed to send message to Telegram' },
+        { 
+          error: 'Failed to send message to Telegram', 
+          success: false, 
+          details: errorData,
+          telegramError: true,
+          telegramStatus: textResponse.status
+        },
         { status: 500 }
-      )
+      );
     }
 
     // Если есть файл, отправляем его отдельно
     if (file && file.size > 0) {
-      const buffer = await file.arrayBuffer()
-      const blob = new Blob([buffer], { type: file.type })
-      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`
-      
-      const formDataForTelegram = new FormData()
-      formDataForTelegram.append('chat_id', TELEGRAM_CHAT_ID)
-      formDataForTelegram.append('document', blob, file.name)
-      formDataForTelegram.append('caption', '📎 Прикрепленный файл от клиента')
-      
-      await fetch(url, {
-        method: 'POST',
-        body: formDataForTelegram,
-      })
+      try {
+        const buffer = await file.arrayBuffer()
+        const blob = new Blob([buffer], { type: file.type })
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`
+        
+        const formDataForTelegram = new FormData()
+        formDataForTelegram.append('chat_id', TELEGRAM_CHAT_ID)
+        formDataForTelegram.append('document', blob, file.name)
+        formDataForTelegram.append('caption', '📎 Прикрепленный файл от клиента')
+        
+        const fileResponse = await fetch(url, {
+          method: 'POST',
+          body: formDataForTelegram,
+        })
+
+        if (!fileResponse.ok) {
+          const errorData = await fileResponse.json()
+          console.error('Telegram file upload error:', errorData)
+          // Не прерываем выполнение, т.к. основное сообщение уже отправлено
+        }
+      } catch (fileError) {
+        console.error('Error sending file to Telegram:', fileError)
+        // Не прерываем выполнение, т.к. основное сообщение уже отправлено
+      }
     }
 
     return NextResponse.json(
@@ -105,7 +150,7 @@ ${notes || 'Не указано'}
   } catch (error) {
     console.error('Error processing form:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', success: false, details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

@@ -90,6 +90,11 @@ export default function TattooCalculator() {
         ) {
           newErrors.budget = 'Введите корректную сумму (только цифры)';
         }
+        // Проверка чекбокса согласия
+        if (!formData.privacyAccepted) {
+          newErrors.privacyAccepted =
+            'Необходимо согласие на обработку персональных данных';
+        }
         break;
       // case 7:
       //   // Вопрос 7: Валидация чекбокса на последнем шаге
@@ -99,8 +104,9 @@ export default function TattooCalculator() {
       //   break
     }
 
+    const isValid = Object.keys(newErrors).length === 0;
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isValid;
   };
 
   const nextStep = (): void => {
@@ -182,9 +188,31 @@ export default function TattooCalculator() {
         body: formDataToSend,
       });
 
-      if (response.ok) {
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('Ошибка парсинга JSON ответа:', parseError);
+        setSubmitStatus('error');
+        return;
+      }
+
+      if (response.ok && data.success) {
         setSubmitStatus('success');
       } else {
+        console.error('Ошибка ответа сервера:', data);
+        // Показываем более понятное сообщение об ошибке
+        if (data.code === 'TELEGRAM_NOT_CONFIGURED') {
+          alert(
+            'Ошибка: Telegram бот не настроен. Проверьте настройки сервера.'
+          );
+        } else if (data.telegramError) {
+          alert(
+            `Ошибка отправки в Telegram: ${data.error}\nПроверьте правильность токена и chat_id.`
+          );
+        } else {
+          alert(`Ошибка отправки: ${data.error || 'Неизвестная ошибка'}`);
+        }
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -202,7 +230,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 1 из 7</span>
+              <span className={styles.stepNumber}>Шаг 1 из 6</span>
               <h3 className={styles.stepTitle}>У вас есть татуировки?</h3>
             </div>
 
@@ -236,7 +264,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 2 из 7</span>
+              <span className={styles.stepNumber}>Шаг 2 из 6</span>
               <h3 className={styles.stepTitle}>На каком месте тату?</h3>
             </div>
 
@@ -270,7 +298,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 3 из 7</span>
+              <span className={styles.stepNumber}>Шаг 3 из 6</span>
               <h3 className={styles.stepTitle}>Какой размер тату?</h3>
             </div>
 
@@ -302,7 +330,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 4 из 7</span>
+              <span className={styles.stepNumber}>Шаг 4 из 6</span>
               <h3 className={styles.stepTitle}>
                 У вас уже есть эскиз или идея?
               </h3>
@@ -338,7 +366,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 5 из 7</span>
+              <span className={styles.stepNumber}>Шаг 5 из 6</span>
               <h3 className={styles.stepTitle}>Загрузи пример или эскиз</h3>
               <p className={styles.stepSubtitle}>
                 Необязательно, но поможет мастеру лучше понять вашу идею
@@ -390,7 +418,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 6 из 7</span>
+              <span className={styles.stepNumber}>Шаг 6 из 6</span>
               <h3 className={styles.stepTitle}>Какой бюджет планируешь?</h3>
             </div>
 
@@ -398,7 +426,7 @@ export default function TattooCalculator() {
               <input
                 type='text'
                 name='budget'
-                value={formData.budget}
+                value={formData.budget || ''}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder='Например: 15000'
@@ -412,6 +440,54 @@ export default function TattooCalculator() {
             {errors.budget && (
               <div className={styles.error}>{errors.budget}</div>
             )}
+
+            <div style={{ marginTop: '40px' }}>
+              <h4
+                className={styles.stepTitle}
+                style={{
+                  fontSize: '20px',
+                  marginBottom: '20px',
+                  textAlign: 'left',
+                }}
+              >
+                Если есть пожелания по тату, напиши
+              </h4>
+              <textarea
+                name='notes'
+                value={formData.notes || ''}
+                onChange={handleInputChange}
+                className={styles.textarea}
+                placeholder='Опишите ваши идеи, пожелания, особенности...'
+                rows={4}
+                maxLength={500}
+              />
+              <div className={styles.charCounter}>
+                <span className={styles.charCount}>
+                  {formData.notes.length}
+                </span>
+                <span className={styles.charMax}>/500 символов</span>
+              </div>
+            </div>
+
+            {/* Чекбокс на последнем шаге */}
+            <div className={styles.privacyCheckbox}>
+              <label className={styles.checkboxLabel}>
+                <input
+                  type='checkbox'
+                  name='privacyAccepted'
+                  checked={formData.privacyAccepted}
+                  onChange={handleInputChange}
+                  className={styles.checkboxInput}
+                />
+                <span className={styles.checkboxCustom}></span>
+                <span className={styles.checkboxText}>
+                  Я соглашаюсь с обработкой персональных данных
+                </span>
+              </label>
+              {errors.privacyAccepted && (
+                <div className={styles.error}>{errors.privacyAccepted}</div>
+              )}
+            </div>
           </div>
         );
 
@@ -543,19 +619,27 @@ export default function TattooCalculator() {
                   </button>
                 )}
 
-                <button
-                  type={'button'}
-                  // type={currentStep === totalSteps ? 'submit' : 'button'}
-                  onClick={currentStep === totalSteps ? undefined : nextStep}
-                  disabled={isSubmitting}
-                  className={styles.nextButton}
-                >
-                  {isSubmitting
-                    ? 'Отправка...'
-                    : currentStep === totalSteps
-                    ? 'Отправить заявку'
-                    : 'Далее'}
-                </button>
+                {currentStep === totalSteps ? (
+                  <button
+                    type='submit'
+                    disabled={isSubmitting}
+                    className={styles.nextButton}
+                  >
+                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                  </button>
+                ) : (
+                  <button
+                    type='button'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      nextStep();
+                    }}
+                    disabled={isSubmitting}
+                    className={styles.nextButton}
+                  >
+                    Далее
+                  </button>
+                )}
               </div>
             </>
           )}
