@@ -156,11 +156,11 @@ const PriceCard = ({
           </ul>
         </div>
         <div className={styles.tarif__pricing}>
-          <span>{tarifPrice}</span>
+          <span>{tafirCreditPrice}/месяц</span>
           <div className={styles.tarif__line}></div>
           <span>
-            {tafirCreditPrice} <br></br>
-            <small>Стоимость в месяц при покупке в рассрочку</small>
+            {tarifPrice}<br></br>
+            <small>Стоимость при покупке единым платежом</small>
           </span>
         </div>
 

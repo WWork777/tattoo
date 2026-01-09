@@ -298,6 +298,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
   border: 1px solid $gray-light;
   border-radius: $border-radius;
   transition: all 0.3s ease;
+  font-family: var(--font-condensed) !important;
   
   &:focus {
     outline: none;
@@ -344,6 +345,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.5);
   }
 }
+
 
 .charCounter {
   text-align: right;
@@ -431,7 +433,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
   }
 }
 
-.error {
+.error{
   color: #ff6b6b;
   font-size: 16px;
   margin-top: 10px;
@@ -440,6 +442,10 @@ $gray-hover: rgba(255, 255, 255, 0.1);
   background-color: rgba(255, 107, 107, 0.1);
   border-radius: $border-radius;
   border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.errorPoint {
+  text-align: left;
 }
 
 .buttons {
@@ -459,6 +465,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
   border-radius: $border-radius;
   font-size: 18px;
   transition: all 0.3s ease;
+  font-family: var(--font-condensed)!important;
   
   &:hover {
     background-color: $gray-hover;
@@ -481,6 +488,7 @@ $gray-hover: rgba(255, 255, 255, 0.1);
   font-weight: 600;
   transition: all 0.3s ease;
   margin-left: auto;
+  font-family: var(--font-condensed)!important;
   
   &:hover:not(:disabled) {
     background-color: darken($gold, 10%);

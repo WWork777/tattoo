@@ -21,6 +21,7 @@ export const Portfolio = () => {
         "/images/portfolio/project5.webp",
         "/images/portfolio/project6.webp",
         "/images/portfolio/project7.webp",
+        "/images/portfolio/project8.webp",
       ],
     },
     {
@@ -32,6 +33,7 @@ export const Portfolio = () => {
         "/images/portfolio/big3.webp",
         "/images/portfolio/big4.webp",
         "/images/portfolio/big5.webp",
+        "/images/portfolio/big6.webp",
       ],
     },
     {

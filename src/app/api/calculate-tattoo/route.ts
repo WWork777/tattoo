@@ -10,7 +10,10 @@ export async function POST(request: NextRequest) {
     const size = formData.get('size') as string
     const sketchType = formData.get('sketchType') as string
     const budget = formData.get('budget') as string
-    const notes = formData.get('notes') as string
+    const name = formData.get('name') as string
+    const phone = formData.get('phone') as string
+    const contactMethod = formData.get('contactMethod') as string
+    // const notes = formData.get('notes') as string
     const privacyAccepted = formData.get('privacyAccepted') as string
     
     // Получаем файл, если он есть
@@ -51,8 +54,10 @@ ${sketchType}
 *Вопрос 6: Какой бюджет планируешь?*
 ${budget} ₽
 
-*Вопрос 7: Если есть пожелания по тату:*
-${notes || 'Не указано'}
+*Вопрос 7: Контактная информация*
+Имя: ${name}
+Телефон: ${phone}
+Связь: ${contactMethod}
 
 *Согласие на обработку данных:* ${privacyAccepted === 'true' ? '✅ Да' : '❌ Нет'}
 

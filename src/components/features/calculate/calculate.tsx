@@ -22,6 +22,11 @@ export default function TattooCalculator() {
     budget: '',
     // Вопрос 7: Если есть пожелания по тату, напишите
     notes: '',
+
+    phone: '',
+    name: '',
+    contactMethod: '',
+    
     // Чекбокс согласия
     privacyAccepted: false,
   });
@@ -30,6 +35,7 @@ export default function TattooCalculator() {
     null
   );
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touchedStep, setTouchedStep] = useState<Record<number, boolean>>({});
 
   // Константы для вопросов
   // Вопрос 1: У вас есть татуировки? (как у конкурентов)
@@ -56,7 +62,13 @@ export default function TattooCalculator() {
     'Пока нет идей, нужна консультация',
   ];
 
-  const totalSteps = 6;
+  const connectOptions = [
+    'Звонок',
+    'Telegram',
+    'Whatsapp',
+  ];
+
+  const totalSteps = 7;
 
   // Функции
   const validateCurrentStep = (): boolean => {
@@ -90,26 +102,31 @@ export default function TattooCalculator() {
         ) {
           newErrors.budget = 'Введите корректную сумму (только цифры)';
         }
-        // Проверка чекбокса согласия
-        if (!formData.privacyAccepted) {
-          newErrors.privacyAccepted =
-            'Необходимо согласие на обработку персональных данных';
-        }
         break;
-      // case 7:
-      //   // Вопрос 7: Валидация чекбокса на последнем шаге
-      //   if (!formData.privacyAccepted) {
-      //     newErrors.privacyAccepted = 'Необходимо согласие на обработку персональных данных'
-      //   }
-      //   break
+      case 7:
+        // Вопрос 7: Валидация чекбокса на последнем шаге
+        if (!formData.name.trim()) newErrors.name = 'Введите ваше имя';
+  
+        if (!formData.phone.trim()) {
+          newErrors.phone = 'Введите номер телефона';
+        } else if (!isValidPhone(formData.phone)) {
+          newErrors.phone = 'Введите корректный номер телефона';
+        }
+        
+        if (!formData.contactMethod) newErrors.contactMethod = 'Выберите способ связи';
+        
+        if (!formData.privacyAccepted) {
+          newErrors.privacyAccepted = 'Необходимо согласие на обработку персональных данных';
+        }
+        break
     }
 
-    const isValid = Object.keys(newErrors).length === 0;
     setErrors(newErrors);
-    return isValid;
+    return Object.keys(newErrors).length === 0;
   };
 
   const nextStep = (): void => {
+    setTouchedStep((prev) => ({ ...prev, [currentStep]: true }));
     if (validateCurrentStep() && currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
     }
@@ -118,6 +135,59 @@ export default function TattooCalculator() {
   const prevStep = (): void => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+    }
+  };
+
+  const isValidPhone = (phone: string): boolean => {
+    // Убираем все кроме цифр
+    const cleaned = phone.replace(/\D/g, '');
+    
+    // Проверяем российские номера: начинается с 7 или 8, длина 11 цифр
+    if (/^[78]\d{10}$/.test(cleaned)) {
+      return true;
+    }
+    
+    // Также можно принимать номера в формате +7 xxx xxx xx xx
+    if (/^\+7\d{10}$/.test(cleaned)) {
+      return true;
+    }
+    
+    return false;
+  };
+
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    
+    // Убираем все кроме цифр
+    const numbers = value.replace(/\D/g, '');
+    
+    let formattedValue = '';
+    
+    if (numbers.length > 0) {
+      // Если первая цифра 8 или 7, оставляем как есть, иначе добавляем 7
+      let phoneNumbers = numbers;
+      if (!phoneNumbers.startsWith('7') && !phoneNumbers.startsWith('8')) {
+        phoneNumbers = '7' + phoneNumbers;
+      }
+      
+      // Форматируем номер: +7 (XXX) XXX-XX-XX
+      if (phoneNumbers.length <= 1) {
+        formattedValue = '+7';
+      } else if (phoneNumbers.length <= 4) {
+        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}`;
+      } else if (phoneNumbers.length <= 7) {
+        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}`;
+      } else if (phoneNumbers.length <= 9) {
+        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(7, 9)}`;
+      } else {
+        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(7, 9)}-${phoneNumbers.substring(9, 11)}`;
+      }
+    }
+    
+    setFormData((prev) => ({ ...prev, phone: formattedValue }));
+    
+    if (errors.phone) {
+      setErrors((prev) => ({ ...prev, phone: '' }));
     }
   };
 
@@ -153,6 +223,10 @@ export default function TattooCalculator() {
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
+    if (currentStep === totalSteps) {
+      setTouchedStep((prev) => ({ ...prev, [currentStep]: true }));
+    }
+
     if (currentStep < totalSteps) {
       nextStep();
       return;
@@ -173,7 +247,10 @@ export default function TattooCalculator() {
       formDataToSend.append('size', formData.size);
       formDataToSend.append('sketchType', formData.sketchType);
       formDataToSend.append('budget', formData.budget);
-      formDataToSend.append('notes', formData.notes);
+      // formDataToSend.append('notes', formData.notes);
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('contactMethod', formData.contactMethod);
       formDataToSend.append(
         'privacyAccepted',
         formData.privacyAccepted.toString()
@@ -188,31 +265,9 @@ export default function TattooCalculator() {
         body: formDataToSend,
       });
 
-      let data;
-      try {
-        data = await response.json();
-      } catch (parseError) {
-        console.error('Ошибка парсинга JSON ответа:', parseError);
-        setSubmitStatus('error');
-        return;
-      }
-
-      if (response.ok && data.success) {
+      if (response.ok) {
         setSubmitStatus('success');
       } else {
-        console.error('Ошибка ответа сервера:', data);
-        // Показываем более понятное сообщение об ошибке
-        if (data.code === 'TELEGRAM_NOT_CONFIGURED') {
-          alert(
-            'Ошибка: Telegram бот не настроен. Проверьте настройки сервера.'
-          );
-        } else if (data.telegramError) {
-          alert(
-            `Ошибка отправки в Telegram: ${data.error}\nПроверьте правильность токена и chat_id.`
-          );
-        } else {
-          alert(`Ошибка отправки: ${data.error || 'Неизвестная ошибка'}`);
-        }
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -230,7 +285,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 1 из 6</span>
+              <span className={styles.stepNumber}>Шаг 1 из 7</span>
               <h3 className={styles.stepTitle}>У вас есть татуировки?</h3>
             </div>
 
@@ -264,7 +319,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 2 из 6</span>
+              <span className={styles.stepNumber}>Шаг 2 из 7</span>
               <h3 className={styles.stepTitle}>На каком месте тату?</h3>
             </div>
 
@@ -298,7 +353,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 3 из 6</span>
+              <span className={styles.stepNumber}>Шаг 3 из 7</span>
               <h3 className={styles.stepTitle}>Какой размер тату?</h3>
             </div>
 
@@ -330,7 +385,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 4 из 6</span>
+              <span className={styles.stepNumber}>Шаг 4 из 7</span>
               <h3 className={styles.stepTitle}>
                 У вас уже есть эскиз или идея?
               </h3>
@@ -366,7 +421,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 5 из 6</span>
+              <span className={styles.stepNumber}>Шаг 5 из 7</span>
               <h3 className={styles.stepTitle}>Загрузи пример или эскиз</h3>
               <p className={styles.stepSubtitle}>
                 Необязательно, но поможет мастеру лучше понять вашу идею
@@ -418,7 +473,7 @@ export default function TattooCalculator() {
         return (
           <div className={styles.step}>
             <div className={styles.stepHeader}>
-              <span className={styles.stepNumber}>Шаг 6 из 6</span>
+              <span className={styles.stepNumber}>Шаг 6 из 7</span>
               <h3 className={styles.stepTitle}>Какой бюджет планируешь?</h3>
             </div>
 
@@ -426,7 +481,7 @@ export default function TattooCalculator() {
               <input
                 type='text'
                 name='budget'
-                value={formData.budget || ''}
+                value={formData.budget}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder='Например: 15000'
@@ -440,99 +495,115 @@ export default function TattooCalculator() {
             {errors.budget && (
               <div className={styles.error}>{errors.budget}</div>
             )}
+          </div>
+        );
 
-            <div style={{ marginTop: '40px' }}>
-              <h4
-                className={styles.stepTitle}
-                style={{
-                  fontSize: '20px',
-                  marginBottom: '20px',
-                  textAlign: 'left',
-                }}
-              >
-                Если есть пожелания по тату, напиши
-              </h4>
-              <textarea
-                name='notes'
-                value={formData.notes || ''}
-                onChange={handleInputChange}
-                className={styles.textarea}
-                placeholder='Опишите ваши идеи, пожелания, особенности...'
-                rows={4}
-                maxLength={500}
-              />
-              <div className={styles.charCounter}>
-                <span className={styles.charCount}>
-                  {formData.notes.length}
-                </span>
-                <span className={styles.charMax}>/500 символов</span>
-              </div>
+      case 7:
+        return (
+          <div className={styles.step}>
+            <div className={styles.stepHeader}>
+              <span className={styles.stepNumber}>Шаг 7 из 7</span>
+              <h3 className={styles.stepTitle}>Оставьте Контактную информацию</h3>
             </div>
 
-            {/* Чекбокс на последнем шаге */}
+            {/* <textarea
+              name="notes"
+              value={formData.notes}
+              onChange={handleInputChange}
+              className={styles.textarea}
+              placeholder="Опишите ваши идеи, пожелания, особенности..."
+              rows={6}
+              maxLength={500}
+            />
+
+            <div className={styles.charCounter}>
+              <span className={styles.charCount}>{formData.notes.length}</span>
+              <span className={styles.charMax}>/500 символов</span>
+            </div> */}
+
+            <div className={styles.inputGroup}>
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="Ваше имя"
+                maxLength={100}
+              />
+              {errors.name && <div className={styles.errorPoint}>{errors.name}</div>}
+
+              <input
+                style={{ marginTop: "20px" }}
+                name="phone"
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                className={styles.input}
+                placeholder="+7 (123) 456-78-90"
+                maxLength={18}
+                inputMode="tel"
+              />
+              {touchedStep[7] && errors.phone && (
+                <div className={styles.errorPoint}>{errors.phone}</div>
+              )}
+            </div>
+
+            <div className={styles.stepHeader}>
+              <h3 className={styles.stepTitle}>Как с вами лучше связаться?</h3>
+            </div>
+
+            <div className={styles.radioGrid}>
+              {connectOptions.map((option) => (
+                <label
+                  key={option}
+                  className={`${styles.radioLabel} ${
+                    formData.contactMethod === option ? styles.active : ""
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="contactMethod"
+                    checked={formData.contactMethod === option}
+                    onChange={() => handleRadioChange("contactMethod", option)}
+                    className={styles.radioInput}
+                  />
+                  <span className={styles.radioText}>{option}</span>
+                </label>
+              ))}
+              
+            </div>
+            {/* {errors.contactMethod && (
+              <div>{errors.contactMethod}</div>
+            )} */}
+
+            
+
+            {/* Чекбокс согласия */}
             <div className={styles.privacyCheckbox}>
               <label className={styles.checkboxLabel}>
                 <input
-                  type='checkbox'
-                  name='privacyAccepted'
+                  type="checkbox"
+                  name="privacyAccepted"
                   checked={formData.privacyAccepted}
                   onChange={handleInputChange}
                   className={styles.checkboxInput}
                 />
                 <span className={styles.checkboxCustom}></span>
                 <span className={styles.checkboxText}>
-                  Я соглашаюсь с обработкой персональных данных
+                  Я даю согласие на обработку персональных данных
                 </span>
               </label>
-              {errors.privacyAccepted && (
+              
+              {errors.privacyAccepted ? (
                 <div className={styles.error}>{errors.privacyAccepted}</div>
+              ) : (
+                errors.contactMethod && (
+                  <div className={styles.error}>{errors.contactMethod}</div>
+                )
               )}
             </div>
           </div>
         );
 
-      // case 7:
-      //   return (
-      //     <div className={styles.step}>
-      //       <div className={styles.stepHeader}>
-      //         <span className={styles.stepNumber}>Шаг 7 из 7</span>
-      //         <h3 className={styles.stepTitle}>Если есть пожелания по тату, напиши</h3>
-      //       </div>
-
-      //       <textarea
-      //         name="notes"
-      //         value={formData.notes}
-      //         onChange={handleInputChange}
-      //         className={styles.textarea}
-      //         placeholder="Опишите ваши идеи, пожелания, особенности..."
-      //         rows={6}
-      //         maxLength={500}
-      //       />
-
-      //       <div className={styles.charCounter}>
-      //         <span className={styles.charCount}>{formData.notes.length}</span>
-      //         <span className={styles.charMax}>/500 символов</span>
-      //       </div>
-
-      //       {/* Чекбокс на последнем шаге */}
-      //       <div className={styles.privacyCheckbox}>
-      //         <label className={styles.checkboxLabel}>
-      //           <input
-      //             type="checkbox"
-      //             name="privacyAccepted"
-      //             checked={formData.privacyAccepted}
-      //             onChange={handleInputChange}
-      //             className={styles.checkboxInput}
-      //           />
-      //           <span className={styles.checkboxCustom}></span>
-      //           <span className={styles.checkboxText}>
-      //             Я соглашаюсь с обработкой персональных данных
-      //           </span>
-      //         </label>
-      //         {errors.privacyAccepted && <div className={styles.error}>{errors.privacyAccepted}</div>}
-      //       </div>
-      //     </div>
-      //   )
 
       default:
         return <div className={styles.error}>Ошибка: неверный шаг</div>;
@@ -580,6 +651,9 @@ export default function TattooCalculator() {
                     notes: '',
                     file: null,
                     privacyAccepted: false,
+                    phone: '',
+                    name: '',
+                    contactMethod: '',
                   });
                   setCurrentStep(1);
                   setSubmitStatus(null);
@@ -619,27 +693,19 @@ export default function TattooCalculator() {
                   </button>
                 )}
 
-                {currentStep === totalSteps ? (
-                  <button
-                    type='submit'
-                    disabled={isSubmitting}
-                    className={styles.nextButton}
-                  >
-                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-                  </button>
-                ) : (
-                  <button
-                    type='button'
-                    onClick={(e) => {
-                      e.preventDefault();
-                      nextStep();
-                    }}
-                    disabled={isSubmitting}
-                    className={styles.nextButton}
-                  >
-                    Далее
-                  </button>
-                )}
+                <button
+                  // type={'button'}
+                  type={currentStep === totalSteps ? 'submit' : 'button'}
+                  onClick={currentStep === totalSteps ? handleSubmit : nextStep}
+                  disabled={isSubmitting}
+                  className={styles.nextButton}
+                >
+                  {isSubmitting
+                    ? 'Отправка...'
+                    : currentStep === totalSteps
+                    ? 'Отправить заявку'
+                    : 'Далее'}
+                </button>
               </div>
             </>
           )}
