@@ -43,7 +43,6 @@ export const Footer = () => {
 
       <div className={styles.footer__content}>
         <div className={styles.footer__content__left}>
-          {/* ✅ Почта */}
           <Link href={`mailto:${email}`} className={styles.item}>
             <img src="/icons/footer/mail.svg" alt="" /> <p>{email}</p>
           </Link>
@@ -80,6 +79,9 @@ export const Footer = () => {
               ))}
             </p>
           </div>
+          <Link href={`mailto:${email}`} className={styles.item}>
+            <img src="/icons/footer/18.svg" alt="" /> <p>Услуги пирсинга и татуировки не являются медицинскими услугами, перед оказанием услуг клиент самостоятельно оценивает состояние своего здоровья и возможные противопоказания</p>
+          </Link>
         </div>
 
         <div className={styles.footer__content__right}>

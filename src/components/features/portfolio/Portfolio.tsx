@@ -22,6 +22,7 @@ export const Portfolio = () => {
         "/images/portfolio/project6.webp",
         "/images/portfolio/project7.webp",
         "/images/portfolio/project8.webp",
+        "/images/portfolio/project9.webp",
       ],
     },
     {

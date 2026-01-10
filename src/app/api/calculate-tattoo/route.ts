@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
     // Получаем данные Telegram из переменных окружения
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
     const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID
+    const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID
     
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Telegram credentials not configured')
@@ -81,6 +82,23 @@ ${budget} ₽
           }),
         }
       );
+
+      textResponse = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_ADMIN_ID,
+            text: message,
+            parse_mode: 'Markdown',
+          }),
+        }
+      );
+
+
     } catch (fetchError) {
       console.error('Ошибка при вызове Telegram API:', fetchError);
       return NextResponse.json(
