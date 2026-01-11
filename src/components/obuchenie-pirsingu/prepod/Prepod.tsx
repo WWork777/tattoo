@@ -10,35 +10,27 @@ export default function PrepodPirsing() {
   const slides = [
     {
       id: 1,
-      image: "/obuchenie/prepod/7.webp",
+      image: "/obucheniePirsing/Works/5.webp",
     },
     {
       id: 2,
-      image: "/obuchenie/prepod/8.webp",
+      image: "/obucheniePirsing/Works/1.webp",
     },
     {
       id: 3,
-      image: "/obuchenie/prepod/9.webp",
+      image: "/obucheniePirsing/Works/2.webp",
     },
     {
       id: 4,
-      image: "/obuchenie/prepod/10.webp",
+      image: "/obucheniePirsing/Works/3.webp",
     },
     {
       id: 5,
-      image: "/obuchenie/prepod/11.webp",
+      image: "/obucheniePirsing/Works/4.webp",
     },
     {
       id: 6,
-      image: "/obuchenie/prepod/12.webp",
-    },
-    {
-      id: 7,
-      image: "/obuchenie/prepod/13.webp",
-    },
-    {
-      id: 8,
-      image: "/obuchenie/prepod/14.webp",
+      image: "/obucheniePirsing/Works/6.webp",
     },
   ];
 

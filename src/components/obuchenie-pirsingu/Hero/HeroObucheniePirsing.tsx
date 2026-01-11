@@ -125,7 +125,7 @@ const HeroObucheniePirsing = () => {
           </div>
           <div className={styles.right__bottom}>
             <Link
-              href="/obuchenie-tatu/#prepod"
+              href="/obuchenie-pirsingu/#prepod"
               className={styles.right__bottom__left}
             >
               <img src={Arrow.src} alt="" className={styles.arrow__left} />
