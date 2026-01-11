@@ -122,6 +122,14 @@ export const Header = () => {
               Обучение тату
             </p>
           </Link>
+          <Link href={"/obuchenie-pirsingu"}>
+            <p
+              style={{ color: "#c6ab7a", fontSize: "20px" }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Обучение Пирсингу
+            </p>
+          </Link>
           {/* Номер телефона в мобильном меню */}
           <Link
             href={`tel:${phoneNumber.replace(/[^\d]/g, "")}`}
