@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
     const name = formData.get('name') as string
     const phone = formData.get('phone') as string
     const contactMethod = formData.get('contactMethod') as string
+    const telegram = formData.get('telegram') as string | null
     // const notes = formData.get('notes') as string
     const privacyAccepted = formData.get('privacyAccepted') as string
     
@@ -36,39 +37,71 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Формируем сообщение для Telegram
+    // Функция для преобразования номера телефона в международный формат
+    // Telegram автоматически распознает номера в формате +7XXXXXXXXXX и делает их кликабельными
+    const formatPhoneForClick = (phoneNumber: string): string => {
+      // Убираем все кроме цифр и знака +
+      const cleaned = phoneNumber.replace(/[^\d+]/g, '');
+      // Если номер начинается с +7, оставляем как есть, иначе добавляем +7
+      if (cleaned.startsWith('+7')) {
+        return cleaned;
+      } else if (cleaned.startsWith('7')) {
+        return '+' + cleaned;
+      } else if (cleaned.startsWith('8')) {
+        return '+7' + cleaned.substring(1);
+      } else {
+        return '+7' + cleaned;
+      }
+    };
+
+    const phoneForClick = formatPhoneForClick(phone);
+
+    // Экранируем специальные символы для HTML
+    const escapeHtml = (text: string): string => {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    };
+
+    // Формируем сообщение для Telegram в HTML формате
+    // Показываем номер в читаемом формате, но также добавляем его в международном формате
+    // Telegram автоматически распознает номер в формате +7XXXXXXXXXX и делает его кликабельным
     const message = `
-🎨 *НОВАЯ ЗАЯВКА НА ТАТУИРОВКУ*
+🎨 <b>НОВАЯ ЗАЯВКА НА ТАТУИРОВКУ</b>
 
-*Вопрос 1: У вас есть татуировки?*
-${hasTattoos}
+<b>Вопрос 1: У вас есть татуировки?</b>
+${escapeHtml(hasTattoos)}
 
-*Вопрос 2: На каком месте тату?*
-${placement}
+<b>Вопрос 2: На каком месте тату?</b>
+${escapeHtml(placement)}
 
-*Вопрос 3: Какой размер тату?*
-${size}
+<b>Вопрос 3: Какой размер тату?</b>
+${escapeHtml(size)}
 
-*Вопрос 4: У вас уже есть эскиз или идея?*
-${sketchType}
+<b>Вопрос 4: У вас уже есть эскиз или идея?</b>
+${escapeHtml(sketchType)}
 
-*Вопрос 6: Какой бюджет планируешь?*
-${budget} ₽
+<b>Вопрос 6: Какой бюджет планируешь?</b>
+${escapeHtml(budget)} ₽
 
-*Вопрос 7: Контактная информация*
-Имя: ${name}
-Телефон: ${phone}
-Связь: ${contactMethod}
+<b>Вопрос 7: Контактная информация</b>
+Имя: ${escapeHtml(name)}
+Телефон: ${phoneForClick}
+Связь: ${escapeHtml(contactMethod)}${telegram ? `\nTelegram: ${escapeHtml(telegram)}` : ''}
 
-*Согласие на обработку данных:* ${privacyAccepted === 'true' ? '✅ Да' : '❌ Нет'}
+<b>Согласие на обработку данных:</b> ${privacyAccepted === 'true' ? '✅ Да' : '❌ Нет'}
 
-📅 *Дата заявки:* ${new Date().toLocaleString('ru-RU')}
+📅 <b>Дата заявки:</b> ${escapeHtml(new Date().toLocaleString('ru-RU'))}
     `.trim()
 
-    // Отправляем текстовое сообщение в Telegram
-    let textResponse;
+    // Отправляем текстовое сообщение в Telegram в оба чата
+    let mainMessageSent = false;
+    let adminMessageSent = false;
+    
     try {
-      textResponse = await fetch(
+      // Отправляем основное сообщение в основной чат (групповой)
+      const mainResponse = await fetch(
         `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
         {
           method: 'POST',
@@ -78,86 +111,134 @@ ${budget} ₽
           body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
             text: message,
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
           }),
         }
       );
 
-      textResponse = await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_ADMIN_ID,
-            text: message,
-            parse_mode: 'Markdown',
-          }),
-        }
-      );
+      if (mainResponse.ok) {
+        mainMessageSent = true;
+      } else {
+        const errorData = await mainResponse.json().catch(() => ({}));
+        console.error('Ошибка отправки основного сообщения в Telegram:', {
+          status: mainResponse.status,
+          errorData
+        });
+      }
 
+      // Отправляем копию на личный аккаунт админа (обязательно, если указан)
+      if (TELEGRAM_ADMIN_ID) {
+        try {
+          const adminResponse = await fetch(
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                chat_id: TELEGRAM_ADMIN_ID,
+                text: message,
+                parse_mode: 'HTML',
+              }),
+            }
+          );
+          
+          if (adminResponse.ok) {
+            adminMessageSent = true;
+          } else {
+            const errorData = await adminResponse.json().catch(() => ({}));
+            console.error('Ошибка отправки сообщения админу:', {
+              status: adminResponse.status,
+              errorData
+            });
+          }
+        } catch (adminError) {
+          console.error('Ошибка при отправке сообщения админу:', adminError);
+        }
+      } else {
+        // Если TELEGRAM_ADMIN_ID не указан, считаем что админское сообщение "отправлено"
+        adminMessageSent = true;
+      }
 
     } catch (fetchError) {
       console.error('Ошибка при вызове Telegram API:', fetchError);
-      return NextResponse.json(
-        { 
-          error: 'Network error when sending to Telegram', 
-          success: false, 
-          details: fetchError instanceof Error ? fetchError.message : 'Unknown fetch error',
-          telegramError: true
-        },
-        { status: 500 }
-      );
+      // Если основное сообщение не отправилось, возвращаем ошибку
+      if (!mainMessageSent) {
+        return NextResponse.json(
+          { 
+            error: 'Network error when sending to Telegram', 
+            success: false, 
+            details: fetchError instanceof Error ? fetchError.message : 'Unknown fetch error',
+            telegramError: true
+          },
+          { status: 500 }
+        );
+      }
     }
 
-    if (!textResponse.ok) {
-      let errorData;
-      try {
-        errorData = await textResponse.json();
-      } catch (e) {
-        const text = await textResponse.text();
-        errorData = { message: text, status: textResponse.status, statusText: textResponse.statusText };
-      }
-      console.error('Telegram API error:', {
-        status: textResponse.status,
-        statusText: textResponse.statusText,
-        errorData
-      });
+    // Проверяем успешность отправки: основное сообщение обязательно, админское - если указан
+    const requiredMessagesSent = mainMessageSent && (TELEGRAM_ADMIN_ID ? adminMessageSent : true);
+    
+    if (!requiredMessagesSent) {
       return NextResponse.json(
         { 
           error: 'Failed to send message to Telegram', 
           success: false, 
-          details: errorData,
           telegramError: true,
-          telegramStatus: textResponse.status
+          details: {
+            mainChat: mainMessageSent,
+            adminChat: adminMessageSent
+          }
         },
         { status: 500 }
       );
     }
 
-    // Если есть файл, отправляем его отдельно
+    // Если есть файл, отправляем его в оба чата
     if (file && file.size > 0) {
       try {
         const buffer = await file.arrayBuffer()
         const blob = new Blob([buffer], { type: file.type })
         const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`
         
-        const formDataForTelegram = new FormData()
-        formDataForTelegram.append('chat_id', TELEGRAM_CHAT_ID)
-        formDataForTelegram.append('document', blob, file.name)
-        formDataForTelegram.append('caption', '📎 Прикрепленный файл от клиента')
+        // Отправляем файл в основной чат
+        const formDataForMainChat = new FormData()
+        formDataForMainChat.append('chat_id', TELEGRAM_CHAT_ID)
+        formDataForMainChat.append('document', blob, file.name)
+        formDataForMainChat.append('caption', '📎 Прикрепленный файл от клиента')
         
-        const fileResponse = await fetch(url, {
+        const mainFileResponse = await fetch(url, {
           method: 'POST',
-          body: formDataForTelegram,
+          body: formDataForMainChat,
         })
 
-        if (!fileResponse.ok) {
-          const errorData = await fileResponse.json()
-          console.error('Telegram file upload error:', errorData)
-          // Не прерываем выполнение, т.к. основное сообщение уже отправлено
+        if (!mainFileResponse.ok) {
+          const errorData = await mainFileResponse.json().catch(() => ({}))
+          console.error('Ошибка отправки файла в основной чат:', errorData)
+        }
+
+        // Отправляем файл админу (если указан)
+        if (TELEGRAM_ADMIN_ID) {
+          try {
+            const formDataForAdmin = new FormData()
+            formDataForAdmin.append('chat_id', TELEGRAM_ADMIN_ID)
+            formDataForAdmin.append('document', blob, file.name)
+            formDataForAdmin.append('caption', '📎 Прикрепленный файл от клиента')
+            
+            const adminFileResponse = await fetch(url, {
+              method: 'POST',
+              body: formDataForAdmin,
+            })
+
+            if (!adminFileResponse.ok) {
+              const errorData = await adminFileResponse.json().catch(() => ({}))
+              console.error('Ошибка отправки файла админу:', errorData)
+            }
+          } catch (adminFileError) {
+            console.error('Ошибка при отправке файла админу:', adminFileError)
+            // Не прерываем выполнение, т.к. основное сообщение уже отправлено
+          }
         }
       } catch (fileError) {
         console.error('Error sending file to Telegram:', fileError)

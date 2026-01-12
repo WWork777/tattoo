@@ -26,7 +26,8 @@ export default function TattooCalculator() {
     phone: '',
     name: '',
     contactMethod: '',
-    
+    telegram: '', // Telegram username для связи
+
     // Чекбокс согласия
     privacyAccepted: false,
   });
@@ -62,11 +63,7 @@ export default function TattooCalculator() {
     'Пока нет идей, нужна консультация',
   ];
 
-  const connectOptions = [
-    'Звонок',
-    'Telegram',
-    'Whatsapp',
-  ];
+  const connectOptions = ['Звонок', 'Telegram', 'Whatsapp'];
 
   const totalSteps = 7;
 
@@ -106,19 +103,28 @@ export default function TattooCalculator() {
       case 7:
         // Вопрос 7: Валидация чекбокса на последнем шаге
         if (!formData.name.trim()) newErrors.name = 'Введите ваше имя';
-  
+
         if (!formData.phone.trim()) {
           newErrors.phone = 'Введите номер телефона';
         } else if (!isValidPhone(formData.phone)) {
           newErrors.phone = 'Введите корректный номер телефона';
         }
-        
-        if (!formData.contactMethod) newErrors.contactMethod = 'Выберите способ связи';
-        
-        if (!formData.privacyAccepted) {
-          newErrors.privacyAccepted = 'Необходимо согласие на обработку персональных данных';
+
+        if (!formData.contactMethod)
+          newErrors.contactMethod = 'Выберите способ связи';
+
+        // Если выбран Telegram, проверяем что указан username
+        if (formData.contactMethod === 'Telegram') {
+          if (!formData.telegram.trim()) {
+            newErrors.telegram = 'Введите ваш Telegram username';
+          }
         }
-        break
+
+        if (!formData.privacyAccepted) {
+          newErrors.privacyAccepted =
+            'Необходимо согласие на обработку персональных данных';
+        }
+        break;
     }
 
     setErrors(newErrors);
@@ -141,51 +147,63 @@ export default function TattooCalculator() {
   const isValidPhone = (phone: string): boolean => {
     // Убираем все кроме цифр
     const cleaned = phone.replace(/\D/g, '');
-    
+
     // Проверяем российские номера: начинается с 7 или 8, длина 11 цифр
     if (/^[78]\d{10}$/.test(cleaned)) {
       return true;
     }
-    
+
     // Также можно принимать номера в формате +7 xxx xxx xx xx
     if (/^\+7\d{10}$/.test(cleaned)) {
       return true;
     }
-    
+
     return false;
   };
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
-    
+
     // Убираем все кроме цифр
     const numbers = value.replace(/\D/g, '');
-    
+
     let formattedValue = '';
-    
+
     if (numbers.length > 0) {
       // Если первая цифра 8 или 7, оставляем как есть, иначе добавляем 7
       let phoneNumbers = numbers;
       if (!phoneNumbers.startsWith('7') && !phoneNumbers.startsWith('8')) {
         phoneNumbers = '7' + phoneNumbers;
       }
-      
+
       // Форматируем номер: +7 (XXX) XXX-XX-XX
       if (phoneNumbers.length <= 1) {
         formattedValue = '+7';
       } else if (phoneNumbers.length <= 4) {
         formattedValue = `+7 (${phoneNumbers.substring(1, 4)}`;
       } else if (phoneNumbers.length <= 7) {
-        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}`;
+        formattedValue = `+7 (${phoneNumbers.substring(
+          1,
+          4
+        )}) ${phoneNumbers.substring(4, 7)}`;
       } else if (phoneNumbers.length <= 9) {
-        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(7, 9)}`;
+        formattedValue = `+7 (${phoneNumbers.substring(
+          1,
+          4
+        )}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(7, 9)}`;
       } else {
-        formattedValue = `+7 (${phoneNumbers.substring(1, 4)}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(7, 9)}-${phoneNumbers.substring(9, 11)}`;
+        formattedValue = `+7 (${phoneNumbers.substring(
+          1,
+          4
+        )}) ${phoneNumbers.substring(4, 7)}-${phoneNumbers.substring(
+          7,
+          9
+        )}-${phoneNumbers.substring(9, 11)}`;
       }
     }
-    
+
     setFormData((prev) => ({ ...prev, phone: formattedValue }));
-    
+
     if (errors.phone) {
       setErrors((prev) => ({ ...prev, phone: '' }));
     }
@@ -251,6 +269,9 @@ export default function TattooCalculator() {
       formDataToSend.append('name', formData.name);
       formDataToSend.append('phone', formData.phone);
       formDataToSend.append('contactMethod', formData.contactMethod);
+      if (formData.telegram) {
+        formDataToSend.append('telegram', formData.telegram);
+      }
       formDataToSend.append(
         'privacyAccepted',
         formData.privacyAccepted.toString()
@@ -265,9 +286,13 @@ export default function TattooCalculator() {
         body: formDataToSend,
       });
 
-      if (response.ok) {
+      const responseData = await response.json().catch(() => ({}));
+
+      // Проверяем и статус ответа, и поле success в JSON
+      if (response.ok && responseData.success !== false) {
         setSubmitStatus('success');
       } else {
+        console.error('Ошибка отправки:', responseData);
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -430,6 +455,7 @@ export default function TattooCalculator() {
 
             <div className={styles.fileUpload}>
               <input
+                key={formData.file ? formData.file.name : 'no-file'}
                 type='file'
                 onChange={handleFileChange}
                 accept='image/*,.pdf'
@@ -456,9 +482,16 @@ export default function TattooCalculator() {
                   </div>
                   <button
                     type='button'
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, file: null }))
-                    }
+                    onClick={() => {
+                      setFormData((prev) => ({ ...prev, file: null }));
+                      // Сброс input через изменение key
+                      const fileInput = document.getElementById(
+                        'file-upload'
+                      ) as HTMLInputElement;
+                      if (fileInput) {
+                        fileInput.value = '';
+                      }
+                    }}
                     className={styles.fileRemoveButton}
                   >
                     ✕
@@ -503,7 +536,9 @@ export default function TattooCalculator() {
           <div className={styles.step}>
             <div className={styles.stepHeader}>
               <span className={styles.stepNumber}>Шаг 7 из 7</span>
-              <h3 className={styles.stepTitle}>Оставьте Контактную информацию</h3>
+              <h3 className={styles.stepTitle}>
+                Оставьте Контактную информацию
+              </h3>
             </div>
 
             {/* <textarea
@@ -523,24 +558,26 @@ export default function TattooCalculator() {
 
             <div className={styles.inputGroup}>
               <input
-                name="name"
+                name='name'
                 value={formData.name}
                 onChange={handleInputChange}
                 className={styles.input}
-                placeholder="Ваше имя"
+                placeholder='Ваше имя'
                 maxLength={100}
               />
-              {errors.name && <div className={styles.errorPoint}>{errors.name}</div>}
+              {errors.name && (
+                <div className={styles.errorPoint}>{errors.name}</div>
+              )}
 
               <input
-                style={{ marginTop: "20px" }}
-                name="phone"
+                style={{ marginTop: '20px' }}
+                name='phone'
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 className={styles.input}
-                placeholder="+7 (123) 456-78-90"
+                placeholder='+7 (123) 456-78-90'
                 maxLength={18}
-                inputMode="tel"
+                inputMode='tel'
               />
               {touchedStep[7] && errors.phone && (
                 <div className={styles.errorPoint}>{errors.phone}</div>
@@ -556,33 +593,47 @@ export default function TattooCalculator() {
                 <label
                   key={option}
                   className={`${styles.radioLabel} ${
-                    formData.contactMethod === option ? styles.active : ""
+                    formData.contactMethod === option ? styles.active : ''
                   }`}
                 >
                   <input
-                    type="radio"
-                    name="contactMethod"
+                    type='radio'
+                    name='contactMethod'
                     checked={formData.contactMethod === option}
-                    onChange={() => handleRadioChange("contactMethod", option)}
+                    onChange={() => handleRadioChange('contactMethod', option)}
                     className={styles.radioInput}
                   />
                   <span className={styles.radioText}>{option}</span>
                 </label>
               ))}
-              
             </div>
             {/* {errors.contactMethod && (
               <div>{errors.contactMethod}</div>
             )} */}
 
-            
+            {/* Поле для Telegram username, показывается только если выбран Telegram */}
+            {formData.contactMethod === 'Telegram' && (
+              <div className={styles.inputGroup} style={{ marginTop: '20px' }}>
+                <input
+                  name='telegram'
+                  value={formData.telegram}
+                  onChange={handleInputChange}
+                  className={styles.input}
+                  placeholder='@username'
+                  maxLength={100}
+                />
+                {errors.telegram && (
+                  <div className={styles.errorPoint}>{errors.telegram}</div>
+                )}
+              </div>
+            )}
 
             {/* Чекбокс согласия */}
             <div className={styles.privacyCheckbox}>
               <label className={styles.checkboxLabel}>
                 <input
-                  type="checkbox"
-                  name="privacyAccepted"
+                  type='checkbox'
+                  name='privacyAccepted'
                   checked={formData.privacyAccepted}
                   onChange={handleInputChange}
                   className={styles.checkboxInput}
@@ -592,7 +643,7 @@ export default function TattooCalculator() {
                   Я даю согласие на обработку персональных данных
                 </span>
               </label>
-              
+
               {errors.privacyAccepted ? (
                 <div className={styles.error}>{errors.privacyAccepted}</div>
               ) : (
@@ -603,7 +654,6 @@ export default function TattooCalculator() {
             </div>
           </div>
         );
-
 
       default:
         return <div className={styles.error}>Ошибка: неверный шаг</div>;
@@ -654,6 +704,7 @@ export default function TattooCalculator() {
                     phone: '',
                     name: '',
                     contactMethod: '',
+                    telegram: '',
                   });
                   setCurrentStep(1);
                   setSubmitStatus(null);

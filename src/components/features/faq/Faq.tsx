@@ -63,12 +63,12 @@ export const Foq = () => {
               className={styles.accordion__header}
             >
               <Typography component="span" className={styles.accordion__title}>
-                <p>{item.question}</p>
+                {item.question}
               </Typography>
             </AccordionSummary>
             <AccordionDetails className={styles.accordion__content}>
               <Typography component="p" className={styles.accordion__text}>
-                <p>{item.answer}</p>
+                {item.answer}
               </Typography>
             </AccordionDetails>
           </Accordion>
