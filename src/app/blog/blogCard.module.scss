@@ -149,5 +149,9 @@
 .container {
   min-height: 100vh;
   background: #1d1b18;
-  padding: 0 10vw;
+  padding: 100px 10vw 0;
+
+  @media (max-width: 768px) {
+    padding: 80px 5vw 0;
+  }
 }

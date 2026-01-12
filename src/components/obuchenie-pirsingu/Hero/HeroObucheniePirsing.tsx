@@ -1,12 +1,12 @@
-"use client";
-import { useState } from "react";
-import styles from "./Hero.module.scss";
-import Arrow from "./arrow.svg";
-import ArrowSecond from "./arrow-second.svg";
-import SliderArea from "./slider-area.svg";
-import SliderArrow from "./slider-arrow.svg";
+'use client';
+import { useState } from 'react';
+import styles from './Hero.module.scss';
+import Arrow from './arrow.svg';
+import ArrowSecond from './arrow-second.svg';
+import SliderArea from './slider-area.svg';
+import SliderArrow from './slider-arrow.svg';
 // import ModalForm from "../modal/ModalForm";
-import Link from "next/link";
+import Link from 'next/link';
 
 const HeroObucheniePirsing = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -15,24 +15,24 @@ const HeroObucheniePirsing = () => {
   const slides = [
     {
       id: 1,
-      title: "Освой прибыльную и интересную профессию",
+      title: 'Освой прибыльную и интересную профессию',
       subtitle:
-        "Давно мечтаешь попробовать себя в роли пирсера, но не знаешь как подступиться? Хочешь узнать как правильно и безопасно получить практические навыки проколов? Не боишься крови + считаешь себя аккуратным человеком? Тогда присоединяйся",
-      image: "/images/pirsing/Hero.png",
+        'Давно мечтаешь попробовать себя в роли пирсера, но не знаешь как подступиться? Хочешь узнать как правильно и безопасно получить практические навыки проколов? Не боишься крови + считаешь себя аккуратным человеком? Тогда присоединяйся',
+      image: '/images/pirsing/Hero.png',
     },
     {
       id: 2,
-      title: "Карта лояльности",
+      title: 'Карта лояльности',
       subtitle:
-        "За каждые 10 000 руб., потраченные в студии, клиент получает скидку 1000 бонусов на следующую услугу.",
-      image: "/images/hero/hero2.webp",
+        'За каждые 10 000 руб., потраченные в студии, клиент получает скидку 1000 бонусов на следующую услугу.',
+      image: '/images/hero/hero2.webp',
     },
     {
       id: 3,
-      title: "Большие проекты под ключ",
+      title: 'Большие проекты под ключ',
       subtitle:
-        "Хочешь сделать спину/полурукав/рукав/ногав — мы готовы сделать большой проект под ключ с четким дедлайном и железной ценой и подкрепим все договором.",
-      image: "/images/hero/hero3.webp",
+        'Хочешь сделать спину/полурукав/рукав/ногав — мы готовы сделать большой проект под ключ с четким дедлайном и железной ценой и подкрепим все договором.',
+      image: '/images/hero/hero3.webp',
     },
   ];
 
@@ -53,7 +53,7 @@ const HeroObucheniePirsing = () => {
   };
 
   return (
-    <section className="container-ellipse-hero">
+    <section className='container-ellipse-hero'>
       <div className={styles.hero}>
         <div className={styles.left}>
           <div className={styles.slider}>
@@ -71,7 +71,7 @@ const HeroObucheniePirsing = () => {
                 <div
                   key={slide.id}
                   className={`${styles.slide} ${
-                    index === currentSlide ? styles.active : ""
+                    index === currentSlide ? styles.active : ''
                   }`}
                 >
                   <div
@@ -87,7 +87,7 @@ const HeroObucheniePirsing = () => {
                       <div className={styles.slide__line}></div>
                       <p className={styles.slide__subtitle}>{slide.subtitle}</p>
                       <button>
-                        <Link href="https://t.me/Soprano2024" target="_blank">
+                        <Link href='https://t.me/Soprano2024' target='_blank'>
                           <p>Написать нам</p>
                         </Link>
                       </button>
@@ -112,26 +112,23 @@ const HeroObucheniePirsing = () => {
         <div className={styles.right}>
           <div className={styles.right__top}>
             <p>
-              Запишись <br></br> на консультацию по обучению,
-            </p>
-            <p>
-              cообщи кодовое слово <b>ФЛОРЕНЦИЯ</b>,<br/> и получи скидку 10% на обучение
+              Запишись на пробное занятие -<br></br> получи скидку 10% на курс
             </p>
             <button className={styles.right__top__button}>
-              <Link href="https://t.me/Soprano2024" target="_blank">
-                <p>Написать нам</p>
+              <Link href='/obuchenie-pirsingu#trial-form'>
+                <p>Записаться</p>
               </Link>
             </button>
           </div>
           <div className={styles.right__bottom}>
             <Link
-              href="/obuchenie-pirsingu/#prepod"
+              href='/obuchenie-pirsingu/#prepod'
               className={styles.right__bottom__left}
             >
-              <img src={Arrow.src} alt="" className={styles.arrow__left} />
+              <img src={Arrow.src} alt='' className={styles.arrow__left} />
               <img
                 src={ArrowSecond.src}
-                alt=""
+                alt=''
                 className={styles.arrow__second}
               />
               <p>Работы преподавателей</p>

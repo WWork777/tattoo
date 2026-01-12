@@ -195,61 +195,92 @@ ${escapeHtml(budget)} ₽
       );
     }
 
-    // Если есть файл, отправляем его в оба чата
-    if (file && file.size > 0) {
-      try {
-        const buffer = await file.arrayBuffer()
-        const blob = new Blob([buffer], { type: file.type })
-        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`
-        
-        // Отправляем файл в основной чат
-        const formDataForMainChat = new FormData()
-        formDataForMainChat.append('chat_id', TELEGRAM_CHAT_ID)
-        formDataForMainChat.append('document', blob, file.name)
-        formDataForMainChat.append('caption', '📎 Прикрепленный файл от клиента')
-        
-        const mainFileResponse = await fetch(url, {
-          method: 'POST',
-          body: formDataForMainChat,
-        })
-
-        if (!mainFileResponse.ok) {
-          const errorData = await mainFileResponse.json().catch(() => ({}))
-          console.error('Ошибка отправки файла в основной чат:', errorData)
-        }
-
-        // Отправляем файл админу (если указан)
-        if (TELEGRAM_ADMIN_ID) {
-          try {
-            const formDataForAdmin = new FormData()
-            formDataForAdmin.append('chat_id', TELEGRAM_ADMIN_ID)
-            formDataForAdmin.append('document', blob, file.name)
-            formDataForAdmin.append('caption', '📎 Прикрепленный файл от клиента')
-            
-            const adminFileResponse = await fetch(url, {
-              method: 'POST',
-              body: formDataForAdmin,
-            })
-
-            if (!adminFileResponse.ok) {
-              const errorData = await adminFileResponse.json().catch(() => ({}))
-              console.error('Ошибка отправки файла админу:', errorData)
-            }
-          } catch (adminFileError) {
-            console.error('Ошибка при отправке файла админу:', adminFileError)
-            // Не прерываем выполнение, т.к. основное сообщение уже отправлено
-          }
-        }
-      } catch (fileError) {
-        console.error('Error sending file to Telegram:', fileError)
-        // Не прерываем выполнение, т.к. основное сообщение уже отправлено
-      }
-    }
-
-    return NextResponse.json(
+    // Возвращаем успешный ответ сразу, не дожидаясь отправки файла
+    // Отправку файла делаем асинхронно, чтобы не блокировать ответ клиенту
+    const response = NextResponse.json(
       { success: true, message: 'Заявка успешно отправлена' },
       { status: 200 }
     )
+
+    // Если есть файл, отправляем его асинхронно (не блокируя ответ)
+    if (file && file.size > 0) {
+      // Запускаем отправку файла асинхронно, не дожидаясь завершения
+      ;(async () => {
+        try {
+          // Проверяем размер файла (Telegram ограничение: 50MB для документов)
+          const maxFileSize = 50 * 1024 * 1024; // 50MB
+          if (file.size > maxFileSize) {
+            console.warn(`Файл слишком большой (${(file.size / 1024 / 1024).toFixed(2)}MB), максимальный размер 50MB`);
+            return;
+          }
+
+          const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`
+          
+          // Читаем файл один раз
+          const buffer = await file.arrayBuffer()
+          const blob = new Blob([buffer], { type: file.type })
+          
+          // Функция для отправки файла в чат с таймаутом
+          const sendFileToChat = async (chatId: string, chatName: string, fileBlob: Blob) => {
+            try {
+              const formData = new FormData()
+              formData.append('chat_id', chatId)
+              formData.append('document', fileBlob, file.name)
+              formData.append('caption', '📎 Прикрепленный файл от клиента')
+              
+              // Создаем AbortController для таймаута (20 секунд)
+              const controller = new AbortController()
+              const timeoutId = setTimeout(() => controller.abort(), 20000)
+              
+              try {
+                const fetchResponse = await fetch(url, {
+                  method: 'POST',
+                  body: formData,
+                  signal: controller.signal,
+                })
+                
+                clearTimeout(timeoutId)
+
+                if (!fetchResponse.ok) {
+                  const errorText = await fetchResponse.text().catch(() => 'Unknown error')
+                  console.error(`Ошибка отправки файла в ${chatName}:`, {
+                    status: fetchResponse.status,
+                    statusText: fetchResponse.statusText,
+                    error: errorText
+                  })
+                }
+              } catch (fetchError: any) {
+                clearTimeout(timeoutId)
+                if (fetchError.name === 'AbortError') {
+                  console.error(`Таймаут при отправке файла в ${chatName}`)
+                } else {
+                  throw fetchError
+                }
+              }
+            } catch (error) {
+              console.error(`Ошибка при отправке файла в ${chatName}:`, error)
+            }
+          }
+          
+          // Отправляем файл в основной чат
+          await sendFileToChat(TELEGRAM_CHAT_ID, 'основной чат', blob)
+
+          // Отправляем файл админу (если указан) - создаем новый blob из того же buffer
+          if (TELEGRAM_ADMIN_ID) {
+            // Создаем новый blob для второго запроса из того же buffer
+            const blobForAdmin = new Blob([buffer], { type: file.type })
+            // Добавляем небольшую задержку между запросами
+            await new Promise(resolve => setTimeout(resolve, 500))
+            await sendFileToChat(TELEGRAM_ADMIN_ID, 'личный чат админа', blobForAdmin)
+          }
+        } catch (fileError) {
+          console.error('Ошибка обработки файла:', fileError)
+          // Файл - это дополнительная информация, основная заявка уже получена
+        }
+      })()
+    }
+
+    return response
 
   } catch (error) {
     console.error('Error processing form:', error)

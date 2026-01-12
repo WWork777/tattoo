@@ -281,18 +281,53 @@ export default function TattooCalculator() {
         formDataToSend.append('file', formData.file);
       }
 
-      const response = await fetch('/api/calculate-tattoo', {
-        method: 'POST',
-        body: formDataToSend,
-      });
+      // Добавляем таймаут для запроса (30 секунд)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const responseData = await response.json().catch(() => ({}));
+      let response: Response;
+      try {
+        response = await fetch('/api/calculate-tattoo', {
+          method: 'POST',
+          body: formDataToSend,
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        if (fetchError.name === 'AbortError') {
+          console.error('Таймаут при отправке заявки');
+          setSubmitStatus('error');
+          return;
+        }
+        throw fetchError;
+      }
+
+      let responseData: any = {};
+      try {
+        const text = await response.text();
+        if (text) {
+          responseData = JSON.parse(text);
+        }
+      } catch (parseError) {
+        console.error('Ошибка парсинга ответа:', parseError);
+        // Если не удалось распарсить JSON, проверяем статус ответа
+        if (response.ok) {
+          // Если статус OK, считаем что запрос успешен
+          setSubmitStatus('success');
+          return;
+        }
+      }
 
       // Проверяем и статус ответа, и поле success в JSON
       if (response.ok && responseData.success !== false) {
         setSubmitStatus('success');
       } else {
-        console.error('Ошибка отправки:', responseData);
+        console.error('Ошибка отправки:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: responseData,
+        });
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -665,7 +700,7 @@ export default function TattooCalculator() {
       <div className={styles.container}>
         <h1 className={styles.title}>Рассчитать стоимость татуировки</h1>
         <p className={styles.subtitle}>
-          Заполните форму и мастер свяжется с вами для расчета
+          Заполните форму и менеджер свяжется с вами для расчета
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -687,7 +722,8 @@ export default function TattooCalculator() {
               <div className={styles.successIcon}>✅</div>
               <h3 className={styles.successTitle}>Заявка отправлена!</h3>
               <p className={styles.successMessage}>
-                Мастер свяжется с вами в течение 24 часов для расчета стоимости.
+                Менеджер свяжется с вами в течение 24 часов для расчета
+                стоимости.
               </p>
               <button
                 type='button'
