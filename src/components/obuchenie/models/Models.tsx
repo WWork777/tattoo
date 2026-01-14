@@ -219,6 +219,9 @@ export default function Models() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <Link href={'/obuchenie-tatu#trial-form'} className="btn-trial">
+      Записаться
+      </Link>
     </section>
   );
 }

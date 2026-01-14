@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
     const phone = formData.get('phone') as string
     const telegram = formData.get('telegram') as string | null
     const privacyAccepted = formData.get('privacyAccepted') as string
+    const tarif = formData.get('tarif') as string | null
+    const type = formData.get('type') as string | null
     
     // Получаем данные Telegram из переменных окружения
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
@@ -55,8 +57,14 @@ export async function POST(request: NextRequest) {
     };
 
     // Формируем сообщение для Telegram в HTML формате
+    const header = tarif && type ? `<b>🎓 НОВАЯ ЗАЯВКА НА ${type == "buy" ? "ПОКУПКУ" : "РАССРОЧКУ"}<b>`: `
+🎓 <b>НОВАЯ ЗАЯВКА НА ПРОБНОЕ ЗАНЯТИЕ ПО ТАТУ</b>`
+    const buy = tarif && type ? `
+<b>Тариф</b>: ${escapeHtml(tarif)}` : ``
     const message = `
-🎓 <b>НОВАЯ ЗАЯВКА НА ПРОБНОЕ ЗАНЯТИЕ ПО ТАТУ</b>
+${escapeHtml(header)}
+
+${escapeHtml(buy)}
 
 <b>Вопрос 1: Есть опыт татуирования?</b>
 ${escapeHtml(hasTattooExperience)}
@@ -194,4 +202,3 @@ ${escapeHtml(startTime)}
     );
   }
 }
-

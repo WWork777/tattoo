@@ -2,6 +2,10 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./TrialForm.module.scss";
 
+interface TrialFormProps {
+  tarif?: string | null;
+  type?: string | null;
+}
 interface FormData {
   hasTattooExperience: string;
   hasDrawingExperience: string;
@@ -10,6 +14,8 @@ interface FormData {
   phone: string;
   telegram: string;
   privacyAccepted: boolean;
+  type: string | null;
+  tarif: string | null;
 }
 
 interface FormErrors {
@@ -22,7 +28,7 @@ interface FormErrors {
   privacyAccepted?: string;
 }
 
-export default function TrialForm() {
+export default function TrialForm({ tarif=null, type=null }: TrialFormProps) {
   const [formData, setFormData] = useState<FormData>({
     hasTattooExperience: "",
     hasDrawingExperience: "",
@@ -31,8 +37,11 @@ export default function TrialForm() {
     phone: "",
     telegram: "",
     privacyAccepted: false,
+    tarif: tarif,
+    type: type
   });
-
+  console.log(formData.type);
+  console.log(formData.tarif);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -122,6 +131,12 @@ export default function TrialForm() {
       formDataToSend.append("startTime", formData.startTime);
       formDataToSend.append("name", formData.name);
       formDataToSend.append("phone", formData.phone);
+      if (formData.type && formData.tarif) {
+        formDataToSend.append("type", formData.type);
+        formDataToSend.append("tarif", formData.tarif);
+        const aa = formDataToSend.get('tarif') as string;
+        console.log(formDataToSend.get('tarif') as string)
+      }
       if (formData.telegram) {
         formDataToSend.append("telegram", formData.telegram);
       }
@@ -144,6 +159,8 @@ export default function TrialForm() {
         name: "",
         phone: "",
         telegram: "",
+        tarif: null,
+        type: null,
         privacyAccepted: false,
       });
 

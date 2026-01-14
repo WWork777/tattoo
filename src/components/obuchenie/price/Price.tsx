@@ -1,5 +1,8 @@
-import Link from "next/link";
+"use client";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+import TrialForm from "../trial-form/TrialForm";
+import Link from "next/link";
 
 // Создаем отдельные списки для каждого тарифа
 const tarifList1 = [
@@ -57,6 +60,7 @@ interface Props {
   tarifList: string[];
   tarifPrice: string;
   tafirCreditPrice: string;
+  onButtonClick: (type: "buy" | "installment") => void;
 }
 
 const PriceCard = ({
@@ -66,6 +70,7 @@ const PriceCard = ({
   tarifList,
   tarifPrice,
   tafirCreditPrice,
+  onButtonClick,
 }: Props) => {
   return (
     <div className={styles.tarifCard}>
@@ -165,15 +170,11 @@ const PriceCard = ({
         </div>
 
         <div className={styles.tarif__actions}>
-          <button>
-            <Link href="https://t.me/Soprano2024">
-              <p>Купить</p>
-            </Link>
+          <button onClick={() => onButtonClick("buy")}>
+            <p>Купить</p>
           </button>
-          <button>
-            <Link href="https://t.me/Soprano2024">
-              <p>Купить в рассрочку</p>
-            </Link>
+          <button onClick={() => onButtonClick("installment")}>
+            <p>Купить в рассрочку</p>
           </button>
         </div>
       </div>
@@ -182,8 +183,95 @@ const PriceCard = ({
 };
 
 export default function Price() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<"buy" | "installment">("buy");
+  const [selectedTarif, setSelectedTarif] = useState({
+    title: "",
+    price: "",
+    creditPrice: "",
+    number: ""
+  });
+
+  // Функции для открытия модалки с разными тарифами
+  const openModalWithTarif1 = (type: "buy" | "installment") => {
+    setSelectedTarif({
+      title: "СТАРТ",
+      price: "35 000 ₽",
+      creditPrice: "3 400 ₽",
+      number: "1"
+    });
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const openModalWithTarif2 = (type: "buy" | "installment") => {
+    setSelectedTarif({
+      title: "БАЗА",
+      price: "65 000 ₽",
+      creditPrice: "5 900 ₽",
+      number: "2"
+    });
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const openModalWithTarif3 = (type: "buy" | "installment") => {
+    setSelectedTarif({
+      title: "ПРО",
+      price: "105 000 ₽",
+      creditPrice: "9 200 ₽",
+      number: "3"
+    });
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // Блокировка скролла
+  useEffect(() => {
+    if (isModalOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isModalOpen]);
+
+  // Закрытие по ESC
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        handleCloseModal();
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleEsc);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [isModalOpen]);
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      handleCloseModal();
+    }
+  };
+
   return (
-    <section className="container">
+    <section className={styles.container}>
       <h2>Стоимость</h2>
       <div className={styles.tarif__grid}>
         <PriceCard
@@ -193,6 +281,7 @@ export default function Price() {
           tarifList={tarifList1}
           tarifPrice="35 000 ₽"
           tafirCreditPrice="3 400 ₽"
+          onButtonClick={openModalWithTarif1}
         />
         <PriceCard
           img="41"
@@ -201,6 +290,7 @@ export default function Price() {
           tarifList={tarifList2}
           tarifPrice="65 000 ₽"
           tafirCreditPrice="5 900 ₽"
+          onButtonClick={openModalWithTarif2}
         />
         <PriceCard
           img="42"
@@ -209,8 +299,50 @@ export default function Price() {
           tarifList={tarifList3}
           tarifPrice="105 000 ₽"
           tafirCreditPrice="9 200 ₽"
+          onButtonClick={openModalWithTarif3}
         />
       </div>
+      <Link href={'/obuchenie-tatu#trial-form'} className={styles.btnTrial}>
+      Записаться
+      </Link>
+      {/* Модальное окно */}
+      {isModalOpen && (
+        <div 
+          className={styles.modalOverlay}
+          onClick={handleOverlayClick}
+        >
+          <div 
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalHeader}>
+              {/* <h3>
+                {modalType === "buy" 
+                  ? `Заявка на тариф "${selectedTarif.title}"` 
+                  : `Заявка на рассрочку "${selectedTarif.title}"`
+                }
+              </h3> */}
+              <button 
+                className={styles.modalClose}
+                onClick={handleCloseModal}
+              >
+                ×
+              </button>
+            </div>
+            <div className={styles.modalBody}>
+              {/* <div className={styles.tarifInfo}>
+                <p><strong>Тариф:</strong> {selectedTarif.title} (№{selectedTarif.number})</p>
+                <p><strong>Стоимость:</strong> {
+                  modalType === "buy" 
+                    ? selectedTarif.price 
+                    : `${selectedTarif.creditPrice}/месяц`
+                }</p>
+              </div> */}
+              <TrialForm tarif={selectedTarif.title} type={modalType}/>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
