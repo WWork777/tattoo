@@ -1,12 +1,12 @@
-"use client";
-import "./sales-slider.scss";
-import React, { useRef, useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper/types";
-import Link from "next/link";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+'use client';
+import './sales-slider.scss';
+import React, { useRef, useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper/types';
+import Link from 'next/link';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 export default function Models() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -78,69 +78,69 @@ export default function Models() {
 
   const slides = [
     {
-      title: "Станислав",
-      date: "02.2024",
-      text: "Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц",
+      title: 'Станислав',
+      date: '02.2024',
+      text: 'Открыл свою мастерскую в Кемерово, имеет 15+ сеансов в месяц',
     },
     {
-      title: "Полина",
-      date: "07.2024",
-      text: "Работает в студии Старк-тату в Кемерово, специализируется на минимализме",
+      title: 'Полина',
+      date: '07.2024',
+      text: 'Работает в студии Старк-тату в Кемерово, специализируется на минимализме',
     },
     {
-      title: "Евгения",
-      date: "03.2025",
-      text: "Работает в тату студии в Грузии в стиле реалистичная графика",
-      tgLink: "https://t.me/lisi_tattoo",
+      title: 'Евгения',
+      date: '03.2025',
+      text: 'Работает в тату студии в Грузии в стиле реалистичная графика',
+      tgLink: 'https://t.me/lisi_tattoo',
     },
     {
-      title: "Алина",
-      date: "06.2025",
-      text: "Работает стажером в Soprano тату, имеет 3+ клиентов в неделю",
-      tgLink: "https://t.me/Akimova_Tattoo",
+      title: 'Алина',
+      date: '06.2025',
+      text: 'Работает стажером в Soprano тату, имеет 3+ клиентов в неделю',
+      tgLink: 'https://t.me/Akimova_Tattoo',
     },
     {
-      title: "Виолетта",
-      date: "07.2025",
-      text: "Работает тату мастером в Бердске",
-      tgLink: "https://t.me/violaclubtattoo",
+      title: 'Виолетта',
+      date: '07.2025',
+      text: 'Работает тату мастером в Бердске',
+      tgLink: 'https://t.me/violaclubtattoo',
     },
     {
-      title: "Полина",
-      date: "07.2024",
-      text: "Работает тату мастером во Владивостоке",
-      tgLink: "https://t.me/kak_stat_kruche",
+      title: 'Полина',
+      date: '07.2024',
+      text: 'Работает тату мастером во Владивостоке',
+      tgLink: 'https://t.me/kak_stat_kruche',
     },
     {
-      title: "Ксения",
-      date: "08.2024",
-      text: "Учмится в 10 классе, при этом имеет стабильный доход с татуировок",
-      tgLink: "https://t.me/firebreathingtattoo",
+      title: 'Ксения',
+      date: '08.2024',
+      text: 'Учмится в 10 классе, при этом имеет стабильный доход с татуировок',
+      tgLink: 'https://t.me/firebreathingtattoo',
     },
     {
-      title: "София",
-      date: "08.2024",
-      text: "Учиться в колледже 2 курс, в свободное время делает татуировки одногруппникам",
+      title: 'София',
+      date: '08.2024',
+      text: 'Учиться в колледже 2 курс, в свободное время делает татуировки одногруппникам',
     },
   ];
 
   return (
-    <section className="sales" id="learnWorks">
-      <div className="title__container">
-        <h2 className="title">Переходим к моделям</h2>
+    <section className='sales' id='learnWorks'>
+      <div className='title__container'>
+        <h2 className='title'>Переходим к моделям</h2>
       </div>
 
       <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         spaceBetween={0}
         navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         }}
         initialSlide={0}
         centeredSlides={true}
         pagination={{
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true,
         }}
         loop={false}
@@ -154,7 +154,7 @@ export default function Models() {
           1920: { slidesPerView: 5 },
         }}
         modules={[Pagination, Navigation, Autoplay]}
-        className="mySwiper"
+        className='mySwiper'
         onSlideChange={handleSlideChange}
         // autoplay={{
         //   delay: autoplayDelay,
@@ -172,10 +172,10 @@ export default function Models() {
             onClick={() => {
               swiperRef.current?.slideTo(index);
             }}
-            className={activeSlideIndex === index ? "active-slide" : ""}
+            className={activeSlideIndex === index ? 'active-slide' : ''}
           >
             <div
-              className="slide-fon"
+              className='slide-fon'
               onMouseDown={pauseAutoplay}
               onMouseUp={resumeAutoplay}
               onMouseLeave={() => {
@@ -187,23 +187,23 @@ export default function Models() {
               onTouchEnd={resumeAutoplay}
             >
               {activeSlideIndex === index && (
-                <div className="slide-progress-container">
+                <div className='slide-progress-container'>
                   <div
-                    className="slide-progress-bar"
+                    className='slide-progress-bar'
                     style={{ width: `${progress}%` }}
                   />
                 </div>
               )}
 
-              <div className="slide-content">
+              <div className='slide-content'>
                 {/* Заголовок и дата */}
-                <div className="slide-header">
+                <div className='slide-header'>
                   <strong>{slide.title}</strong>
-                  <span className="slide-date">{slide.date}</span>
+                  <span className='slide-date'>{slide.date}</span>
                 </div>
 
                 {/* Основной текст */}
-                <div className="slide-text">{slide.text}</div>
+                <div className='slide-text'>{slide.text}</div>
 
                 {/* Кнопка Telegram */}
                 {/* {slide.tgLink && (
@@ -219,8 +219,8 @@ export default function Models() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Link href={'/obuchenie-tatu#trial-form'} className="btn-trial">
-      Записаться
+      <Link href={'/obuchenie-tatu#trial-form'} className='btn-trial'>
+        Запишись на пробное занятие - получи скидку 10% на курс
       </Link>
     </section>
   );

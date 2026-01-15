@@ -75,10 +75,8 @@ export default function Page() {
       <Program />
       <Practice />
       <Models />
-      <TrialForm />
       <Sertificate />
       <Price />
-      <TrialForm />
       <Rewievs />
       <Faq />
       <TrialForm />

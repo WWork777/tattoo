@@ -40,30 +40,30 @@
     }
 
     .swiper-slide:nth-child(1) {
-      background-image: url("/obuchenie/models/26.webp");
+      background-image: url('/obuchenie/models/26.webp');
     }
 
     .swiper-slide:nth-child(2) {
-      background-image: url("/obuchenie/models/27.webp");
+      background-image: url('/obuchenie/models/27.webp');
     }
 
     .swiper-slide:nth-child(3) {
-      background-image: url("/obuchenie/models/28.webp");
+      background-image: url('/obuchenie/models/28.webp');
     }
     .swiper-slide:nth-child(4) {
-      background-image: url("/obuchenie/models/29.webp");
+      background-image: url('/obuchenie/models/29.webp');
     }
     .swiper-slide:nth-child(5) {
-      background-image: url("/obuchenie/models/30.webp");
+      background-image: url('/obuchenie/models/30.webp');
     }
     .swiper-slide:nth-child(6) {
-      background-image: url("/obuchenie/models/31.webp");
+      background-image: url('/obuchenie/models/31.webp');
     }
     .swiper-slide:nth-child(7) {
-      background-image: url("/obuchenie/models/32.webp");
+      background-image: url('/obuchenie/models/32.webp');
     }
     .swiper-slide:nth-child(8) {
-      background-image: url("/obuchenie/models/33.webp");
+      background-image: url('/obuchenie/models/33.webp');
     }
 
     .swiper-slide {
@@ -217,7 +217,7 @@
 
     .swiper-button-prev {
       left: 3%;
-      background: url("/services/arrowLeft.svg") no-repeat center;
+      background: url('/services/arrowLeft.svg') no-repeat center;
       background-color: #ffffff;
 
       @media (max-width: 1300px) {
@@ -227,7 +227,7 @@
 
     .swiper-button-next {
       right: 3%;
-      background: url("/services/arrowRight.svg") no-repeat center;
+      background: url('/services/arrowRight.svg') no-repeat center;
       background-color: #ffffff;
 
       @media (max-width: 1600px) {
@@ -286,19 +286,19 @@
     }
   }
 }
-  .btn-trial {
-    width: 20%;
-    display: block;
-    margin: auto;
-    margin-top: 50px;
-    text-align: center;
-    background-color: #a78e61;
-    color: #fff;
-    font-size: 24px;
-    border-radius: 25px;
-    padding: 24px 0;
-    @media (max-width: 480px) {
-      width: 100%;
-      margin-top: 0px;
-    }
+.btn-trial {
+  width: 50%;
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+  background-color: #a78e61;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 25px;
+  padding: 24px 0;
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-top: 0px;
   }
+}

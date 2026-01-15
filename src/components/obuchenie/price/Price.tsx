@@ -1,56 +1,56 @@
-"use client";
-import { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import TrialForm from "../trial-form/TrialForm";
-import Link from "next/link";
+'use client';
+import { useState, useEffect } from 'react';
+import styles from './styles.module.scss';
+import TrialForm from '../trial-form/TrialForm';
+import Link from 'next/link';
 
 // Создаем отдельные списки для каждого тарифа
 const tarifList1 = [
-  "Количество занятий : 6",
-  "Количество часов : 18 часов",
-  "Формат занятий : до 3 человек",
-  "Работы на искусственной коже : 5 работ",
-  "Работы на настоящей коже",
-  "Домашние задания",
-  "Портфолио после курса",
-  "Оборудование со скидкой",
-  "Сертификат о прохождении",
-  "Сопровождение после курса : месяц",
-  "Аренда гостевого места",
-  "Стажировка в SOPRANO",
-  "Возможность попасть в команду",
+  'Количество занятий : 6',
+  'Количество часов : 18 часов',
+  'Формат занятий : до 3 человек',
+  'Работы на искусственной коже : 5 работ',
+  'Работы на настоящей коже',
+  'Домашние задания',
+  'Портфолио после курса',
+  'Оборудование со скидкой',
+  'Сертификат о прохождении',
+  'Сопровождение после курса : месяц',
+  'Аренда гостевого места',
+  'Стажировка в SOPRANO',
+  'Возможность попасть в команду',
 ];
 
 const tarifList2 = [
-  "Количество занятий : 12",
-  "Количество часов : 36 часов",
-  "Формат занятий : до 3 человек",
-  "Работы на искусственной коже : 10 работ",
-  "Работы на настоящей коже",
-  "Домашние задания",
-  "Портфолио после курса",
-  "Оборудование со скидкой",
-  "Сертификат о прохождении",
-  "Сопровождение после курса : месяц",
-  "Аренда гостевого места",
-  "Стажировка в SOPRANO",
-  "Возможность попасть в команду",
+  'Количество занятий : 12',
+  'Количество часов : 36 часов',
+  'Формат занятий : до 3 человек',
+  'Работы на искусственной коже : 10 работ',
+  'Работы на настоящей коже',
+  'Домашние задания',
+  'Портфолио после курса',
+  'Оборудование со скидкой',
+  'Сертификат о прохождении',
+  'Сопровождение после курса : месяц',
+  'Аренда гостевого места',
+  'Стажировка в SOPRANO',
+  'Возможность попасть в команду',
 ];
 
 const tarifList3 = [
-  "Количество занятий : 18",
-  "Количество часов : 54 часов",
-  "Формат занятий : до 3 человек",
-  "Работы на искусственной коже : 15 работ",
-  "Работы на настоящей коже",
-  "Домашние задания",
-  "Портфолио после курса",
-  "Оборудование со скидкой",
-  "Сертификат о прохождении",
-  "Сопровождение после курса : месяц",
-  "Аренда гостевого места",
-  "Стажировка в SOPRANO",
-  "Возможность попасть в команду",
+  'Количество занятий : 18',
+  'Количество часов : 54 часов',
+  'Формат занятий : до 3 человек',
+  'Работы на искусственной коже : 15 работ',
+  'Работы на настоящей коже',
+  'Домашние задания',
+  'Портфолио после курса',
+  'Оборудование со скидкой',
+  'Сертификат о прохождении',
+  'Сопровождение после курса : месяц',
+  'Аренда гостевого места',
+  'Стажировка в SOPRANO',
+  'Возможность попасть в команду',
 ];
 
 interface Props {
@@ -60,7 +60,7 @@ interface Props {
   tarifList: string[];
   tarifPrice: string;
   tafirCreditPrice: string;
-  onButtonClick: (type: "buy" | "installment") => void;
+  onButtonClick: (type: 'buy' | 'installment') => void;
 }
 
 const PriceCard = ({
@@ -88,20 +88,20 @@ const PriceCard = ({
             {tarifList.map((item, index) => {
               let dataStatus = undefined;
 
-              const isTeamAccess = item === "Возможность попасть в команду";
-              const isGuestRent = item === "Аренда гостевого места";
-              const isInternship = item === "Стажировка в SOPRANO";
-              const isSupport = item === "Сопровождение после курса : месяц";
-              const isEquipment = item === "Оборудование со скидкой";
-              const isCertificate = item === "Сертификат о прохождении";
-              const isPortfolio = item === "Портфолио после курса";
-              const isHomework = item === "Домашние задания";
-              const isRealSkin = item === "Работы на настоящей коже";
+              const isTeamAccess = item === 'Возможность попасть в команду';
+              const isGuestRent = item === 'Аренда гостевого места';
+              const isInternship = item === 'Стажировка в SOPRANO';
+              const isSupport = item === 'Сопровождение после курса : месяц';
+              const isEquipment = item === 'Оборудование со скидкой';
+              const isCertificate = item === 'Сертификат о прохождении';
+              const isPortfolio = item === 'Портфолио после курса';
+              const isHomework = item === 'Домашние задания';
+              const isRealSkin = item === 'Работы на настоящей коже';
 
               // Обработка для Тарифа №1
-              if (tarifNumber === "1") {
+              if (tarifNumber === '1') {
                 if (isTeamAccess || isGuestRent || isInternship || isSupport) {
-                  dataStatus = "cross";
+                  dataStatus = 'cross';
                 } else if (
                   isRealSkin ||
                   isRealSkin ||
@@ -110,13 +110,13 @@ const PriceCard = ({
                   isEquipment ||
                   isCertificate
                 ) {
-                  dataStatus = "check";
+                  dataStatus = 'check';
                 }
               }
               // Обработка для Тарифа №2
-              else if (tarifNumber === "2") {
+              else if (tarifNumber === '2') {
                 if (isTeamAccess) {
-                  dataStatus = "cross";
+                  dataStatus = 'cross';
                 } else if (
                   isGuestRent ||
                   isInternship ||
@@ -127,11 +127,11 @@ const PriceCard = ({
                   isEquipment ||
                   isCertificate
                 ) {
-                  dataStatus = "check";
+                  dataStatus = 'check';
                 }
               }
               // Обработка для Тарифа №3
-              else if (tarifNumber === "3") {
+              else if (tarifNumber === '3') {
                 if (
                   isTeamAccess ||
                   isGuestRent ||
@@ -143,13 +143,13 @@ const PriceCard = ({
                   isEquipment ||
                   isCertificate
                 ) {
-                  dataStatus = "check";
+                  dataStatus = 'check';
                 }
               }
 
               // Пункты с двоеточием — без иконки (кроме тех, что уже обработаны)
-              if (!dataStatus && item.includes(":")) {
-                dataStatus = "colon";
+              if (!dataStatus && item.includes(':')) {
+                dataStatus = 'colon';
               }
 
               return (
@@ -164,16 +164,17 @@ const PriceCard = ({
           <span>{tafirCreditPrice}/месяц</span>
           <div className={styles.tarif__line}></div>
           <span>
-            {tarifPrice}<br></br>
+            {tarifPrice}
+            <br></br>
             <small>Стоимость при покупке единым платежом</small>
           </span>
         </div>
 
         <div className={styles.tarif__actions}>
-          <button onClick={() => onButtonClick("buy")}>
+          <button onClick={() => onButtonClick('buy')}>
             <p>Купить</p>
           </button>
-          <button onClick={() => onButtonClick("installment")}>
+          <button onClick={() => onButtonClick('installment')}>
             <p>Купить в рассрочку</p>
           </button>
         </div>
@@ -184,43 +185,43 @@ const PriceCard = ({
 
 export default function Price() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<"buy" | "installment">("buy");
+  const [modalType, setModalType] = useState<'buy' | 'installment'>('buy');
   const [selectedTarif, setSelectedTarif] = useState({
-    title: "",
-    price: "",
-    creditPrice: "",
-    number: ""
+    title: '',
+    price: '',
+    creditPrice: '',
+    number: '',
   });
 
   // Функции для открытия модалки с разными тарифами
-  const openModalWithTarif1 = (type: "buy" | "installment") => {
+  const openModalWithTarif1 = (type: 'buy' | 'installment') => {
     setSelectedTarif({
-      title: "СТАРТ",
-      price: "35 000 ₽",
-      creditPrice: "3 400 ₽",
-      number: "1"
+      title: 'СТАРТ',
+      price: '35 000 ₽',
+      creditPrice: '3 400 ₽',
+      number: '1',
     });
     setModalType(type);
     setIsModalOpen(true);
   };
 
-  const openModalWithTarif2 = (type: "buy" | "installment") => {
+  const openModalWithTarif2 = (type: 'buy' | 'installment') => {
     setSelectedTarif({
-      title: "БАЗА",
-      price: "65 000 ₽",
-      creditPrice: "5 900 ₽",
-      number: "2"
+      title: 'БАЗА',
+      price: '65 000 ₽',
+      creditPrice: '5 900 ₽',
+      number: '2',
     });
     setModalType(type);
     setIsModalOpen(true);
   };
 
-  const openModalWithTarif3 = (type: "buy" | "installment") => {
+  const openModalWithTarif3 = (type: 'buy' | 'installment') => {
     setSelectedTarif({
-      title: "ПРО",
-      price: "105 000 ₽",
-      creditPrice: "9 200 ₽",
-      number: "3"
+      title: 'ПРО',
+      price: '105 000 ₽',
+      creditPrice: '9 200 ₽',
+      number: '3',
     });
     setModalType(type);
     setIsModalOpen(true);
@@ -237,7 +238,7 @@ export default function Price() {
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-      
+
       return () => {
         document.body.style.top = '';
         document.body.style.width = '';
@@ -275,43 +276,40 @@ export default function Price() {
       <h2>Стоимость</h2>
       <div className={styles.tarif__grid}>
         <PriceCard
-          img="40"
-          tarifNumber="1"
-          tarifTitle="СТАРТ"
+          img='40'
+          tarifNumber='1'
+          tarifTitle='СТАРТ'
           tarifList={tarifList1}
-          tarifPrice="35 000 ₽"
-          tafirCreditPrice="3 400 ₽"
+          tarifPrice='35 000 ₽'
+          tafirCreditPrice='3 400 ₽'
           onButtonClick={openModalWithTarif1}
         />
         <PriceCard
-          img="41"
-          tarifNumber="2"
-          tarifTitle="БАЗА"
+          img='41'
+          tarifNumber='2'
+          tarifTitle='БАЗА'
           tarifList={tarifList2}
-          tarifPrice="65 000 ₽"
-          tafirCreditPrice="5 900 ₽"
+          tarifPrice='65 000 ₽'
+          tafirCreditPrice='5 900 ₽'
           onButtonClick={openModalWithTarif2}
         />
         <PriceCard
-          img="42"
-          tarifNumber="3"
-          tarifTitle="ПРО"
+          img='42'
+          tarifNumber='3'
+          tarifTitle='ПРО'
           tarifList={tarifList3}
-          tarifPrice="105 000 ₽"
-          tafirCreditPrice="9 200 ₽"
+          tarifPrice='105 000 ₽'
+          tafirCreditPrice='9 200 ₽'
           onButtonClick={openModalWithTarif3}
         />
       </div>
       <Link href={'/obuchenie-tatu#trial-form'} className={styles.btnTrial}>
-      Записаться
+        Запишись на пробное занятие - получи скидку 10% на курс
       </Link>
       {/* Модальное окно */}
       {isModalOpen && (
-        <div 
-          className={styles.modalOverlay}
-          onClick={handleOverlayClick}
-        >
-          <div 
+        <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+          <div
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
@@ -322,10 +320,7 @@ export default function Price() {
                   : `Заявка на рассрочку "${selectedTarif.title}"`
                 }
               </h3> */}
-              <button 
-                className={styles.modalClose}
-                onClick={handleCloseModal}
-              >
+              <button className={styles.modalClose} onClick={handleCloseModal}>
                 ×
               </button>
             </div>
@@ -338,7 +333,7 @@ export default function Price() {
                     : `${selectedTarif.creditPrice}/месяц`
                 }</p>
               </div> */}
-              <TrialForm tarif={selectedTarif.title} type={modalType}/>
+              <TrialForm tarif={selectedTarif.title} type={modalType} />
             </div>
           </div>
         </div>
