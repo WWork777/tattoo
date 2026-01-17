@@ -10,9 +10,9 @@ interface Master {
   name: string;
   description?: string;
   list?: string[];
-  tgLink: string;
-  instaLink: string;
-  vkLink: string;
+  tgLink?: string;
+  instaLink?: string;
+  vkLink?: string;
   category: string;
 }
 
@@ -21,9 +21,9 @@ interface Props {
   name: string;
   description?: string;
   list?: string[];
-  tgLink: string;
-  instaLink: string;
-  vkLink: string;
+  tgLink?: string;
+  instaLink?: string;
+  vkLink?: string;
   onOpenModal: () => void; // Добавляем пропс для открытия модального окна
 }
 
@@ -60,15 +60,24 @@ const Card = ({
             <p>Портфолио</p>
           </div>
           <div className={styles.card__footer__socials}>
+            {tgLink && 
             <Link href={tgLink}>
               <img src="/icons/socials/tg.svg" alt="" />
             </Link>
+            }
+            {instaLink && 
             <Link href={instaLink}>
               <img src="/icons/socials/inst.svg" alt="" />
             </Link>
+            }
+            {vkLink && 
             <Link href={vkLink}>
               <img src="/icons/socials/vk.svg" alt="" />
             </Link>
+            }
+            
+            
+            
           </div>
         </div>
         <button>
@@ -105,9 +114,7 @@ export default function Masters() {
       name: "Иван",
       description:
         "Стаж 5 лет - опыт, превращённый в уверенную руку и высокую скорость",
-      tgLink: "#",
-      instaLink: "#",
-      vkLink: "#",
+      vkLink: "https://vk.ru/album-226183798_309693926",
       category: "tattoo",
     },
     {
@@ -138,9 +145,7 @@ export default function Masters() {
       name: "Иван",
       description:
         "Старший мастер",
-      tgLink: "#",
-      instaLink: "#",
-      vkLink: "#",
+      vkLink: "https://vk.ru/album-226183798_309693926",
       category: "lesson",
     },
   ];

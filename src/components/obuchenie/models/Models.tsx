@@ -220,7 +220,7 @@ export default function Models() {
         ))}
       </Swiper>
       <Link href={'/obuchenie-tatu#trial-form'} className='btn-trial'>
-        Запишись на пробное занятие - получи скидку 10% на курс
+        Запишись на пробное занятие - Получи план подготовки с готовыми рекомендациями.
       </Link>
     </section>
   );

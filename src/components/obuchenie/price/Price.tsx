@@ -304,7 +304,7 @@ export default function Price() {
         />
       </div>
       <Link href={'/obuchenie-tatu#trial-form'} className={styles.btnTrial}>
-        Запишись на пробное занятие - получи скидку 10% на курс
+        Запишись на пробное занятие - Получи план подготовки с готовыми рекомендациями.
       </Link>
       {/* Модальное окно */}
       {isModalOpen && (

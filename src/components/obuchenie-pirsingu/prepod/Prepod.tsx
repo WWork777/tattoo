@@ -32,6 +32,30 @@ export default function PrepodPirsing() {
       id: 6,
       image: "/obucheniePirsing/Works/6.webp",
     },
+    {
+      id: 7,
+      image: "/obucheniePirsing/Works/7.webp",
+    },
+    {
+      id: 8,
+      image: "/obucheniePirsing/Works/8.webp",
+    },
+    {
+      id: 9,
+      image: "/obucheniePirsing/Works/9.webp",
+    },
+    {
+      id: 10,
+      image: "/obucheniePirsing/Works/10.webp",
+    },
+    {
+      id: 11,
+      image: "/obucheniePirsing/Works/11.webp",
+    },
+    {
+      id: 12,
+      image: "/obucheniePirsing/Works/12.webp",
+    },
   ];
 
   const nextSlide = () => {

@@ -28,6 +28,18 @@ export default function Prepod() {
       id: 5,
       image: "/obuchenie/prepod2/05.jpg",
     },
+    {
+      id: 6,
+      image: "/obuchenie/prepod2/06.jpg",
+    },
+    {
+      id: 7,
+      image: "/obuchenie/prepod2/07.jpg",
+    },
+    {
+      id: 8,
+      image: "/obuchenie/prepod2/08.jpg",
+    },
   ];
 
   const nextSlide = () => {

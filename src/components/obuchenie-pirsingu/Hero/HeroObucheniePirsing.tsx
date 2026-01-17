@@ -112,7 +112,7 @@ const HeroObucheniePirsing = () => {
         <div className={styles.right}>
           <div className={styles.right__top}>
             <p>
-              Запишись на пробное занятие -<br></br> получи скидку 10% на курс
+              Запишись на пробное занятие -<br></br> Получи план подготовки с готовыми рекомендациями.
             </p>
             <button className={styles.right__top__button}>
               <Link href='/obuchenie-pirsingu#trial-form'>

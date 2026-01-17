@@ -164,8 +164,8 @@ export default function TrialForm() {
       <div className={styles.form}>
         <div className={styles.form__content}>
           <h2>
-            Запишись на пробное занятие - получи{" "}
-            <span className={styles.gold_text}>скидку 10%</span> на курс
+            Запишись на пробное занятие - получи план подготовки с{" "}
+            <span className={styles.gold_text}>готовыми рекомендациями</span>
           </h2>
 
           <form onSubmit={handleSubmit}>
