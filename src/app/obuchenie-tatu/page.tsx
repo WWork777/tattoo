@@ -4,6 +4,7 @@ import HeroObuchenie from '../../components/obuchenie/Hero/Hero';
 import TrialForm from '@/components/obuchenie/trial-form/TrialForm';
 import Put from '@/components/obuchenie/put-tatu/Put';
 import Program from '@/components/obuchenie/program/Program';
+import VideoPlayer from '@/components/obuchenie/VideoPlayer/VideoPlayer';
 import Practice from '@/components/obuchenie/practice/Practice';
 import Models from '@/components/obuchenie/models/Models';
 import Sertificate from '@/components/obuchenie/sertificate/Sertificate';
@@ -73,6 +74,7 @@ export default function Page() {
       <TrialForm />
       <Put />
       <Program />
+      <VideoPlayer src='/video/promo.mp4' poster="/video/promoPreview.png"/>
       <Practice />
       <Models />
       <Sertificate />
