@@ -160,16 +160,36 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
   };
 
   const toggleFullscreen = async () => {
-    const container = videoRef.current?.parentElement;
-    if (!container) return;
-    try {
-      if (!document.fullscreenElement) {
-        await container.requestFullscreen();
-      } else {
+    const v = videoRef.current;
+    if (!v) return;
+
+    // Если уже в fullscreen — выходим
+    if (document.fullscreenElement) {
+      try {
         await document.exitFullscreen();
-      }
+      } catch {}
+      return;
+    }
+
+    // iOS Safari: используем нативный fullscreen у video (webkitEnterFullscreen)
+    // @ts-expect-error - webkit API exists on iOS Safari
+    if (typeof v.webkitEnterFullscreen === "function") {
+      // @ts-expect-error
+      v.webkitEnterFullscreen();
+      return;
+    }
+
+    // Остальные браузеры: пробуем Fullscreen API (на видео, а не на контейнер)
+    try {
+      await v.requestFullscreen();
     } catch {
-      // ignore
+      // Если вдруг не вышло — пробуем контейнер
+      const container = v.parentElement;
+      if (container?.requestFullscreen) {
+        try {
+          await container.requestFullscreen();
+        } catch {}
+      }
     }
   };
 
@@ -204,13 +224,15 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
           )}
 
           <video
+            playsInline
+            webkit-playsinline="true"
+            x-webkit-airplay="allow"
             ref={videoRef}
             className={styles.video}
             src={src}
             poster={poster}
             preload="metadata"
             // Важно: без autoPlay, без muted — старт на паузе со звуком
-            playsInline
             controls={false}
           />
 
