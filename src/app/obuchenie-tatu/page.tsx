@@ -69,12 +69,13 @@ export default function Page() {
   return (
     <>
       <HeroObuchenie />
+      <VideoPlayer src='/video/promo.mp4' poster="/video/promoPreview.png"/>
       <Prepod />
       <Prepod2 />
       <TrialForm />
       <Put />
       <Program />
-      <VideoPlayer src='/video/promo.mp4' poster="/video/promoPreview.png"/>
+      
       <Practice />
       <Models />
       <Sertificate />

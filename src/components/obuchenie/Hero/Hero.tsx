@@ -122,18 +122,6 @@ const HeroObuchenie = () => {
           </div>
           <div className={styles.right__bottom}>
             <Link
-              href='/obuchenie-tatu/#prepod'
-              className={styles.right__bottom__left}
-            >
-              <img src={Arrow.src} alt='' className={styles.arrow__left} />
-              <img
-                src={ArrowSecond.src}
-                alt=''
-                className={styles.arrow__second}
-              />
-              <p>Работы преподавателей</p>
-            </Link>
-            <Link
               href='/obuchenie-tatu/#learnWorks'
               className={styles.right__bottom__right}
             >
@@ -147,6 +135,19 @@ const HeroObuchenie = () => {
                 Работы <br></br> учеников
               </p>
             </Link>
+            <Link
+              href='/obuchenie-tatu/#prepod'
+              className={styles.right__bottom__left}
+            >
+              <img src={Arrow.src} alt='' className={styles.arrow__left} />
+              <img
+                src={ArrowSecond.src}
+                alt=''
+                className={styles.arrow__second}
+              />
+              <p>Работы преподавателей</p>
+            </Link>
+            
           </div>
         </div>
       </div>
