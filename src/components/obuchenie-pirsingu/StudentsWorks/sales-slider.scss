@@ -1,0 +1,316 @@
+.sales {
+  width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: 100px;
+
+  @media (max-width: 1300px) {
+    padding-left: 3% !important;
+    padding-right: 3% !important;
+  }
+
+  .title__container {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @media (max-width: 1300px) {
+      padding-left: 0;
+      gap: 10px;
+    }
+  }
+
+  .mySwiper {
+    height: calc(60vh + 80px);
+    width: 100%;
+    margin-top: 0px;
+
+    .swiper-slide-active {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      cursor: default !important;
+    }
+
+    .swiper-wrapper {
+      @media (max-width: 1700px) {
+        margin-left: 0%;
+      }
+    }
+
+    .swiper-slide:nth-child(1) {
+      background-image: url('/obucheniePirsing/StudentWorks/1.webp');
+    }
+    .swiper-slide:nth-child(2) {
+      background-image: url('/obucheniePirsing/StudentWorks/2.webp');
+    }
+    .swiper-slide:nth-child(3) {
+      background-image: url('/obucheniePirsing/StudentWorks/3.webp');
+    }
+    .swiper-slide:nth-child(4) {
+      background-image: url('/obucheniePirsing/StudentWorks/4.webp');
+    }
+    .swiper-slide:nth-child(5) {
+      background-image: url('/obucheniePirsing/StudentWorks/5.webp');
+    }
+    .swiper-slide:nth-child(6) {
+      background-image: url('/obucheniePirsing/StudentWorks/6.webp');
+    }
+    .swiper-slide:nth-child(7) {
+      background-image: url('/obucheniePirsing/StudentWorks/7.webp');
+    }
+    .swiper-slide:nth-child(8) {
+      background-image: url('/obucheniePirsing/StudentWorks/8.webp');
+    }
+    .swiper-slide:nth-child(9) {
+      background-image: url('/obucheniePirsing/StudentWorks/9.webp');
+    }
+    .swiper-slide:nth-child(10) {
+      background-image: url('/obucheniePirsing/StudentWorks/10.webp');
+    }
+    .swiper-slide:nth-child(11) {
+      background-image: url('/obucheniePirsing/StudentWorks/11.webp');
+    }
+    .swiper-slide:nth-child(12) {
+      background-image: url('/obucheniePirsing/StudentWorks/11.webp');
+    }
+    .swiper-slide:nth-child(13) {
+      background-image: url('/obucheniePirsing/StudentWorks/11.webp');
+    }
+    .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      width: 20% !important;
+      color: white;
+      opacity: 0.8;
+      transition: 0.3s ease;
+      transform: scale(0.9);
+      border-radius: 15px;
+      cursor: pointer;
+
+      @media (max-width: 1300px) {
+        width: 100% !important;
+      }
+
+      .slide-fon {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; // Изменено для распределения пространства
+        gap: 25px;
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        background-color: hsla(0, 0%, 0%, 0.425);
+        padding: 30px;
+        overflow: hidden;
+
+        // Линия времени на слайде
+        .slide-progress-container {
+          position: absolute;
+          top: 0px;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background-color: rgba(255, 255, 255, 0.3);
+          border-radius: 2px 2px 0 0;
+          overflow: hidden;
+
+          .slide-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #c6ab7a, #a78e61);
+            border-radius: 2px 0 0 0;
+            transition: width 0.1s linear;
+          }
+        }
+
+        .slide-content {
+          // Убрано margin-top и изменено выравнивание
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end; // Контент прижат к низу
+          min-height: auto; // Убрана фиксированная высота
+          position: relative;
+          z-index: 2;
+          margin-top: auto; // Автоматический отступ сверху для прижатия к низу
+          padding-top: 20px; // Отступ от верхнего края контента
+
+          .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+
+            strong {
+              font-size: 22px;
+              font-weight: 800;
+              color: #ffffff;
+              text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .slide-date {
+              font-size: 14px;
+              color: #c6ab7a;
+              background: rgba(0, 0, 0, 0.3);
+              padding: 4px 10px;
+              border-radius: 12px;
+              font-weight: 600;
+            }
+          }
+
+          .slide-text {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #c6ab7a;
+          }
+
+          .slide-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: auto;
+
+            a {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              background: linear-gradient(135deg, #c6ab7a, #a78e61);
+              padding: 10px 20px;
+              border-radius: 25px;
+              text-decoration: none;
+              color: white;
+              font-weight: 600;
+              font-size: 14px;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 15px rgba(198, 171, 122, 0.3);
+              pointer-events: auto;
+
+              img {
+                width: 18px;
+                height: 18px;
+                filter: brightness(0) invert(1);
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(198, 171, 122, 0.5);
+                background: linear-gradient(135deg, #d4b98a, #b89d73);
+              }
+
+              &:active {
+                transform: translateY(0);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 45px;
+      height: 45px;
+      border-radius: 40px;
+      background-color: #ffffff;
+      border: none;
+      top: calc(50%);
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .swiper-button-prev {
+      left: 3%;
+      background: url('/services/arrowLeft.svg') no-repeat center;
+      background-color: #ffffff;
+
+      @media (max-width: 1300px) {
+        left: 1%;
+      }
+    }
+
+    .swiper-button-next {
+      right: 3%;
+      background: url('/services/arrowRight.svg') no-repeat center;
+      background-color: #ffffff;
+
+      @media (max-width: 1600px) {
+        right: 9%;
+      }
+
+      @media (max-width: 1400px) {
+        right: 8%;
+      }
+
+      @media (max-width: 1300px) {
+        right: 1%;
+      }
+    }
+
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .sales {
+    .mySwiper {
+      padding-left: 8%;
+      padding-right: 8%;
+      height: calc(65vh + 80px);
+      width: 100%;
+      padding-bottom: 80px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .sales {
+    h2 {
+      font-size: 26px;
+      text-align: center;
+      padding-bottom: 30px;
+    }
+
+    .mySwiper {
+      .swiper-button-next {
+        right: 1%;
+      }
+
+      .swiper-button-prev {
+        left: 1%;
+      }
+    }
+
+    .link-more {
+      margin-right: 5%;
+      margin-top: 30px;
+    }
+  }
+}
+.btn-trial {
+  width: 50%;
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+  background-color: #a78e61;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 25px;
+  padding: 24px 0;
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-top: 0px;
+  }
+}

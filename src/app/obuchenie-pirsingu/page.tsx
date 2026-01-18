@@ -2,6 +2,7 @@ import HeroObucheniePirsing from "@/components/obuchenie-pirsingu/Hero/HeroObuch
 import PrepodPirsing from "@/components/obuchenie-pirsingu/prepod/Prepod"
 import TrialForm from "@/components/obuchenie-pirsingu/trial-form/TrialForm"
 import ProgrammPirsing from "@/components/obuchenie-pirsingu/program/Program"
+import StudentWorks from "@/components/obuchenie-pirsingu/StudentsWorks/StudentWorks"
 import PricePirsing from "@/components/obuchenie-pirsingu/price/Price"
 import { headers } from "next/headers";
 
@@ -65,6 +66,7 @@ export default function Page() {
             <PrepodPirsing/>
             <TrialForm/>
             {/* <ProgrammPirsing/> */}
+            <StudentWorks/>
             <PricePirsing/>
         </>
     )
