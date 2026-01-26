@@ -57,14 +57,14 @@ export async function POST(request: NextRequest) {
     };
 
     // Формируем сообщение для Telegram в HTML формате
-    const header = tarif && type ? `<b>🎓 НОВАЯ ЗАЯВКА НА ${type == "buy" ? "ПОКУПКУ" : "РАССРОЧКУ"}<b>`: `
-🎓 <b>НОВАЯ ЗАЯВКА НА ПРОБНОЕ ЗАНЯТИЕ ПО ТАТУ</b>`
+    const header = tarif && type ? `🎓 НОВАЯ ЗАЯВКА НА ${type == "buy" ? "ПОКУПКУ" : "РАССРОЧКУ"}`: `
+🎓НОВАЯ ЗАЯВКА НА ПРОБНОЕ ЗАНЯТИЕ ПО ТАТУ`
     const buy = tarif && type ? `
-<b>Тариф</b>: ${escapeHtml(tarif)}` : ``
+Тариф: ${escapeHtml(tarif)}` : ``
     const message = `
-${escapeHtml(header)}
+<b>${escapeHtml(header)}</b>
 
-${escapeHtml(buy)}
+<b>${escapeHtml(buy)}</b>
 
 <b>Вопрос 1: Есть опыт татуирования?</b>
 ${escapeHtml(hasTattooExperience)}
